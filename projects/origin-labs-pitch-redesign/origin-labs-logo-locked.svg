@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 90" width="450" height="90">
-  <!-- Origin (turquoise) - starts at x=60 -->
-  <text x="60" y="50" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#40E0D0">Origin</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 90" width="360" height="90">
+  <!-- Origin (turquoise) -->
+  <text x="50" y="48" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="700" fill="#40E0D0">Origin</text>
   
-  <!-- Labs (black) - starts at x=240, WAY after Origin ends -->
-  <text x="240" y="50" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="#000000">Labs</text>
+  <!-- Labs (black) - positioned after Origin ends -->
+  <text x="175" y="48" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="800" fill="#000000">Labs</text>
   
-  <!-- Human . AI (centered) -->
-  <text x="225" y="78" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#64748B" text-anchor="middle" letter-spacing="2">Human . AI</text>
+  <!-- Human . AI (centered under the full wordmark) -->
+  <text x="180" y="75" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#64748B" text-anchor="middle" letter-spacing="2">Human . AI</text>
 </svg>
