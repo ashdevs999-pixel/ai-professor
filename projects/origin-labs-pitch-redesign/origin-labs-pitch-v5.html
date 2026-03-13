@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Origin Labs — Investor Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+    --bg-primary: #ffffff;
+    --bg-secondary: #fafbfc;
+    --bg-tertiary: #f5f7f9;
+    --surface: #ffffff;
+    --surface-elevated: #f8f9fb;
+    --border: rgba(0, 0, 0, 0.08);
+    --border-accent: rgba(64, 224, 208, 0.2);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-tertiary: #94a3b8;
+    --accent-primary: #40E0D0;
+    --accent-secondary: #0ea5e9;
+    --accent-tertiary: #06b6d4;
+    --success: #10b981;
+    --warning: #f59e0b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-display);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .bg-pattern {
+    position: fixed;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(64, 224, 208, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(14, 165, 233, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .deck {
+    height: 100dvh;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+  }
+
+  .slide {
+    height: 100dvh;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0; left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(40px, 6vh, 80px) clamp(40px, 8vw, 140px);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 0;
+    background: var(--bg-primary);
+  }
+
+  .slide:first-child {
+    opacity: 1;
+    transform: translateY(0);
+    z-index: 1;
+  }
+
+  .slide.visible { opacity: 1; transform: translateY(0); z-index: 1; }
+
+  .slide .reveal {
+    opacity: 0; transform: translateY(25px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .slide.visible .reveal { opacity: 1; transform: none; }
+  .slide.visible .reveal:nth-child(1) { transition-delay: 0.1s; }
+  .slide.visible .reveal:nth-child(2) { transition-delay: 0.2s; }
+  .slide.visible .reveal:nth-child(3) { transition-delay: 0.3s; }
+  .slide.visible .reveal:nth-child(4) { transition-delay: 0.4s; }
+  .slide.visible .reveal:nth-child(5) { transition-delay: 0.5s; }
+  .slide.visible .reveal:nth-child(6) { transition-delay: 0.6s; }
+
+  .deck-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    z-index: 100;
+    transition: width 0.3s ease;
+    pointer-events: none;
+  }
+
+  .deck-counter {
+    position: fixed;
+    bottom: clamp(20px, 3vh, 32px);
+    right: clamp(20px, 3vw, 40px);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-tertiary);
+    z-index: 100;
+    letter-spacing: 1px;
+  }
+
+  .display {
+    font-size: clamp(48px, 9vw, 110px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+  }
+
+  .display-accent {
+    color: var(--accent-primary);
+  }
+
+  .heading {
+    font-size: clamp(32px, 5vw, 60px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .subheading {
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .label {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 1.1vw, 13px);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-primary);
+    margin-bottom: 16px;
+  }
+
+  .body-text {
+    font-size: clamp(16px, 1.8vw, 22px);
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .center { text-align: center; align-items: center; }
+
+  .stats-row {
+    display: flex;
+    gap: clamp(32px, 5vw, 64px);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: clamp(24px, 4vh, 48px) 0;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: clamp(44px, 7.5vw, 80px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--accent-primary);
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 1vw, 13px);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 10px;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(16px, 2vw, 24px);
+    width: 100%;
+    max-width: 1000px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: clamp(24px, 3vh, 36px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .card-title {
+    font-size: clamp(20px, 2.2vw, 26px);
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  .card-text {
+    font-size: clamp(14px, 1.5vw, 17px);
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2vw, 24px);
+    width: 100%;
+    max-width: 1000px;
+  }
+
+  .phase {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: clamp(20px, 2.5vh, 32px);
+  }
+
+  .phase.current {
+    border-color: var(--accent-primary);
+    background: var(--surface-elevated);
+    box-shadow: 0 0 0 1px var(--accent-primary);
+  }
+
+  .phase-year {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 1vw, 12px);
+    color: var(--accent-primary);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .phase-title {
+    font-size: clamp(16px, 1.8vw, 20px);
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  .phase-list {
+    list-style: none;
+  }
+
+  .phase-list li {
+    font-size: clamp(12px, 1.3vw, 15px);
+    color: var(--text-secondary);
+    padding: 6px 0;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .phase-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+  }
+
+  .comparison {
+    display: flex;
+    align-items: center;
+    gap: clamp(24px, 4vw, 48px);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .compare-box {
+    text-align: center;
+    padding: clamp(20px, 3vh, 32px);
+  }
+
+  .compare-value {
+    font-size: clamp(48px, 8vw, 88px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .compare-label {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 1.1vw, 14px);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 12px;
+  }
+
+  .compare-vs {
+    font-size: clamp(18px, 2.5vw, 28px);
+    color: var(--text-tertiary);
+    font-weight: 300;
+  }
+
+  .revenue-flow {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 2vw, 20px);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .rev-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: clamp(16px, 2vh, 24px) clamp(20px, 2vw, 32px);
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .rev-value {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    color: var(--accent-primary);
+  }
+
+  .rev-label {
+    font-family: var(--font-mono);
+    font-size: clamp(9px, 1vw, 12px);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 6px;
+  }
+
+  .rev-arrow {
+    color: var(--text-tertiary);
+    font-size: 24px;
+    opacity: 0.5;
+  }
+
+  .ask-container {
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .ask-amount {
+    font-size: clamp(44px, 7.5vw, 80px);
+    font-weight: 800;
+    color: var(--accent-primary);
+  }
+
+  .ask-detail {
+    font-family: var(--font-mono);
+    font-size: clamp(12px, 1.3vw, 16px);
+    color: var(--text-tertiary);
+    margin-top: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .tranches {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(16px, 2vw, 24px);
+    margin-top: clamp(24px, 4vh, 40px);
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .tranche {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: clamp(20px, 3vh, 28px);
+    text-align: center;
+  }
+
+  .tranche-amount {
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .tranche-label {
+    font-family: var(--font-mono);
+    font-size: clamp(9px, 1vw, 11px);
+    color: var(--accent-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 8px 0;
+    font-weight: 600;
+  }
+
+  .tranche-desc {
+    font-size: clamp(12px, 1.2vw, 15px);
+    color: var(--text-tertiary);
+    margin-top: 8px;
+  }
+
+  .traction-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(12px, 2vw, 20px);
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .traction-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: clamp(16px, 2vh, 24px);
+    text-align: center;
+  }
+
+  .traction-value {
+    font-size: clamp(24px, 3.5vw, 34px);
+    font-weight: 800;
+    color: var(--accent-primary);
+  }
+
+  .traction-label {
+    font-family: var(--font-mono);
+    font-size: clamp(9px, 1vw, 11px);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 8px;
+  }
+
+  .market-funnel {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 2vh, 20px);
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .market-bar {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2vw, 24px);
+    border-radius: 12px;
+    padding: clamp(14px, 2vh, 22px) clamp(20px, 2.5vw, 32px);
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .market-value {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    min-width: 120px;
+    color: var(--accent-primary);
+  }
+
+  .market-info {
+    text-align: left;
+  }
+
+  .market-label {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 1.2vw, 14px);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .market-desc {
+    font-size: clamp(12px, 1.2vw, 15px);
+    color: var(--text-tertiary);
+    margin-top: 4px;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(16px, 2vw, 24px);
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .team-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: clamp(18px, 2.5vh, 28px);
+  }
+
+  .team-title {
+    font-size: clamp(16px, 1.8vw, 20px);
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--accent-primary);
+  }
+
+  .team-desc {
+    font-size: clamp(12px, 1.3vw, 15px);
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .pricing-grid {
+    display: flex;
+    gap: clamp(16px, 2vw, 24px);
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .price-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: clamp(20px, 3vh, 32px);
+    flex: 1;
+    min-width: 200px;
+    max-width: 280px;
+    text-align: center;
+  }
+
+  .price-card.featured {
+    border-color: var(--accent-primary);
+    background: var(--surface-elevated);
+  }
+
+  .price-name {
+    font-family: var(--font-mono);
+    font-size: clamp(10px, 1.1vw, 13px);
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .price-value {
+    font-size: clamp(32px, 5vw, 44px);
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .price-period {
+    font-size: clamp(12px, 1.2vw, 15px);
+    color: var(--text-tertiary);
+  }
+
+  .price-features {
+    list-style: none;
+    margin-top: 16px;
+    text-align: left;
+  }
+
+  .price-features li {
+    font-size: clamp(11px, 1.1vw, 14px);
+    color: var(--text-secondary);
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .price-features li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+    font-weight: 700;
+  }
+
+  .moat-list {
+    list-style: none;
+    max-width: 700px;
+  }
+
+  .moat-list li {
+    font-size: clamp(18px, 2.5vw, 24px);
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+  }
+
+  .moat-list li strong {
+    color: var(--accent-primary);
+    font-weight: 700;
+    min-width: 160px;
+  }
+
+  .moat-list li span {
+    color: var(--text-secondary);
+  }
+
+  .close-text {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    line-height: 1.3;
+    max-width: 700px;
+    color: var(--text-primary);
+  }
+
+  .close-tagline {
+    font-size: clamp(16px, 2vw, 22px);
+    color: var(--accent-secondary);
+    margin-top: clamp(20px, 3vh, 32px);
+    font-weight: 500;
+  }
+
+  .close-logo {
+    font-family: var(--font-mono);
+    font-size: clamp(11px, 1.3vw, 15px);
+    color: var(--text-tertiary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: clamp(32px, 5vh, 56px);
+  }
+
+  .slide-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: clamp(16px, 2vh, 24px) clamp(24px, 4vw, 48px);
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header-logo svg {
+    height: 28px;
+    width: auto;
+  }
+
+  .header-tagline {
+    font-family: var(--font-mono);
+    font-size: clamp(9px, 0.9vw, 11px);
+    color: var(--text-tertiary);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .deck-nav {
+    position: fixed;
+    bottom: clamp(16px, 3vh, 28px);
+    left: clamp(20px, 3vw, 40px);
+    display: flex;
+    gap: 8px;
+    z-index: 200;
+  }
+
+  .deck-nav button {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .deck-nav button:hover {
+    background: var(--surface-elevated);
+    border-color: var(--accent-primary);
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 768px) {
+    .timeline { grid-template-columns: 1fr; }
+    .traction-grid { grid-template-columns: repeat(2, 1fr); }
+    .team-grid { grid-template-columns: 1fr; }
+    .tranches { grid-template-columns: 1fr; }
+    .stats-row { flex-direction: column; gap: 24px; }
+    .moat-list li { flex-direction: column; gap: 8px; }
+    .moat-list li strong { min-width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-pattern"></div>
+
+<div class="slide-header">
+  <div class="header-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" width="140" height="40">
+      <g transform="translate(0, 10)">
+        <g>
+          <text x="0" y="40" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="700" fill="#40E0D0" letter-spacing="-0.5">Origin</text>
+          <text x="108" y="40" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#000000" letter-spacing="0">Labs</text>
+        </g>
+        <text x="95" y="60" font-family="Inter, -apple-system, sans-serif" font-size="10" font-weight="500" fill="#64748B" text-anchor="middle" letter-spacing="1">Human . AI</text>
+      </g>
+    </svg>
+  </div>
+  <div class="header-tagline">Powering the AI Workforce</div>
+</div>
+
+<div class="deck">
+
+  <!-- 1. OPEN -->
+  <section class="slide center">
+    <h1 class="display reveal">
+      AI is here.<br>
+      <span class="display-accent">The infrastructure isn't.</span>
+    </h1>
+    <p class="subheading reveal" style="margin-top:clamp(24px,4vh,40px);max-width:600px;">
+      Building the infrastructure layer for human-AI collaboration.
+    </p>
+  </section>
+
+  <!-- 2. PROBLEM -->
+  <section class="slide center">
+    <div class="label reveal">The Reality</div>
+    <h2 class="heading reveal" style="max-width:700px;">
+      Every company wants AI. Most are stuck.
+    </h2>
+    <p class="body-text reveal" style="margin-top:clamp(20px,3vh,32px);max-width:600px;">
+      AI models are accessible. ChatGPT, Claude, Midjourney — anyone can use them. But when companies try to put AI to work in their actual operations, they hit a wall.
+    </p>
+  </section>
+
+  <!-- 3. STATS -->
+  <section class="slide center">
+    <div class="label reveal">The AI Integration Gap</div>
+    <div class="stats-row">
+      <div class="stat reveal">
+        <div class="stat-value">85%</div>
+        <div class="stat-label">Companies experimenting<br>with AI</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-value">12%</div>
+        <div class="stat-label">Have AI in<br>production workflows</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-value">$100B+</div>
+        <div class="stat-label">AI automation market<br>by 2027</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CHAOS -->
+  <section class="slide">
+    <div class="label reveal">What Teams Use Today</div>
+    <h2 class="heading reveal" style="margin-bottom:clamp(24px,4vh,40px);">Chaos.</h2>
+    <ul class="moat-list">
+      <li class="reveal">
+        <strong>Copy-pasting</strong>
+        <span>Between ChatGPT, Claude, and Gemini</span>
+      </li>
+      <li class="reveal">
+        <strong>Manual workflows</strong>
+        <span>Export, transform, import, repeat</span>
+      </li>
+      <li class="reveal">
+        <strong>No visibility</strong>
+        <span>Into what AI agents are doing</span>
+      </li>
+      <li class="reveal">
+        <strong>Security gaps</strong>
+        <span>AI tools outside enterprise networks</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 5. SOLUTION -->
+  <section class="slide center">
+    <div class="label reveal">Introducing</div>
+    <svg class="reveal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" width="420" height="120" style="margin-top:20px;">
+      <g transform="translate(0, 10)">
+        <g>
+          <text x="0" y="40" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="700" fill="#40E0D0" letter-spacing="-0.5">Origin</text>
+          <text x="108" y="40" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#000000" letter-spacing="0">Labs</text>
+        </g>
+        <text x="95" y="60" font-family="Inter, -apple-system, sans-serif" font-size="10" font-weight="500" fill="#64748B" text-anchor="middle" letter-spacing="1">Human . AI</text>
+      </g>
+    </svg>
+    <p class="subheading reveal" style="margin-top:clamp(20px,3vh,32px);max-width:550px;">
+      The infrastructure layer for human-AI collaboration.
+    </p>
+  </section>
+
+  <!-- 6. PRODUCTS -->
+  <section class="slide center">
+    <div class="label reveal">Two Platforms. One Mission.</div>
+    <div class="card-grid" style="margin-top:clamp(16px,2vh,24px);">
+      <div class="card reveal">
+        <div class="card-title" style="color:var(--accent-primary);">Crosspath</div>
+        <div class="card-text">
+          Enterprise AI workflow engine. Deploy AI agents that operate inside secure networks. Natural language prompts → automated workflows.
+        </div>
+      </div>
+      <div class="card reveal">
+        <div class="card-title" style="color:var(--accent-secondary);">Mimphes</div>
+        <div class="card-text">
+          Multi-LLM creative workflow platform. Orchestrate multiple AI models in structured pipelines. For creators, marketers, media teams.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ROADMAP -->
+  <section class="slide center">
+    <div class="label reveal">Phased Execution</div>
+    <h2 class="heading reveal" style="margin-bottom:clamp(20px,3vh,32px);">Focus first. Scale second.</h2>
+    <div class="timeline">
+      <div class="phase current reveal">
+        <div class="phase-year">Phase 1 — 2026</div>
+        <div class="phase-title">MVP + Beta</div>
+        <ul class="phase-list">
+          <li>Enterprise pilots</li>
+          <li>Creator beta launch</li>
+          <li>First paying customers</li>
+          <li>Security certifications</li>
+        </ul>
+      </div>
+      <div class="phase reveal">
+        <div class="phase-year">Phase 2 — 2027</div>
+        <div class="phase-title">Scale + Ecosystem</div>
+        <ul class="phase-list">
+          <li>Self-serve onboarding</li>
+          <li>Workflow marketplace</li>
+          <li>Partner integrations</li>
+          <li>ASEAN expansion</li>
+        </ul>
+      </div>
+      <div class="phase reveal">
+        <div class="phase-year">Phase 3 — 2028+</div>
+        <div class="phase-title">Platform</div>
+        <ul class="phase-list">
+          <li>Third-party developers</li>
+          <li>Industry solutions</li>
+          <li>Regional data centers</li>
+          <li>Enterprise partnerships</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. WHY US -->
+  <section class="slide">
+    <div class="label reveal">Why Us. Why Now.</div>
+    <h2 class="heading reveal" style="margin-bottom:clamp(20px,3vh,32px);">First-mover in workflow orchestration.</h2>
+    <ul class="moat-list">
+      <li class="reveal">
+        <strong>Infrastructure gap</strong>
+        <span>AI tools exist, but the layer to deploy them doesn't</span>
+      </li>
+      <li class="reveal">
+        <strong>Enterprise-ready</strong>
+        <span>Built for secure networks, not just consumer apps</span>
+      </li>
+      <li class="reveal">
+        <strong>Dual engine</strong>
+        <span>B2B (Crosspath) + B2C (Mimphes) = diversified revenue</span>
+      </li>
+      <li class="reveal">
+        <strong>Team expertise</strong>
+        <span>Deep experience in AI, enterprise software, creative tools</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 9. MARKET -->
+  <section class="slide center">
+    <div class="label reveal">The Opportunity</div>
+    <div class="market-funnel" style="margin-top:clamp(20px,3vh,32px);">
+      <div class="market-bar reveal">
+        <div class="market-value">$100B+</div>
+        <div class="market-info">
+          <div class="market-label">TAM</div>
+          <div class="market-desc">AI automation market</div>
+        </div>
+      </div>
+      <div class="market-bar reveal">
+        <div class="market-value" style="color:var(--accent-secondary);">$2B</div>
+        <div class="market-info">
+          <div class="market-label">SAM</div>
+          <div class="market-desc">Workflow orchestration (APAC)</div>
+        </div>
+      </div>
+      <div class="market-bar reveal">
+        <div class="market-value" style="color:var(--success);">$50M</div>
+        <div class="market-info">
+          <div class="market-label">SOM</div>
+          <div class="market-desc">Year 5 target</div>
+        </div>
+      </div>
+    </div>
+    <p class="body-text reveal" style="margin-top:clamp(16px,2vh,24px);opacity:0.7;">
+      Creator economy overlay: $480B+ globally
+    </p>
+  </section>
+
+  <!-- 10. REVENUE -->
+  <section class="slide center">
+    <div class="label reveal">Revenue Trajectory</div>
+    <div class="revenue-flow" style="margin-top:clamp(20px,3vh,32px);">
+      <div class="rev-box reveal">
+        <div class="rev-value">$100K</div>
+        <div class="rev-label">Year 1 ARR</div>
+      </div>
+      <div class="rev-arrow reveal">→</div>
+      <div class="rev-box reveal">
+        <div class="rev-value">$2M</div>
+        <div class="rev-label">Year 3 ARR</div>
+      </div>
+      <div class="rev-arrow reveal">→</div>
+      <div class="rev-box reveal">
+        <div class="rev-value">$10M+</div>
+        <div class="rev-label">Year 5 ARR</div>
+      </div>
+    </div>
+    <div class="stats-row reveal" style="margin-top:clamp(32px,5vh,48px);">
+      <div class="stat">
+        <div class="stat-value" style="font-size:clamp(32px,5vw,48px);">80%</div>
+        <div class="stat-label">Gross margin</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" style="font-size:clamp(32px,5vw,48px);">$500</div>
+        <div class="stat-label">Avg LTV</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" style="font-size:clamp(32px,5vw,48px);">2</div>
+        <div class="stat-label">Revenue engines</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. PRICING -->
+  <section class="slide center">
+    <div class="label reveal">Simple, Accessible Pricing</div>
+    <h2 class="heading reveal" style="margin-bottom:clamp(20px,3vh,32px);">Two products. Two markets.</h2>
+    <div class="pricing-grid">
+      <div class="price-card featured reveal">
+        <div class="price-name">Crosspath</div>
+        <div class="price-value">$499<span class="price-period">/mo</span></div>
+        <ul class="price-features">
+          <li>Up to 5 agents</li>
+          <li>Basic integrations</li>
+          <li>Email support</li>
+        </ul>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-name">Mimphes</div>
+        <div class="price-value">$29<span class="price-period">/mo</span></div>
+        <ul class="price-features">
+          <li>Unlimited workflows</li>
+          <li>Priority models</li>
+          <li>Collaboration</li>
+        </ul>
+      </div>
+    </div>
+    <p class="body-text reveal" style="margin-top:clamp(20px,3vh,32px);opacity:0.6;">
+      Enterprise and Team tiers available
+    </p>
+  </section>
+
+  <!-- 12. TRACTION -->
+  <section class="slide center">
+    <div class="label reveal">Where We Are Now</div>
+    <h2 class="heading reveal" style="margin-bottom:clamp(20px,3vh,32px);">Building with urgency.</h2>
+    <div class="traction-grid">
+      <div class="traction-item reveal">
+        <div class="traction-value">MVP</div>
+        <div class="traction-label">Crosspath in dev</div>
+      </div>
+      <div class="traction-item reveal">
+        <div class="traction-value">Beta</div>
+        <div class="traction-label">Mimphes alpha</div>
+      </div>
+      <div class="traction-item reveal">
+        <div class="traction-value">$0</div>
+        <div class="traction-label">External funding spent</div>
+      </div>
+      <div class="traction-item reveal">
+        <div class="traction-value">Q2</div>
+        <div class="traction-label">Pilot target</div>
+      </div>
+    </div>
+    <p class="body-text reveal" style="margin-top:clamp(20px,3vh,32px);opacity:0.6;">
+      Pilot Q2 2026 — Public beta Q3 2026 — First revenue Q3 2026
+    </p>
+  </section>
+
+  <!-- 13. TEAM -->
+  <section class="slide center">
+    <div class="label reveal">The Team</div>
+    <h2 class="heading reveal" style="margin-bottom:clamp(20px,3vh,32px);">Built by builders.</h2>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-title">Deep AI Expertise</div>
+        <div class="team-desc">Experience in AI, enterprise software, and creative tools. Shipped products used by thousands.</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-title">Technical Depth</div>
+        <div class="team-desc">From infrastructure to interfaces. We understand both engineering and business challenges.</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-title">Skin in the Game</div>
+        <div class="team-desc">All progress on sweat equity. Your investment goes to product and growth.</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-title">Domain Expertise</div>
+        <div class="team-desc">Enterprise workflows, creator tools, AI orchestration. We've lived the problems.</div>
+      </div>
+    </div>
+    <p class="body-text reveal" style="margin-top:clamp(16px,2vh,24px);opacity:0.5;">
+      Detailed team bios available upon request.
+    </p>
+  </section>
+
+  <!-- 14. ASK -->
+  <section class="slide center">
+    <div class="ask-container">
+      <div class="label reveal">The Ask</div>
+      <div class="ask-amount reveal">$500K – $1M</div>
+      <div class="ask-detail reveal">12–18 months runway — Path to $2M ARR</div>
+      <div class="tranches">
+        <div class="tranche reveal">
+          <div class="tranche-amount">$250K</div>
+          <div class="tranche-label">Tranche 1 — $2.5M val</div>
+          <div class="tranche-desc">MVP launch, first pilots, initial revenue</div>
+        </div>
+        <div class="tranche reveal">
+          <div class="tranche-amount">$250K+</div>
+          <div class="tranche-label">Tranche 2 — $5M val</div>
+          <div class="tranche-desc">Scale, team expansion, ASEAN entry</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15. CLOSE -->
+  <section class="slide center">
+    <h2 class="close-text reveal">
+      AI is the future of work.
+    </h2>
+    <p class="close-tagline reveal">
+      We're building the infrastructure to make it work.
+    </p>
+    <svg class="reveal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" width="280" height="80" style="margin-top:clamp(32px,5vh,56px);">
+      <g transform="translate(0, 10)">
+        <g>
+          <text x="0" y="40" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="700" fill="#40E0D0" letter-spacing="-0.5">Origin</text>
+          <text x="108" y="40" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#000000" letter-spacing="0">Labs</text>
+        </g>
+        <text x="95" y="60" font-family="Inter, -apple-system, sans-serif" font-size="10" font-weight="500" fill="#64748B" text-anchor="middle" letter-spacing="1">Human . AI</text>
+      </g>
+    </svg>
+  </section>
+
+</div>
+
+<div class="deck-progress"></div>
+<div class="deck-counter"></div>
+
+<div class="deck-nav">
+  <button onclick="window.__deckEngine.prev()" title="Previous">↑</button>
+  <button onclick="window.__deckEngine.next()" title="Next">↓</button>
+</div>
+
+<script>
+(function(){
+  var deck = document.querySelector('.deck');
+  var slides = [].slice.call(document.querySelectorAll('.slide'));
+  var current = 0;
+  var total = slides.length;
+  var isAnimating = false;
+  var TRANSITION_MS = 700;
+
+  slides[0].classList.add('visible');
+
+  var bar = document.querySelector('.deck-progress');
+  var ctr = document.querySelector('.deck-counter');
+
+  function update() {
+    bar.style.width = ((current + 1) / total * 100) + '%';
+    ctr.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+  }
+
+  function goTo(target) {
+    if (target === current || target < 0 || target >= total || isAnimating) return;
+    isAnimating = true;
+    var leaving = slides[current];
+    var entering = slides[target];
+
+    entering.style.transition = 'none';
+    entering.style.transform = 'translateY(30px)';
+    entering.style.opacity = '0';
+    entering.style.zIndex = '2';
+    entering.offsetHeight;
+
+    entering.style.transition = 'transform ' + TRANSITION_MS + 'ms cubic-bezier(0.16, 1, 0.3, 1), opacity ' + TRANSITION_MS + 'ms cubic-bezier(0.16, 1, 0.3, 1)';
+    entering.style.transform = 'translateY(0)';
+    entering.style.opacity = '1';
+    entering.classList.add('visible');
+
+    leaving.style.zIndex = '1';
+    leaving.style.opacity = '0';
+
+    current = target;
+    update();
+
+    setTimeout(function() {
+      leaving.classList.remove('visible');
+      leaving.style.zIndex = '0';
+      entering.style.zIndex = '1';
+      leaving.style.transition = 'none';
+      leaving.style.transform = 'translateY(30px)';
+      isAnimating = false;
+    }, TRANSITION_MS);
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  document.addEventListener('keydown', function(e) {
+    if (['ArrowDown','ArrowRight',' ','PageDown'].indexOf(e.key) > -1) { e.preventDefault(); next(); }
+    else if (['ArrowUp','ArrowLeft','PageUp'].indexOf(e.key) > -1) { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+    else if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
+  });
+
+  var wheelTimeout = null;
+  deck.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    if (wheelTimeout) return;
+    if (Math.abs(e.deltaY) < 15) return;
+    if (e.deltaY > 0) next(); else prev();
+    wheelTimeout = setTimeout(function() { wheelTimeout = null; }, TRANSITION_MS + 100);
+  }, { passive: false });
+
+  var touchY = null;
+  deck.addEventListener('touchstart', function(e) { touchY = e.touches[0].clientY; }, { passive: true });
+  deck.addEventListener('touchend', function(e) {
+    if (touchY === null) return;
+    var dy = touchY - e.changedTouches[0].clientY;
+    if (Math.abs(dy) > 40) { dy > 0 ? next() : prev(); }
+    touchY = null;
+  });
+
+  update();
+  window.__deckEngine = { next: next, prev: prev, goTo: goTo };
+})();
+</script>
+
+</body>
+</html>
