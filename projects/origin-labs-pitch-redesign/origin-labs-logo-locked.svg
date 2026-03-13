@@ -2,8 +2,8 @@
   <!-- Origin (turquoise) -->
   <text x="50" y="52" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="700" fill="#40E0D0">Origin</text>
   
-  <!-- Labs (black) - positioned after Origin ends -->
-  <text x="190" y="52" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="800" fill="#000000">Labs</text>
+  <!-- Labs (black) - scaled proportionally from locked version -->
+  <text x="185" y="52" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="800" fill="#000000">Labs</text>
   
   <!-- Human . AI (centered under the full wordmark) -->
   <text x="190" y="85" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="500" fill="#64748B" text-anchor="middle" letter-spacing="1">Human . AI</text>

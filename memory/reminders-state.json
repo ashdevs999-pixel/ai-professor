@@ -4,9 +4,9 @@
   "outstandingItems": [
     {
       "id": "origin-labs-pitch",
-      "description": "Origin Labs pitch deck awaiting changes",
-      "status": "blocked",
-      "blockedBy": "waiting for Bryan's specific changes"
+      "description": "Origin Labs pitch deck - actively being worked on",
+      "status": "active",
+      "note": "Bryan making changes via opencode"
     }
   ]
 }
