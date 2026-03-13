@@ -34,6 +34,9 @@ Curated memories, decisions, and context worth keeping across sessions.
     - **Wordmark:** "OriginLabs" (Origin + Labs together)
     - **Tagline:** "Human . AI" (in logo, below wordmark)
     - **Subtitle:** "Human - AI Collaboration" (header text, top right corner of slides)
+  - **Typography (standardized):**
+    - Tagline font: IBM Plex Mono, 13px, letter-spacing 1px
+    - Subtitle font: IBM Plex Mono, clamp(10px, 1vw, 12px), letter-spacing 1px
   - Color palette: Turquoise #40E0D0 + black #000000, white background
   - Files: `projects/origin-labs-pitch-redesign/`
 
