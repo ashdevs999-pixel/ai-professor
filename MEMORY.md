@@ -30,8 +30,11 @@ Curated memories, decisions, and context worth keeping across sessions.
     - Tagline "Human . AI" centered below, gray (#64748B)
     - viewBox: 360x90
     - File: `projects/origin-labs-pitch-redesign/origin-labs-logo-locked.svg`
+  - **Terminology:**
+    - **Wordmark:** "OriginLabs" (Origin + Labs together)
+    - **Tagline:** "Human . AI" (in logo, below wordmark)
+    - **Subtitle:** "Human - AI Collaboration" (header text, top right corner of slides)
   - Color palette: Turquoise #40E0D0 + black #000000, white background
-  - Tagline: "Human . AI"
   - Files: `projects/origin-labs-pitch-redesign/`
 
 ### CareHive
@@ -59,7 +62,7 @@ Curated memories, decisions, and context worth keeping across sessions.
 - **Proactive skillset expansion:** When Bryan asks for something new, automatically add it to skillset in MEMORY.md
 - **Agent spawning:** Auto-spawn when needed, always inform Bryan (notification required)
 - **Code changes:** Always ASK first
-- **Coding tasks:** Always use opencode agent (auto-spawn when Bryan says "code", "build", "implement")
+- **Coding tasks:** ALWAYS use opencode skill (`~/.openclaw/workspace/skills/opencode-1.1.0/`) — use `opencode run "prompt"` for one-shot tasks, or TUI mode with `/agents` for plan→build workflow
 - **Chat history:** Can search for conversation context when needed ( but summaries ( not just summaries (avoid summaries unless explicitly asked)
 - **Skill expansion:** When Bryan asks for something new → Do it → Add to skillset automatically (no permission needed)
 - **File edits:** Use `write` instead of `edit` for file updates (avoids "text not found" matching failures)

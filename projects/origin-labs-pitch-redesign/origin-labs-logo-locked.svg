@@ -6,5 +6,5 @@
   <text x="175" y="48" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="800" fill="#000000">Labs</text>
   
   <!-- Human . AI (centered under the full wordmark) -->
-  <text x="180" y="75" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#64748B" text-anchor="middle" letter-spacing="2">Human . AI</text>
+  <text x="180" y="75" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="500" fill="#64748B" text-anchor="middle" letter-spacing="1">Human . AI</text>
 </svg>
