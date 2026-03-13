@@ -24,9 +24,14 @@ Curated memories, decisions, and context worth keeping across sessions.
 - **Mission:** "Infrastructure between human & AI"
 - **Stage:** Seed stage, raising $500K-$1M
 - **Branding:**
-  - Logo: "Origin" in light turquoise (#40E0D0), "Labs" in bold black (weight 800)
+  - **Logo (FINAL - LOCKED March 13, 2026):** Wordmark only, no icon
+    - "Origin" in turquoise (#40E0D0), weight 700, x=50
+    - "Labs" in black (#000000), weight 800, x=175
+    - Tagline "Human . AI" centered below, gray (#64748B)
+    - viewBox: 360x90
+    - File: `projects/origin-labs-pitch-redesign/origin-labs-logo-locked.svg`
+  - Color palette: Turquoise #40E0D0 + black #000000, white background
   - Tagline: "Human . AI"
-  - Color palette: Turquoise + black, white background (not dark mode)
   - Files: `projects/origin-labs-pitch-redesign/`
 
 ### CareHive
