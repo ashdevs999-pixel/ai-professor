@@ -28,15 +28,16 @@ Curated memories, decisions, and context worth keeping across sessions.
     - "Origin" in turquoise (#40E0D0), weight 700, x=50
     - "Labs" in black (#000000), weight 800, x=175
     - Tagline "Human . AI" centered below, gray (#64748B)
-    - viewBox: 360x90
+    - viewBox: 380x100
     - File: `projects/origin-labs-pitch-redesign/origin-labs-logo-locked.svg`
   - **Terminology:**
     - **Wordmark:** "OriginLabs" (Origin + Labs together)
     - **Tagline:** "Human . AI" (in logo, below wordmark)
     - **Subtitle:** "Human - AI Collaboration" (header text, top right corner of slides)
   - **Typography (standardized):**
-    - Tagline font: IBM Plex Mono, 13px, letter-spacing 1px
+    - Tagline font: IBM Plex Mono, 15px, letter-spacing 1px
     - Subtitle font: IBM Plex Mono, clamp(10px, 1vw, 12px), letter-spacing 1px
+    - Wordmark font: Inter, 48px
   - Color palette: Turquoise #40E0D0 + black #000000, white background
   - Files: `projects/origin-labs-pitch-redesign/`
 
