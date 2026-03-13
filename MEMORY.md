@@ -26,7 +26,7 @@ Curated memories, decisions, and context worth keeping across sessions.
 - **Branding:**
   - **Logo (FINAL - LOCKED March 13, 2026):** Wordmark only, no icon
     - "Origin" in turquoise (#40E0D0), weight 700, x=50
-    - "Labs" in black (#000000), weight 800, x=175
+    - "Labs" in black (#000000), weight 800, x=185
     - Tagline "Human . AI" centered below, gray (#64748B)
     - viewBox: 380x100
     - File: `projects/origin-labs-pitch-redesign/origin-labs-logo-locked.svg`
