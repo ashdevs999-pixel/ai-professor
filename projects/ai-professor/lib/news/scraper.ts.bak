@@ -1,0 +1,371 @@
+// Main News Scraper - Orchestrates all source scrapers
+
+import * as cheerio from 'cheerio'
+import { supabaseAdmin } from '../supabase'
+import type { NewsSource, NewNewsItem, ScraperResult, ScrapingConfig } from '@/types/news'
+
+// Default scraping configuration
+const DEFAULT_CONFIG: ScrapingConfig = {
+  maxRetries: 3,
+  retryDelayMs: 1000,
+  timeoutMs: 30000,
+  maxItemsPerSource: parseInt(process.env.NEWS_MAX_ITEMS_PER_SOURCE || '10'),
+  respectRobotsTxt: true,
+  userAgent: 'AI-Professor-News-Bot/1.0 (Educational Platform)',
+}
+
+// Rate limiting tracker
+const rateLimitTracker = new Map<string, number>()
+
+/**
+ * Main scraper function - scrapes all enabled sources
+ */
+export async function scrapeAllNews(config: Partial<ScrapingConfig> = {}): Promise<void> {
+  const finalConfig = { ...DEFAULT_CONFIG, ...config }
+  
+  // Get all enabled sources
+  const { data: sources, error } = await supabaseAdmin
+    .from('news_sources')
+    .select('*')
+    .eq('enabled', true)
+  
+  if (error) {
+    throw new Error(`Failed to fetch sources: ${error.message}`)
+  }
+  
+  if (!sources || sources.length === 0) {
+    console.log('No enabled sources found')
+    return
+  }
+  
+  console.log(`Starting scrape for ${sources.length} sources`)
+  
+  // Process each source
+  for (const source of sources) {
+    try {
+      await scrapeSource(source, finalConfig)
+      
+      // Add delay between sources to respect rate limits
+      await sleep(2000)
+    } catch (error) {
+      console.error(`Error scraping ${source.name}:`, error)
+      await logScrapeError(source.name, undefined, error)
+    }
+  }
+  
+  console.log('Scraping completed')
+}
+
+/**
+ * Scrape a specific source
+ */
+export async function scrapeSource(
+  source: NewsSource,
+  config: ScrapingConfig
+): Promise<ScraperResult> {
+  const { scraper_function } = source
+  
+  // Check if we should skip based on interval
+  if (source.last_scraped_at) {
+    const hoursSinceLastScrape = getHoursSinceDate(new Date(source.last_scraped_at))
+    if (hoursSinceLastScrape < source.scrape_interval_hours) {
+      console.log(`Skipping ${source.name} - scraped ${hoursSinceLastScrape.toFixed(1)}h ago`)
+      return { source: source.name, items: [], errors: [] }
+    }
+  }
+  
+  console.log(`Scraping ${source.name}...`)
+  
+  try {
+    // Dynamically import and call the appropriate scraper function
+    const scraperModule = await import(`./sources/${getScraperFileName(scraper_function)}`)
+    const scraperFn = scraperModule[scraper_function]
+    
+    if (!scraperFn || typeof scraperFn !== 'function') {
+      throw new Error(`Scraper function ${scraper_function} not found`)
+    }
+    
+    // Execute scraper with retries
+    const result = await executeWithRetry(
+      () => scraperFn(source.url, config),
+      config.maxRetries,
+      config.retryDelayMs
+    )
+    
+    // Store items in database
+    if (result.items.length > 0) {
+      await storeNewsItems(result.items)
+      
+      // Update source stats
+      await supabaseAdmin.rpc('update_source_stats', {
+        p_source_name: source.name,
+        p_items_count: result.items.length,
+      })
+    }
+    
+    // Log any errors
+    for (const error of result.errors) {
+      await logScrapeError(source.name, error.url, error.error)
+    }
+    
+    console.log(`✓ ${source.name}: ${result.items.length} items scraped`)
+    
+    return result
+  } catch (error) {
+    console.error(`✗ ${source.name}: ${error}`)
+    await logScrapeError(source.name, undefined, error)
+    throw error
+  }
+}
+
+/**
+ * Store news items in database
+ */
+async function storeNewsItems(items: Omit<NewNewsItem, 'summary'>[]): Promise<void> {
+  for (const item of items) {
+    try {
+      // Use upsert to handle duplicates (by source_url)
+      const { error } = await supabaseAdmin
+        .from('news_items')
+        .upsert(
+          {
+            ...item,
+            scraped_at: new Date().toISOString(),
+          },
+          {
+            onConflict: 'source_url',
+            ignoreDuplicates: false,
+          }
+        )
+      
+      if (error) {
+        console.error(`Failed to store item ${item.source_url}:`, error)
+      }
+    } catch (error) {
+      console.error(`Error storing item ${item.source_url}:`, error)
+    }
+  }
+}
+
+/**
+ * Log scrape error to database
+ */
+async function logScrapeError(
+  sourceName: string,
+  sourceUrl: string | undefined,
+  error: any
+): Promise<void> {
+  try {
+    await supabaseAdmin.from('news_scrape_errors').insert({
+      source_name: sourceName,
+      source_url: sourceUrl || null,
+      error_message: error instanceof Error ? error.message : String(error),
+      error_stack: error instanceof Error ? error.stack : null,
+    })
+    
+    // Update source with error
+    await supabaseAdmin
+      .from('news_sources')
+      .update({
+        last_error: error instanceof Error ? error.message : String(error),
+        updated_at: new Date().toISOString(),
+      })
+      .eq('name', sourceName)
+  } catch (logError) {
+    console.error('Failed to log scrape error:', logError)
+  }
+}
+
+/**
+ * Execute function with retry logic
+ */
+async function executeWithRetry<T>(
+  fn: () => Promise<T>,
+  maxRetries: number,
+  retryDelayMs: number
+): Promise<T> {
+  let lastError: Error | undefined
+  
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn()
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error(String(error))
+      
+      if (attempt < maxRetries) {
+        console.log(`Retry ${attempt}/${maxRetries} after ${retryDelayMs}ms`)
+        await sleep(retryDelayMs)
+        retryDelayMs *= 2 // Exponential backoff
+      }
+    }
+  }
+  
+  throw lastError
+}
+
+/**
+ * Fetch HTML with proper headers and timeout
+ */
+export async function fetchHTML(url: string, config: ScrapingConfig): Promise<string> {
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), config.timeoutMs)
+  
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': config.userAgent,
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+      },
+      signal: controller.signal,
+    })
+    
+    clearTimeout(timeoutId)
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+    }
+    
+    return await response.text()
+  } catch (error) {
+    clearTimeout(timeoutId)
+    
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new Error(`Request timeout after ${config.timeoutMs}ms`)
+    }
+    
+    throw error
+  }
+}
+
+/**
+ * Parse HTML with Cheerio
+ */
+export function parseHTML(html: string): cheerio.CheerioAPI {
+  return cheerio.load(html)
+}
+
+/**
+ * Extract text from Cheerio element
+ */
+export function extractText($: cheerio.CheerioAPI, selector: string): string {
+  return $(selector).text().trim()
+}
+
+/**
+ * Extract attribute from Cheerio element
+ */
+export function extractAttribute(
+  $: cheerio.CheerioAPI,
+  selector: string,
+  attribute: string
+): string {
+  return $(selector).attr(attribute) || ''
+}
+
+/**
+ * Clean and normalize URL
+ */
+export function normalizeUrl(url: string, baseUrl: string): string {
+  try {
+    const absolute = new URL(url, baseUrl)
+    return absolute.href
+  } catch {
+    return url
+  }
+}
+
+/**
+ * Clean text by removing extra whitespace
+ */
+export function cleanText(text: string): string {
+  return text.replace(/\s+/g, ' ').trim()
+}
+
+/**
+ * Extract date from various formats
+ */
+export function parseDate(dateString: string): Date | null {
+  try {
+    const date = new Date(dateString)
+    return isNaN(date.getTime()) ? null : date
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Get hours since a date
+ */
+function getHoursSinceDate(date: Date): number {
+  const now = new Date()
+  const diffMs = now.getTime() - date.getTime()
+  return diffMs / (1000 * 60 * 60)
+}
+
+/**
+ * Sleep utility
+ */
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+/**
+ * Get scraper file name from function name
+ */
+function getScraperFileName(functionName: string): string {
+  // Convert camelCase to kebab-case
+  const fileName = functionName
+    .replace(/([A-Z])/g, '-$1')
+    .toLowerCase()
+    .replace(/^scrape-/, '')
+  
+  return fileName
+}
+
+/**
+ * Manual trigger for specific source
+ */
+export async function scrapeSpecificSource(
+  sourceName: string,
+  config: Partial<ScrapingConfig> = {}
+): Promise<ScraperResult> {
+  const { data: source, error } = await supabaseAdmin
+    .from('news_sources')
+    .select('*')
+    .eq('name', sourceName)
+    .single()
+  
+  if (error || !source) {
+    throw new Error(`Source not found: ${sourceName}`)
+  }
+  
+  const finalConfig = { ...DEFAULT_CONFIG, ...config }
+  return scrapeSource(source, finalConfig)
+}
+
+/**
+ * Get scraping statistics
+ */
+export async function getScrapingStats() {
+  const { data: sources } = await supabaseAdmin
+    .from('news_sources')
+    .select('*')
+    .order('last_scraped_at', { ascending: false })
+  
+  const { count: totalItems } = await supabaseAdmin
+    .from('news_items')
+    .select('*', { count: 'exact', head: true })
+  
+  const { count: recentErrors } = await supabaseAdmin
+    .from('news_scrape_errors')
+    .select('*', { count: 'exact', head: true })
+    .eq('resolved', false)
+    .gte('created_at', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
+  
+  return {
+    sources: sources || [],
+    totalItems: totalItems || 0,
+    recentErrors: recentErrors || 0,
+  }
+}

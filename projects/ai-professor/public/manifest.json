@@ -1,0 +1,41 @@
+{
+  "name": "Pulse + AI Professor",
+  "short_name": "AI Professor",
+  "description": "AI-powered learning platform for courses, news, and personalized learning paths",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0d9488",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Browse Courses",
+      "url": "/courses",
+      "description": "View all available courses"
+    },
+    {
+      "name": "AI News",
+      "url": "/news",
+      "description": "Latest AI news and updates"
+    }
+  ]
+}

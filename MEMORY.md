@@ -11,6 +11,7 @@ Curated memories, decisions, and context worth keeping across sessions.
 - Communication: casual, direct, proactive suggestions OK
 - **Critical rule:** ASK before any code changes, deletions, or implementations
 - **Agent spawning:** Auto-spawn when needed, BUT always inform Bryan (notification required)
+- **Preview preference:** Send files DIRECTLY in chat using message tool with media parameter - NEVER give file:// links to copy-paste
 - Projects exist but are off-limits unless explicitly mentioned
 - **Availability:** Anytime, any day — no restrictions
 

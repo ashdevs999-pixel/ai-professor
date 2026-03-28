@@ -10,7 +10,7 @@
 
 ## Outstanding Items (check these):
 
-- Origin Labs pitch deck — awaiting Bryan's specific changes
+- (none currently)
 
 ## Reminder Format:
 
