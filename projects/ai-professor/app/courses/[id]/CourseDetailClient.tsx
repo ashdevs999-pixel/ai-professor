@@ -28,14 +28,21 @@ const DIFFICULTY_COLORS: Record<string, string> = {
   advanced: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
 }
 
-export default function CourseDetailClient({ courseId }: { courseId: string }) {
+interface Props {
+  courseId: string
+  initialCourse: any
+}
+
+export default function CourseDetailClient({ courseId, initialCourse }: Props) {
   const router = useRouter()
-  const [course, setCourse] = useState<Course | null>(null)
-  const [lessons, setLessons] = useState<Lesson[]>([])
-  const [loading, setLoading] = useState(true)
+  const [course, setCourse] = useState<Course | null>(initialCourse || null)
+  const [lessons, setLessons] = useState<Lesson[]>(initialCourse?.lessons || [])
+  const [loading, setLoading] = useState(!initialCourse)
 
   useEffect(() => {
-    fetchCourse()
+    if (!initialCourse) {
+      fetchCourse()
+    }
   }, [courseId])
 
   const fetchCourse = async () => {
