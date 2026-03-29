@@ -3346,10 +3346,980 @@ You now know how to use Claude AND deploy it to Telegram!` },
     description: 'Master Google\'s multimodal AI assistant.',
     topic: 'AI Tools',
     lessons: [
-      { title: 'What is Gemini?', content: '## Google Gemini\n\n**Gemini** is Google\'s most advanced AI model. It\'s:\n- Multimodal (text, images, audio, video)\n- Integrated with Google services\n- Available free with Google account\n\n## Gemini vs ChatGPT\n\n| Feature | Gemini | ChatGPT |\n|---------|--------|---------|\n| **Free** | ✅ Yes | ✅ Yes |\n| **Multimodal** | ✅ Native | ✅ Plus only |\n| **Google Integration** | ✅ Yes | ❌ No |\n| **Real-time Info** | ✅ Yes | ✅ Plus only |\n\n## Getting Started\n\n1. Go to **[gemini.google.com](https://gemini.google.com)**\n2. Sign in with Google account\n3. Start chatting!\n\n**→ Proceed to Lesson 2: Getting Started**' },
-      { title: 'Getting Started with Gemini', content: '## Key Features\n\n### 1. Multimodal Input\nUpload images and ask questions about them:\n- "What\'s in this image?"\n- "Describe this chart"\n- "Transcribe this text"\n\n### 2. Google Integration\n- Search the web for current info\n- Connect to Google Workspace\n- Export to Google Docs\n\n### 3. Extensions\nConnect to:\n- Google Maps\n- YouTube\n- Google Flights\n- Google Hotels\n\n**→ Proceed to Lesson 3: Multimodal Capabilities**' },
-      { title: 'Multimodal Capabilities', content: '## What Can You Do?\n\n### Images\n- Analyze photos and screenshots\n- Extract text from images (OCR)\n- Describe visual content\n- Identify objects and places\n\n### Documents\n- Upload PDFs\n- Summarize long documents\n- Extract key information\n\n### Code\n- Write and debug code\n- Explain code snippets\n- Generate documentation\n\n**→ Proceed to Lesson 4: Pro Tips**' },
-      { title: 'Pro Tips & Integrations', content: '## Tips for Gemini\n\n### 1. Use @mentions\nType \`@\` to access:\n- \`@YouTube\` - Search and summarize videos\n- \`@Google Maps\` - Find places\n- \`@Google Flights\` - Search flights\n\n### 2. Export to Docs\nAfter getting a response:\n- Click "Export to Docs"\n- Edit in Google Docs\n\n### 3. Double-Check\nGemini can make mistakes. Always verify important information.\n\n## 🎉 Congratulations!\n\nYou now know how to use Google Gemini!' },
+      {
+        title: 'What is Gemini?',
+        content: `## 🎯 What You'll Learn
+
+By the end of this guide, you will:
+
+- ✅ Understand what Gemini is and which version to use
+- ✅ Set up Gemini on web and mobile
+- ✅ Use multimodal features (images, documents, code)
+- ✅ Master effective prompting techniques
+- ✅ Troubleshoot common issues
+
+**⏱️ Time to complete:** ~45 minutes
+
+---
+
+## What is Google Gemini?
+
+**Gemini** is Google's most advanced AI model family, designed to be multimodal from the ground up. This means it can understand and work with text, images, audio, video, and code — all in the same conversation.
+
+Think of Gemini as your AI assistant that can:
+- See and understand images (like showing it a photo of a plant and asking what it is)
+- Read documents and answer questions about them
+- Write, debug, and explain code
+- Search the web for real-time information
+- Connect to Google services (Maps, YouTube, Flights, etc.)
+
+---
+
+## ✅ Prerequisites Checklist
+
+Before starting, ensure you have:
+
+- [ ] **A Google account** (Gmail or Google Workspace)
+- [ ] **Web browser** (Chrome, Firefox, Safari, or Edge)
+- [ ] **Internet connection**
+- [ ] **Optional:** Mobile device for Gemini mobile app
+
+---
+
+## Gemini Model Versions Explained
+
+Google offers different Gemini models for different needs:
+
+| Model | Best For | Speed | Capability |
+|-------|----------|-------|------------|
+| **Gemini Flash** | Quick tasks, everyday use | ⚡ Fastest | Good |
+| **Gemini Pro** | Complex reasoning, coding | 🏃 Fast | Excellent |
+| **Gemini Ultra** | Most difficult tasks | 🐢 Slower | Best |
+
+**Which should you use?**
+- **Free tier:** Uses Gemini Pro (plenty powerful for most tasks)
+- **Advanced ($20/mo):** Access to Ultra + longer context + more features
+
+---
+
+## Gemini vs Other AI Assistants
+
+| Feature | Gemini Free | Gemini Advanced | ChatGPT Free | ChatGPT Plus |
+|---------|-------------|-----------------|--------------|--------------|
+| **Price** | $0 | $20/mo | $0 | $20/mo |
+| **Model** | Gemini Pro | Gemini Ultra | GPT-3.5/4o-mini | GPT-4/4o |
+| **Multimodal** | ✅ Images, files | ✅ Images, files, video | ❌ Text only | ✅ Images |
+| **Web Search** | ✅ Yes | ✅ Yes | ❌ No | ✅ Yes |
+| **Google Integration** | ✅ Yes | ✅ Yes | ❌ No | ❌ No |
+| **Context Length** | 32K tokens | 1M tokens | 8K tokens | 128K tokens |
+| **File Uploads** | ✅ Yes | ✅ Yes | ❌ No | ✅ Yes |
+
+**When to choose Gemini:**
+- ✅ You use Google services (Docs, Drive, Maps)
+- ✅ You need real-time information
+- ✅ You want multimodal capabilities for free
+- ✅ You work with long documents
+
+---
+
+## Real-World Use Cases
+
+**For Students:**
+- "Explain quantum physics like I'm 15"
+- Upload a photo of homework → Get step-by-step help
+- "Summarize this 50-page PDF"
+
+**For Professionals:**
+- "Draft an email declining a meeting politely"
+- Upload a chart → "What trends do you see?"
+- "Compare these two contracts and highlight differences"
+
+**For Developers:**
+- "Debug this Python error: [paste error]"
+- "Explain this React code line by line"
+- "Write unit tests for this function"
+
+**For Creatives:**
+- "Generate 10 blog post ideas about sustainable fashion"
+- "Rewrite this paragraph to be more engaging"
+- Upload an image → "Describe this in vivid detail"
+
+---
+
+**→ Proceed to Lesson 2: Access & Setup**`
+      },
+      {
+        title: 'Access & Setup',
+        content: `## 🌐 Three Ways to Access Gemini
+
+### Method 1: Gemini Website (Recommended for Beginners)
+
+**URL:** [gemini.google.com](https://gemini.google.com)
+
+**Steps:**
+
+1. **Open your web browser** (Chrome, Firefox, Safari, or Edge)
+
+2. **Navigate to gemini.google.com**
+
+3. **Sign in with your Google account:**
+   - Click "Sign in" in the top-right corner
+   - Enter your Gmail address or Google Workspace email
+   - Enter your password
+   - Complete 2-factor authentication if enabled
+
+4. **Accept terms of service:**
+   - Review Google's AI terms
+   - Click "I agree" or "Accept"
+
+5. **You're in!** You'll see a clean chat interface
+
+**📸 Screenshot Description:**
+The Gemini interface has:
+- A text input box at the bottom
+- A paperclip icon (📎) for file uploads
+- A microphone icon (🎤) for voice input
+- A chat history panel on the left
+- Your profile icon in the top-right
+
+---
+
+### Method 2: Google AI Studio (For Developers)
+
+**URL:** [aistudio.google.com](https://aistudio.google.com)
+
+Google AI Studio is a free, browser-based IDE for experimenting with Gemini.
+
+**When to use AI Studio:**
+- Testing prompts before using in production
+- Developing applications with Gemini API
+- Fine-tuning model parameters
+- Comparing different model versions
+
+**Setup Steps:**
+
+1. Go to [aistudio.google.com](https://aistudio.google.com)
+2. Sign in with your Google account
+3. Click "Get API key" in the left sidebar
+4. Click "Create API key"
+5. Copy your API key (save it securely!)
+
+**📸 Screenshot Description:**
+AI Studio has:
+- A prompt input area
+- Model selection dropdown (Flash, Pro)
+- Temperature and token sliders
+- "Run" button to test
+- "Get code" button to export
+
+---
+
+### Method 3: Mobile App
+
+**iOS:** Download "Google Gemini" from App Store
+**Android:** Download "Google Gemini" from Play Store
+
+**Setup Steps:**
+
+1. Download the app from your device's app store
+2. Open the app
+3. Sign in with your Google account
+4. Grant necessary permissions (microphone for voice, camera for images)
+5. Start chatting!
+
+**Mobile-Specific Features:**
+- 📸 Take photos directly in the app
+- 🎤 Voice input (tap and hold microphone)
+- 📱 Upload images from camera roll
+- 🗣️ Hands-free conversations
+
+---
+
+## Upgrading to Gemini Advanced ($20/month)
+
+**What You Get:**
+
+| Feature | Free | Advanced |
+|---------|------|----------|
+| Model | Gemini Pro | Gemini Ultra |
+| Context | 32K tokens | 1M tokens |
+| File uploads | Limited | Unlimited |
+| Priority access | Standard | Priority |
+| Google Workspace | Basic | Deep integration |
+| Image generation | ❌ No | ✅ Yes |
+
+**How to Upgrade:**
+
+1. Go to [gemini.google.com](https://gemini.google.com)
+2. Click "Try Gemini Advanced" or "Upgrade" in the left sidebar
+3. Click "Start trial" (often 1-2 months free)
+4. Enter payment method
+5. Confirm subscription
+
+**Is it worth it?**
+- **Yes** if: You use Gemini daily, work with long documents, need best-in-class performance
+- **No** if: You're casually exploring, Gemini Pro meets your needs
+
+---
+
+## ⏱️ Time Estimate
+
+| Task | Time |
+|------|------|
+| Create Google account | 5 minutes |
+| Sign in to Gemini | 1 minute |
+| First conversation | 2 minutes |
+| Explore features | 10 minutes |
+| **Total** | **~20 minutes** |
+
+---
+
+## ✅ Setup Verification
+
+Before moving on, verify:
+
+- [ ] You can access gemini.google.com
+- [ ] You've sent your first message
+- [ ] You can see the file upload button (paperclip icon)
+- [ ] You can access chat history in the left sidebar
+- [ ] Optional: You have the mobile app installed
+
+---
+
+**→ Proceed to Lesson 3: Effective Prompting**`
+      },
+      {
+        title: 'Effective Prompting',
+        content: `## 🎯 The Perfect Prompt Formula
+
+Every great Gemini prompt has these elements:
+
+\`\`\`
+[Context] + [Specific Task] + [Format/Constraints] + [Examples if complex]
+\`\`\`
+
+---
+
+## Text Prompting Examples
+
+### ❌ Bad Prompt:
+\`"Help me with my resume"\`
+
+### ✅ Good Prompt:
+\`"I'm a software engineer with 3 years of experience applying for senior roles at tech companies. 
+
+Please review my resume and suggest improvements for:
+1. Making achievements more quantifiable (I struggle with this)
+2. Highlighting leadership experience
+3. ATS optimization for tech companies
+
+Here's my resume: [paste resume]"\`
+
+**Why it's better:**
+- Provides context (role, experience level, target)
+- Specific areas to improve
+- Clear deliverables
+
+---
+
+## 📸 Image Prompting Examples
+
+### Example 1: Object Identification
+
+**Prompt:**
+\`"What plant is this? Also tell me how to care for it."\`
+
+**Expected Output:**
+Gemini identifies the plant species and provides care instructions (watering, sunlight, soil).
+
+### Example 2: Chart Analysis
+
+**Prompt:**
+\`"Analyze this sales chart. What trends do you see? What would you recommend we focus on next quarter?"\`
+
+**Expected Output:**
+- Trend identification (growth, decline, seasonality)
+- Data insights
+- Actionable recommendations
+
+### Example 3: Text Extraction (OCR)
+
+**Prompt:**
+\`"Extract all the text from this receipt and organize it as a table with: Item, Quantity, Price"\`
+
+**Expected Output:**
+A formatted table with all receipt items.
+
+### Example 4: Problem Solving
+
+**Prompt:**
+\`"I'm getting this error message on my computer [screenshot]. What does it mean and how do I fix it?"\`
+
+**Expected Output:**
+Error explanation + step-by-step solution.
+
+---
+
+## 💻 Code Prompting Examples
+
+### Example 1: Write Code
+
+**Prompt:**
+\`"Write a Python function that calculates the factorial of a number. Include error handling for negative numbers and examples of how to use it."\`
+
+**Expected Output:**
+\`\`\`python
+def factorial(n):
+    """Calculate factorial of n.
+    
+    Args:
+        n: Non-negative integer
+        
+    Returns:
+        Factorial of n
+        
+    Raises:
+        ValueError: If n is negative
+    """
+    if n < 0:
+        raise ValueError("Factorial not defined for negative numbers")
+    if n == 0 or n == 1:
+        return 1
+    return n * factorial(n - 1)
+
+# Examples
+print(factorial(5))  # Output: 120
+print(factorial(0))  # Output: 1
+\`\`\`
+
+### Example 2: Debug Code
+
+**Prompt:**
+\`"This Python code is giving me an error. What's wrong and how do I fix it?
+
+\`\`\`python
+numbers = [1, 2, 3, 4, 5]
+for i in range(len(numbers)):
+    print(numbers[i+1])
+\`\`\`
+
+Error: IndexError: list index out of range"\`
+
+**Expected Output:**
+Explanation of off-by-one error + corrected code.
+
+### Example 3: Explain Code
+
+**Prompt:**
+\`"Explain this JavaScript code line by line. I'm a beginner.
+
+\`\`\`javascript
+const doubled = numbers.map(n => n * 2).filter(n => n > 5);
+\`\`\`"\`
+
+**Expected Output:**
+Line-by-line explanation with examples.
+
+---
+
+## 📄 Document Prompting Examples
+
+### Example 1: Summarization
+
+**Prompt:**
+\`"Summarize this 20-page PDF in 3 paragraphs. Focus on the key findings and recommendations."\`
+
+**Expected Output:**
+3-paragraph summary with main points.
+
+### Example 2: Extract Information
+
+**Prompt:**
+\`"From this contract, extract all the key dates and deadlines. Format as a table: Event, Date, Description"\`
+
+**Expected Output:**
+Table with all dates and deadlines.
+
+### Example 3: Compare Documents
+
+**Prompt:**
+\`"Compare these two versions of the contract. What changed between version 1 and version 2?"\`
+
+**Expected Output:**
+Side-by-side comparison of changes.
+
+---
+
+## 🧠 Reasoning Prompts
+
+### Chain-of-Thought Prompting
+
+For complex problems, ask Gemini to "think step by step":
+
+**Prompt:**
+\`"If I have 150 apples and I give 1/3 to my friend, then lose 15% of the remaining apples, how many do I have left? Think step by step."\`
+
+**Expected Output:**
+\`\`\`
+Step 1: Start with 150 apples
+Step 2: Give away 1/3: 150 ÷ 3 = 50 apples given away
+Step 3: Remaining: 150 - 50 = 100 apples
+Step 4: Lose 15%: 100 × 0.15 = 15 apples lost
+Step 5: Final count: 100 - 15 = 85 apples
+
+Answer: 85 apples
+\`\`\`
+
+---
+
+## 🎯 Practical Exercises
+
+**Exercise 1: Basic Chat (2 minutes)**
+Ask Gemini to explain a concept you've always been curious about.
+
+**Exercise 2: Image Upload (3 minutes)**
+Upload a photo and ask 3 different questions about it.
+
+**Exercise 3: Code Generation (5 minutes)**
+Ask Gemini to write a function, then ask it to improve the code.
+
+**Exercise 4: Document Summary (5 minutes)**
+Upload a PDF and ask for a summary in 5 bullet points.
+
+---
+
+**→ Proceed to Lesson 4: Advanced Features**`
+      },
+      {
+        title: 'Advanced Features',
+        content: `## 🚀 Multimodal Capabilities
+
+Gemini's superpower is handling multiple types of input in the same conversation.
+
+### Image + Text Combination
+
+**Example:**
+1. Upload an image of a recipe
+2. Ask: "What ingredients do I need? Can you create a shopping list?"
+3. Follow up: "I'm missing olive oil. What can I substitute?"
+4. Continue: "Double the recipe for 8 people"
+
+---
+
+### Document Analysis Workflows
+
+**Workflow 1: Research Paper Analysis**
+
+Upload a PDF → Ask:
+\`\`\`
+1. "What's the main hypothesis?"
+2. "Summarize the methodology in 3 sentences"
+3. "What are the key findings?"
+4. "What are the limitations mentioned?"
+5. "Compare this to [another paper you uploaded]"
+\`\`\`
+
+**Workflow 2: Contract Review**
+
+Upload a contract → Ask:
+\`\`\`
+1. "What are my obligations as the tenant?"
+2. "List all the dates and deadlines"
+3. "Are there any red flags or unusual clauses?"
+4. "What happens if I need to break the lease early?"
+\`\`\`
+
+---
+
+## 📎 File Uploads
+
+### Supported File Types
+
+| Type | Formats | Max Size |
+|------|---------|----------|
+| **Documents** | PDF, DOCX, TXT, RTF | 50 MB |
+| **Images** | JPG, PNG, GIF, WEBP | 50 MB |
+| **Code** | Any text format | 50 MB |
+| **Audio** | MP3, WAV, FLAC, AAC | 50 MB (Advanced only) |
+| **Video** | MP4, MOV, AVI, WEBM | 50 MB (Advanced only) |
+
+### How to Upload Files
+
+1. Click the **paperclip icon (📎)** in the chat input
+2. Select "Upload file" or drag & drop
+3. Choose your file
+4. Wait for upload to complete
+5. Ask questions about the file!
+
+**📸 Screenshot Description:**
+After uploading, you'll see the file appear above your chat input with a thumbnail preview.
+
+---
+
+## 🔌 Google Extensions
+
+Gemini connects to Google services for real-time information.
+
+### @Google Maps
+
+**Example Prompts:**
+- \`"@Google Maps Find coffee shops near Central Park NYC"\`
+- \`"@Google Maps What's the route from Boston to New York?"\`
+- \`"@Google Maps Show me restaurants open now in downtown Chicago"\`
+
+### @YouTube
+
+**Example Prompts:**
+- \`"@YouTube Find tutorials on Python for beginners"\`
+- \`"@YouTube What are the latest videos about AI?"\`
+- \`"@YouTube Summarize this video: [YouTube URL]"\`
+
+### @Google Flights
+
+**Example Prompts:**
+- \`"@Google Flights Find cheap flights from LA to Tokyo in March"\`
+- \`"@Google Flights What's the best time to fly to Europe?"\`
+
+### @Google Hotels
+
+**Example Prompts:**
+- \`"@Google Hotels Find hotels in Paris under $200/night"\`
+- \`"@Google Hotels What are the best-rated hotels in Barcelona?"\`
+
+### @Google Workspace
+
+**Example Prompts:**
+- \`"Search my Google Drive for files about Q4 planning"\`
+- \`"Find emails from John in Gmail about the project"\`
+- \`"Create a calendar event for tomorrow at 2pm"\`
+
+---
+
+## 🌐 Web Search Integration
+
+Gemini automatically searches the web for current information.
+
+**Example 1: Current Events**
+\`"What happened in the news today?"\`
+
+**Example 2: Real-Time Data**
+\`"What's the current stock price of Apple?"\`
+
+**Example 3: Latest Information**
+\`"What are the latest features in React 19?"\`
+
+**Note:** Always verify important facts by clicking the source links Gemini provides.
+
+---
+
+## 📤 Export to Google Docs
+
+After getting a response:
+
+1. Look for the **"Export to Docs"** button (📄 icon) below Gemini's response
+2. Click it
+3. A Google Doc will be created with the conversation
+4. The doc opens automatically for editing
+
+**Use Cases:**
+- Save research summaries
+- Export drafts for further editing
+- Share AI-generated content with team
+
+---
+
+## 🔄 Long Context Usage (Advanced)
+
+Gemini Advanced supports **1 million tokens** of context — roughly 700,000 words or 10+ books.
+
+**What This Means:**
+- Upload multiple long documents
+- Reference earlier parts of a 2-hour conversation
+- Analyze entire code repositories
+
+**Best Practices:**
+- Break very long documents into sections
+- Ask for summaries of large documents
+- Use specific questions rather than "analyze everything"
+
+---
+
+## 🎯 Practical Exercises
+
+**Exercise 1: Multimodal Chat (5 minutes)**
+1. Upload an image
+2. Ask a question about it
+3. Follow up with a related question
+4. Ask Gemini to create something based on the image
+
+**Exercise 2: Document Analysis (10 minutes)**
+1. Upload a PDF (any document)
+2. Ask for a summary
+3. Ask for specific information extraction
+4. Ask for recommendations based on the document
+
+**Exercise 3: Google Extensions (5 minutes)**
+1. Use @Google Maps to find somewhere
+2. Use @YouTube to find a video
+3. Ask Gemini to combine the information
+
+---
+
+**→ Proceed to Lesson 5: Pro Tips & Troubleshooting**`
+      },
+      {
+        title: 'Pro Tips & Troubleshooting',
+        content: `## ⚡ Pro Tips
+
+### 1. Use Conversation Memory
+
+Gemini remembers your conversation. Build on previous responses:
+
+\`\`\`
+You: "Write a blog post about AI"
+Gemini: [Writes blog post]
+You: "Make it shorter"
+Gemini: [Shortens the same post]
+You: "Add more examples"
+Gemini: [Adds examples to the shortened version]
+\`\`\`
+
+### 2. Specify Output Format
+
+Always tell Gemini how you want the answer formatted:
+
+\`\`\`
+"Format as a table"
+"Use bullet points"
+"Give me JSON format"
+"Write in markdown"
+"Number each step"
+\`\`\`
+
+### 3. Ask for Sources
+
+\`"What are your sources for this information?"\`
+
+Gemini will provide links to verify claims.
+
+### 4. Iterate and Refine
+
+Don't accept the first response. Keep refining:
+
+\`\`\`
+"Make it more professional"
+"Add more technical detail"
+"Explain it simpler"
+"Give me 3 alternative approaches"
+\`\`\`
+
+### 5. Use Voice Input on Mobile
+
+On the mobile app, tap and hold the microphone for voice input. Great for:
+- Dictating long prompts
+- Hands-free use
+- Conversational tone
+
+### 6. Leverage Extensions Smartly
+
+Combine extensions in one prompt:
+
+\`"Use @Google Maps to find Italian restaurants near me, then use @YouTube to find reviews of them"\`
+
+---
+
+## 🚨 Troubleshooting Common Issues
+
+### Error 1: "Something went wrong" or Generic Error
+
+**Symptoms:**
+- Red error banner appears
+- Message doesn't send
+- "Try again later" message
+
+**Solutions:**
+\`\`\`
+1. Refresh the page (F5 or Cmd/Ctrl + R)
+2. Clear browser cache:
+   - Chrome: Settings → Privacy → Clear browsing data
+   - Select "Cached images and files"
+3. Try incognito/private mode
+4. Disable browser extensions temporarily
+5. Try a different browser
+6. Check Google Workspace Status: google.com/appsstatus
+\`\`\`
+
+---
+
+### Error 2: "File upload failed"
+
+**Symptoms:**
+- Upload bar stuck at 0%
+- "Upload failed" error
+- File doesn't appear in chat
+
+**Solutions:**
+\`\`\`
+1. Check file size (max 50 MB)
+2. Check file format (PDF, DOCX, JPG, PNG, etc.)
+3. Reduce file size:
+   - Images: Use TinyPNG or Squoosh
+   - PDFs: Use Adobe online compressor
+4. Check your internet connection
+5. Try a different file
+6. Refresh and try again
+\`\`\`
+
+---
+
+### Error 3: "Response stopped" or Incomplete Response
+
+**Symptoms:**
+- Response cuts off mid-sentence
+- "Continue" button doesn't work
+- Incomplete code blocks
+
+**Solutions:**
+\`\`\`
+1. Type "Continue" or "Please continue"
+2. Ask for the response in smaller chunks:
+   "Break this into parts. Give me part 1 first."
+3. Simplify your request
+4. Start a new conversation
+\`\`\`
+
+---
+
+### Error 4: "Can't access Google Workspace"
+
+**Symptoms:**
+- Extensions don't work
+- "Permission denied" errors
+- Can't search Drive or Gmail
+
+**Solutions:**
+\`\`\`
+1. Check your Google Workspace settings:
+   - Admin may have disabled AI features
+   - Contact your IT administrator
+2. For personal accounts:
+   - Go to myaccount.google.com
+   - Check "Data & privacy" → "Workspace extensions"
+   - Ensure Gemini has access
+3. Disconnect and reconnect:
+   - Settings → Workspace → Disconnect
+   - Reconnect and grant permissions
+\`\`\`
+
+---
+
+### Error 5: Gemini Hallucinating (Giving Wrong Information)
+
+**Symptoms:**
+- Confident but incorrect answers
+- Made-up facts or sources
+- Inconsistent information
+
+**Solutions:**
+\`\`\`
+1. Always verify important information:
+   - Click source links
+   - Cross-reference with reliable sources
+2. Ask Gemini to show sources:
+   "What are your sources for this?"
+3. Be more specific in your prompt:
+   ❌ "Tell me about the history of Rome"
+   ✅ "Based on verified historical sources, summarize the founding of Rome"
+4. For critical information, ask Gemini to "verify before answering"
+\`\`\`
+
+---
+
+### Error 6: "Rate limit exceeded" or "Try again later"
+
+**Symptoms:**
+- Blocked from sending messages
+- Temporarily unavailable
+
+**Solutions:**
+\`\`\`
+1. Wait a few minutes (rate limits are temporary)
+2. Free tier has daily limits (roughly 50-100 messages)
+3. Upgrade to Advanced for higher limits
+4. Don't send rapid successive messages
+\`\`\`
+
+---
+
+### Error 7: Extensions (@YouTube, @Maps) Not Working
+
+**Symptoms:**
+- Extension doesn't respond
+- "Extension unavailable" error
+- No results from extension
+
+**Solutions:**
+\`\`\`
+1. Enable extensions:
+   - Settings → Extensions → Toggle on
+2. Check region availability:
+   - Some extensions are region-locked
+3. Verify account permissions:
+   - Settings → Connected services
+4. Try without the @ symbol first:
+   - If "Find coffee shops" works, but "@Google Maps Find coffee shops" doesn't, the extension may be down
+\`\`\`
+
+---
+
+### Error 8: "Can't sign in" or "Account not eligible"
+
+**Symptoms:**
+- Sign-in loop
+- "Service not available in your region"
+- "Account type not supported"
+
+**Solutions:**
+\`\`\`
+1. Check region availability:
+   - Gemini is available in 100+ countries
+   - Full list: support.google.com/gemini
+2. Use a personal Gmail account (not Workspace)
+3. Check age requirement:
+   - Must be 18+ in most regions
+   - 13+ with parental supervision in some
+4. Try a VPN if in an unsupported region
+   (Note: May violate terms of service)
+\`\`\`
+
+---
+
+### Error 9: Mobile App Crashing or Not Loading
+
+**Symptoms:**
+- App closes unexpectedly
+- Blank screen
+- Can't send messages
+
+**Solutions:**
+\`\`\`
+1. Force close and reopen:
+   - iOS: Swipe up from home
+   - Android: Settings → Apps → Gemini → Force stop
+2. Clear app cache:
+   - Android: Settings → Apps → Gemini → Storage → Clear cache
+   - iOS: Uninstall and reinstall
+3. Update the app:
+   - Check App Store/Play Store for updates
+4. Check device compatibility:
+   - Requires iOS 15+ or Android 8+
+5. Reinstall the app
+\`\`\`
+
+---
+
+### Error 10: Gemini Not Remembering Conversation
+
+**Symptoms:**
+- Gemini forgets previous messages
+- No context from earlier in conversation
+
+**Solutions:**
+\`\`\`
+1. Don't clear conversation:
+   - Each new chat is a fresh start
+   - Continue in the same thread
+2. Check if conversation was archived:
+   - Left sidebar → "Archived"
+3. Reference earlier messages explicitly:
+   "Remember earlier when I mentioned..."
+4. For Advanced users, check if long context is enabled:
+   - Settings → Advanced → Context length
+\`\`\`
+
+---
+
+### Error 11: "Response contains blocked content"
+
+**Symptoms:**
+- Gemini refuses to answer
+- Safety filter triggered
+
+**Solutions:**
+\`\`\`
+1. Rephrase your question more neutrally
+2. Gemini has safety filters for:
+   - Harmful content
+   - Personal identifiable information
+   - Medical/legal advice (will disclaim)
+3. For legitimate uses, try:
+   - Being more specific about context
+   - Explaining the educational/research purpose
+4. Note: Some topics are permanently restricted
+\`\`\`
+
+---
+
+### Error 12: Poor Quality Responses
+
+**Symptoms:**
+- Generic, unhelpful answers
+- Responses don't address your question
+- Repeated information
+
+**Solutions:**
+\`\`\`
+1. Provide more context:
+   ❌ "Write code for a game"
+   ✅ "Write Python code for a simple Snake game using Pygame. The game should have score tracking and increasing difficulty."
+2. Be specific about format:
+   "Format as a numbered list"
+   "Use markdown tables"
+3. Give examples:
+   "Here's the style I want: [example]"
+4. Iterate:
+   "That's too generic. Give me specific, actionable advice."
+5. Try a different approach:
+   "Explain this to me like I'm a beginner"
+\`\`\`
+
+---
+
+## 📚 Getting More Help
+
+### Official Resources
+- **Help Center:** [support.google.com/gemini](https://support.google.com/gemini)
+- **Community Forum:** [support.google.com/gemini/community](https://support.google.com/gemini/community)
+- **Status Page:** [google.com/appsstatus](https://google.com/appsstatus)
+
+### Quick Diagnostics
+\`\`\`
+1. Try in incognito/private mode (rules out extension conflicts)
+2. Try a different browser
+3. Check Google Workspace Status Dashboard
+4. Test with a simple prompt: "Hello, how are you?"
+\`\`\`
+
+---
+
+## 🎉 Congratulations!
+
+You've completed the **Google Gemini Essentials** guide!
+
+**What You've Learned:**
+- ✅ Understand Gemini models and capabilities
+- ✅ Set up Gemini on web and mobile
+- ✅ Write effective prompts for text, images, code, and documents
+- ✅ Use advanced features (extensions, file uploads, long context)
+- ✅ Troubleshoot common issues
+
+**Next Steps:**
+- Practice daily with Gemini
+- Explore other AI tool guides
+- Build Gemini into your workflow
+
+**Happy AI-assisted productivity!** 🚀`
+      }
     ]
   },
   'guide-grok': {
@@ -3357,9 +4327,1194 @@ You now know how to use Claude AND deploy it to Telegram!` },
     description: 'Get started with Elon Musk\'s Grok AI.',
     topic: 'Emerging AI',
     lessons: [
-      { title: 'What is Grok?', content: '## xAI\'s Grok\n\n**Grok** is an AI assistant created by xAI (Elon Musk\'s AI company). It\'s known for:\n- Real-time information from X (Twitter)\n- Witty and humorous personality\n- Two modes: Regular and Fun\n\n## Access\n\nGrok is available to X Premium+ subscribers ($16/mo):\n1. Subscribe to X Premium+\n2. Look for Grok in the X sidebar\n3. Start chatting!\n\n## Key Features\n\n- Real-time info from X posts\n- "Fun mode" with humorous responses\n- Image generation (Grok 2)\n- Less censorship than other AIs\n\n**→ Proceed to Lesson 2: Accessing Grok**' },
-      { title: 'Accessing Grok via X', content: '## How to Use Grok\n\n### 1. Subscribe to X Premium+\nGo to X → Premium → Subscribe\n\n### 2. Find Grok\nLook for the Grok icon in the left sidebar\n\n### 3. Start Chatting\nType your question or prompt\n\n## Modes\n\n### Regular Mode\nStraightforward, helpful responses\n\n### Fun Mode\nWitty, sarcastic, humorous responses (Grok\'s signature style)\n\n**→ Proceed to Lesson 3: Unique Features**' },
-      { title: 'Unique Features & Tips', content: '## What Makes Grok Different\n\n### 1. Real-Time Info\nAccess to X posts means Grok knows what\'s happening NOW.\n\n### 2. Personality\nUnlike other AIs, Grok has a distinct sense of humor.\n\n### 3. Less Guardrails\nGrok will answer questions other AIs might refuse.\n\n## Best Use Cases\n\n- Current events and news\n- Social media content\n- Fun, casual conversations\n- Checking what\'s trending\n\n## 🎉 Congratulations!\n\nYou now know how to use Grok!' },
+      {
+        title: 'What is Grok?',
+        content: `## 🎯 What You'll Learn
+
+By the end of this guide, you will:
+
+- ✅ Understand what makes Grok unique
+- ✅ Set up X Premium+ and access Grok
+- ✅ Use Grok for research, coding, and casual conversation
+- ✅ Know when to use Grok vs other AIs
+- ✅ Troubleshoot common issues
+
+**⏱️ Time to complete:** ~30 minutes
+
+---
+
+## What is Grok?
+
+**Grok** is an AI assistant created by xAI (Elon Musk's AI company). It's designed to be witty, helpful, and less constrained than other AI assistants.
+
+Think of Grok as the AI with a personality — it's not just helpful, it's entertaining.
+
+---
+
+## ✅ Prerequisites Checklist
+
+Before starting, ensure you have:
+
+- [ ] **An X (Twitter) account** (can create during setup)
+- [ ] **Credit card or payment method** (for X Premium+ subscription)
+- [ ] **Web browser or X mobile app**
+- [ ] **Internet connection**
+- [ ] **18+ years old** (required for X Premium+)
+
+---
+
+## What Makes Grok Different?
+
+### 1. Real-Time Information from X
+
+Grok has access to millions of X posts in real-time. This means:
+
+- ✅ Knows what's trending RIGHT NOW
+- ✅ Understands breaking news as it happens
+- ✅ Access to diverse perspectives and discussions
+- ✅ Can summarize what people are saying about any topic
+
+**Example:**
+\`"What are people saying about the iPhone 16 launch?"\`
+
+Grok will summarize real X posts, not outdated web pages.
+
+### 2. Witty Personality
+
+Unlike ChatGPT's neutral tone or Claude's helpful demeanor, Grok has **attitude**.
+
+**Example Comparison:**
+
+**ChatGPT:** "I'd be happy to help you with that request. Here's some information..."
+
+**Grok:** "Oh, you want to know about quantum physics? Buckle up, this is going to be wild..."
+
+### 3. Two Modes: Regular & Fun
+
+**Regular Mode:**
+- Straightforward, helpful responses
+- Professional tone
+- Gets the job done
+
+**Fun Mode:**
+- Sarcastic, witty, humorous
+- More conversational
+- Doesn't hold back on opinions
+
+### 4. Fewer Guardrails
+
+Grok will answer questions that other AIs might refuse:
+- Controversial topics (with appropriate warnings)
+- Hypothetical scenarios
+- Edgy humor (within reason)
+- Political discussions
+
+**Note:** Grok still has safety limits, but they're generally looser than ChatGPT or Claude.
+
+### 5. Image Generation (Grok 2)
+
+Grok 2 includes **Aurora**, an image generation model integrated directly into conversations.
+
+**Example:**
+\`"Generate an image of a cyberpunk city at sunset"\`
+
+---
+
+## Grok vs Other AI Assistants
+
+| Feature | Grok | ChatGPT | Claude | Gemini |
+|---------|------|---------|--------|--------|
+| **Price** | $16/mo (X Premium+) | Free / $20 (Plus) | Free / $20 (Pro) | Free / $20 (Advanced) |
+| **Real-Time Info** | ✅ X posts | ✅ Web (Plus) | ✅ Web (Pro) | ✅ Web |
+| **Personality** | 😂 Witty | 😐 Neutral | 🙂 Helpful | 😊 Friendly |
+| **Guardrails** | 🟢 Loose | 🔴 Strict | 🟡 Moderate | 🟡 Moderate |
+| **Image Gen** | ✅ Yes (Grok 2) | ✅ Yes (DALL-E) | ❌ No | ✅ Yes (Advanced) |
+| **Document Upload** | ❌ No | ✅ Yes (Plus) | ✅ Yes | ✅ Yes |
+| **Best For** | Current events, fun, edgy topics | General use, coding | Writing, analysis | Google ecosystem |
+
+---
+
+## When to Use Grok
+
+**✅ Best Use Cases:**
+
+1. **Current Events & Breaking News**
+   - \`"What's the latest on the SpaceX Starship launch?"\`
+   - \`"Summarize what people are saying about [trending topic]"\`
+
+2. **Social Media Content**
+   - \`"Write a funny tweet about Monday mornings"\`
+   - \`"Roast this LinkedIn post: [paste post]"\`
+
+3. **Casual Conversation**
+   - \`"Explain blockchain like you're a sarcastic professor"\`
+   - \`"What do you think about [controversial topic]?"\`
+
+4. **Checking Trends**
+   - \`"What memes are trending right now?"\`
+   - \`"What's the discourse about [topic] on X?"\`
+
+5. **Edgy or Controversial Topics**
+   - Questions other AIs might refuse
+   - Hypothetical scenarios
+   - Political discussions
+
+**❌ Not Best For:**
+
+- Document analysis (use Claude or Gemini)
+- Complex coding (use ChatGPT or Claude)
+- Academic research (use Perplexity or Claude)
+- Professional emails (use ChatGPT or Claude)
+- Long document summarization (use Kimi or Claude)
+
+---
+
+## Real-World Examples
+
+### Example 1: Current Events Research
+
+**Prompt:**
+\`"What's the consensus on X about the new AI regulation bill? Summarize different viewpoints."\`
+
+**Expected Output:**
+- Summary of X discussions
+- Different perspectives (pro/con)
+- Key concerns mentioned
+- Influential voices
+
+### Example 2: Fun Explanation
+
+**Prompt:**
+\`"Explain how neural networks work in Fun mode. Make it entertaining."\`
+
+**Expected Output:**
+Witty, engaging explanation with humor and personality.
+
+### Example 3: Social Media Content
+
+**Prompt:**
+\`"Write 5 tweets about the struggles of working from home. Make them relatable and funny."\`
+
+**Expected Output:**
+5 humorous, relatable tweets ready to post.
+
+---
+
+**→ Proceed to Lesson 2: Access & Setup**`
+      },
+      {
+        title: 'Access & Setup',
+        content: `## 💰 The X Premium+ Requirement
+
+**Important:** Grok is **only** available to X Premium+ subscribers ($16/month).
+
+This guide will walk you through every step.
+
+---
+
+## Step 1: Create an X Account (If Needed)
+
+**If you already have an X account, skip to Step 2.**
+
+### Creating Your Account
+
+1. **Go to** [x.com](https://x.com) or [twitter.com](https://twitter.com)
+
+2. **Click "Sign up"**
+
+3. **Choose sign-up method:**
+   - Google account
+   - Apple ID
+   - Email address
+
+4. **Enter required information:**
+   - Name (can be a display name)
+   - Email address
+   - Date of birth (must be 18+)
+   - Phone number (for verification)
+
+5. **Verify your email:**
+   - Check your inbox
+   - Click the verification link
+
+6. **Verify your phone:**
+   - Enter the code sent via SMS
+
+7. **Complete your profile:**
+   - Add a profile picture (optional)
+   - Write a bio (optional)
+
+**📸 Screenshot Description:**
+The sign-up page has fields for name, email/phone, and date of birth.
+
+**⏱️ Time:** 5-10 minutes
+
+---
+
+## Step 2: Subscribe to X Premium+
+
+### Navigating to Premium
+
+1. **Log in to X**
+
+2. **Click "Premium" in the left sidebar**
+   - Or go directly to: [x.com/premium](https://x.com/premium)
+
+3. **You'll see three tiers:**
+   - **Basic** ($3/mo) - Ad-free, edit posts, longer posts
+   - **Premium** ($8/mo) - Blue checkmark, all Basic features
+   - **Premium+** ($16/mo) - All Premium features + **Grok access** ✅
+
+### Subscribing to Premium+
+
+1. **Click "Subscribe" under Premium+**
+
+2. **Choose billing period:**
+   - Monthly ($16/mo)
+   - Annual ($168/year, save $24)
+
+3. **Select payment method:**
+   - Credit/debit card
+   - Apple Pay (iOS app)
+   - Google Pay (Android app)
+
+4. **Enter payment details**
+
+5. **Review and confirm**
+
+6. **Complete verification (if required):**
+   - X may ask for ID verification
+   - This is to prevent impersonation
+
+**📸 Screenshot Description:**
+Premium page shows three tiers with feature comparison. Premium+ has "Grok access" highlighted.
+
+**⏱️ Time:** 5 minutes
+
+**💡 Note:** X sometimes offers free trials (1-3 months). Check the Premium page for current offers.
+
+---
+
+## Step 3: Access Grok
+
+### On Desktop (Web Browser)
+
+1. **Log in to X** ([x.com](https://x.com))
+
+2. **Look for the Grok icon** in the left sidebar
+   - It looks like a black square with a diagonal line (\\)
+   - It's below "Home," "Explore," and "Notifications"
+
+3. **Click the Grok icon**
+
+4. **You're in!** Start chatting with Grok.
+
+**📸 Screenshot Description:**
+Left sidebar shows Grok icon between "Grok" and "Lists"
+
+### On Mobile (X App)
+
+1. **Open the X app**
+
+2. **Tap your profile picture** (top-left corner)
+
+3. **Look for "Grok"** in the menu
+
+4. **Tap "Grok"**
+
+5. **Start chatting!**
+
+**📸 Screenshot Description:**
+Mobile menu shows Grok option with the diagonal line icon.
+
+---
+
+## Step 4: Using grok.x.com (Alternative)
+
+There's also a dedicated Grok web app:
+
+1. **Go to** [grok.x.com](https://grok.x.com)
+
+2. **Sign in with your X account**
+
+3. **Grant permissions** (if asked)
+
+4. **Start chatting**
+
+**Benefits of grok.x.com:**
+- Clean, distraction-free interface
+- Better for focused work
+- No X timeline visible
+
+---
+
+## ⏱️ Setup Time Summary
+
+| Step | Time |
+|------|------|
+| Create X account | 5-10 minutes |
+| Subscribe to Premium+ | 5 minutes |
+| Access Grok | 1 minute |
+| First conversation | 2 minutes |
+| **Total** | **~20 minutes** |
+
+---
+
+## ✅ Setup Verification
+
+Before moving on, verify:
+
+- [ ] You have an X account
+- [ ] You're subscribed to X Premium+ (check Settings → Premium)
+- [ ] You can see the Grok icon in the X sidebar
+- [ ] You've sent your first message to Grok
+- [ ] You received a response
+
+---
+
+## 🔄 Managing Your Subscription
+
+### Checking Subscription Status
+
+1. Go to [x.com/settings/premium](https://x.com/settings/premium)
+2. View your current plan and renewal date
+
+### Canceling Premium+
+
+1. Go to [x.com/settings/premium](https://x.com/settings/premium)
+2. Click "Cancel subscription"
+3. Confirm cancellation
+4. You'll lose Grok access at the end of the billing period
+
+### Switching Tiers
+
+You can upgrade from Premium to Premium+ anytime:
+1. Go to Premium page
+2. Click "Upgrade"
+3. Pay the difference
+
+---
+
+**→ Proceed to Lesson 3: Using Grok Effectively**`
+      },
+      {
+        title: 'Using Grok Effectively',
+        content: `## 🎮 Understanding Grok Modes
+
+Grok has two distinct modes. You can switch between them using the toggle at the top of the chat.
+
+### Regular Mode 🎯
+
+**When to use:**
+- Serious research
+- Professional tasks
+- Coding questions
+- Factual information
+
+**Example:**
+\`\`\`
+Prompt: "Explain how cryptocurrency mining works"
+
+Response: Clear, technical explanation of mining, proof-of-work,
+blockchain, and energy consumption.
+\`\`\`
+
+### Fun Mode 😂
+
+**When to use:**
+- Casual conversations
+- Entertainment
+- Social media content
+- When you want a laugh
+
+**Example:**
+\`\`\`
+Prompt: "Explain how cryptocurrency mining works"
+
+Response: "Oh boy, crypto mining. It's like trying to solve a Rubik's 
+cube while running a marathon in a sauna, but instead of a medal, you 
+get digital money that might be worth $60k or $6 tomorrow. 
+
+Here's the deal: miners are basically accountants with really expensive 
+gaming PCs..."
+\`\`\`
+
+---
+
+## 🔍 Real-Time X Data Queries
+
+This is Grok's superpower. Use it to understand what's happening on X right now.
+
+### Example 1: Trending Topics
+
+**Prompt:**
+\`"What are people talking about regarding AI this week?"\`
+
+**Expected Output:**
+- Summary of top AI discussions on X
+- Key themes and debates
+- Notable posts or threads
+- Different perspectives
+
+### Example 2: Product Research
+
+**Prompt:**
+\`"What are X users saying about the new MacBook Pro? Summarize complaints and praises."\`
+
+**Expected Output:**
+- Common complaints (battery, price, ports)
+- Common praises (performance, screen, design)
+- Overall sentiment
+- Influential reviewers' opinions
+
+### Example 3: Event Coverage
+
+**Prompt:**
+\`"What's the latest on the CES 2024 announcements? What's getting the most buzz?"\`
+
+**Expected Output:**
+- Top announcements
+- Most-discussed products
+- Notable reactions
+- Links to relevant posts
+
+---
+
+## 💻 Using Grok for Coding
+
+Grok can write, debug, and explain code like ChatGPT.
+
+### Example 1: Write Code
+
+**Prompt:**
+\`"Write a Python script that downloads all images from a webpage. Include error handling."\`
+
+**Expected Output:**
+Complete Python script with:
+- requests library usage
+- BeautifulSoup for parsing
+- Error handling
+- Comments
+
+### Example 2: Debug Code
+
+**Prompt:**
+\`"This Python code is giving me an error. Fix it:
+
+\`\`\`python
+numbers = [1, 2, 3]
+for i in range(len(numbers)):
+    print(numbers[i+1])
+\`\`\`
+
+Error: IndexError"\`
+
+**Expected Output:**
+- Explanation of the error
+- Corrected code
+- Why the fix works
+
+### Example 3: Explain Code
+
+**Prompt:**
+\`"Explain this JavaScript code line by line:
+
+\`\`\`javascript
+const doubled = arr.filter(n => n > 2).map(n => n * 2);
+\`\`\`"\`
+
+**Expected Output:**
+Line-by-line breakdown with examples.
+
+---
+
+## ✍️ Using Grok for Content Creation
+
+### Example 1: Social Media Posts
+
+**Prompt:**
+\`"Write 5 tweets about the struggles of remote work. Make them relatable and funny."\`
+
+**Expected Output:**
+\`\`\`
+1. "My commute went from 45 minutes to 45 steps from bed to desk. 
+   Living the dream? More like living the meme. #RemoteWork"
+
+2. "The best part of WFH is wearing pajama bottoms to meetings. 
+   The worst part is accidentally standing up. 😅"
+
+3. "My cat is now my coworker. She contributes nothing to meetings 
+   but demands treats every hour. Honestly? Same."
+
+4. "Remote work pro tip: If you don't wear pants, no one knows. 
+   Remote work con: If you forget to mute, everyone knows. 🤦‍♂️"
+
+5. "I used to have a work-life balance. Now I have a work-couch 
+   balance. And the couch is winning. 🏠💼"
+\`\`\`
+
+### Example 2: Blog Post Ideas
+
+**Prompt:**
+\`"Give me 10 blog post ideas about productivity for remote workers. Make the titles catchy."\`
+
+**Expected Output:**
+10 engaging blog post titles with brief descriptions.
+
+### Example 3: Content Roasts (Fun Mode)
+
+**Prompt:**
+\`"Roast this LinkedIn post in Fun mode: [paste generic LinkedIn motivational post]"\`
+
+**Expected Output:**
+Humorous, sarcastic critique (all in good fun).
+
+---
+
+## 🧠 Research and Analysis
+
+### Example 1: Summarize X Discussions
+
+**Prompt:**
+\`"Summarize the debate on X about remote work vs. office work. What are the main arguments on each side?"\`
+
+**Expected Output:**
+- Pro-remote arguments (flexibility, no commute, productivity)
+- Pro-office arguments (collaboration, culture, separation)
+- Common concerns
+- Influential voices
+
+### Example 2: Fact-Checking (Use with Caution)
+
+**Prompt:**
+\`"What's the consensus on X about [news story]? Are people skeptical or convinced?"\`
+
+**Expected Output:**
+- Range of opinions on X
+- Links to relevant posts
+- Common fact-checks mentioned
+- Overall sentiment
+
+**⚠️ Important:** Always verify information with reliable sources. X posts can be inaccurate.
+
+---
+
+## 🎨 Image Generation (Grok 2)
+
+Grok 2 includes **Aurora** for image generation.
+
+### Example Prompts:
+
+\`\`\`
+"Generate an image of a futuristic city at sunset"
+"Create a minimalist logo for a coffee shop"
+"Generate a photorealistic image of a golden retriever in space"
+"Make an image of a dragon reading a book"
+\`\`\`
+
+**Tips:**
+- Be specific about style (photorealistic, cartoon, minimalist)
+- Describe lighting and colors
+- Include details you want
+
+---
+
+## 🎯 Practical Exercises
+
+**Exercise 1: Current Events (5 minutes)**
+Ask Grok about a trending topic. Follow up with 2-3 questions.
+
+**Exercise 2: Fun Mode vs Regular Mode (5 minutes)**
+Ask the same question in both modes. Compare responses.
+
+**Exercise 3: Code Generation (5 minutes)**
+Ask Grok to write a simple Python script. Run it.
+
+**Exercise 4: Content Creation (5 minutes)**
+Generate social media content for your niche.
+
+---
+
+**→ Proceed to Lesson 4: Grok vs Other AIs**`
+      },
+      {
+        title: 'Grok vs Other AIs',
+        content: `## 📊 Head-to-Head Comparison
+
+### Grok vs ChatGPT
+
+| Aspect | Grok | ChatGPT |
+|--------|------|---------|
+| **Personality** | 😂 Witty, sarcastic | 😐 Neutral, professional |
+| **Real-time Info** | ✅ X posts (instant) | ✅ Web search (Plus) |
+| **Coding** | 🟡 Good | ✅ Excellent |
+| **Document Analysis** | ❌ No uploads | ✅ Yes (Plus) |
+| **Image Gen** | ✅ Aurora (integrated) | ✅ DALL-E (integrated) |
+| **Guardrails** | 🟢 Loose | 🔴 Strict |
+| **Best For** | Current events, fun | General use, coding |
+
+**When to Choose Grok:**
+- You want witty responses
+- You need real-time social media sentiment
+- You're discussing topics other AIs avoid
+
+**When to Choose ChatGPT:**
+- You need document analysis
+- You want neutral, professional responses
+- You're doing complex coding
+
+---
+
+### Grok vs Claude
+
+| Aspect | Grok | Claude |
+|--------|------|--------|
+| **Personality** | 😂 Witty, edgy | 🙂 Helpful, nuanced |
+| **Writing Quality** | 🟡 Good | ✅ Excellent |
+| **Long Documents** | ❌ No | ✅ 200K tokens |
+| **Reasoning** | 🟡 Good | ✅ Excellent |
+| **Creativity** | ✅ Very creative | ✅ Creative, controlled |
+| **Guardrails** | 🟢 Loose | 🟡 Moderate |
+| **Best For** | Casual, current events | Writing, analysis |
+
+**When to Choose Grok:**
+- You want entertainment value
+- You're checking X sentiment
+- You want an opinionated response
+
+**When to Choose Claude:**
+- You need long document analysis
+- You want nuanced, thoughtful writing
+- You're doing complex reasoning
+
+---
+
+### Grok vs Gemini
+
+| Aspect | Grok | Gemini |
+|--------|------|--------|
+| **Personality** | 😂 Witty | 😊 Friendly |
+| **Google Integration** | ❌ No | ✅ Yes (Maps, YouTube, etc.) |
+| **Multimodal** | 🟡 Images (Grok 2) | ✅ Images, files, video |
+| **Real-time Info** | ✅ X posts | ✅ Web search |
+| **Price** | $16/mo (X Premium+) | Free / $20 (Advanced) |
+| **Best For** | X users, current events | Google ecosystem users |
+
+**When to Choose Grok:**
+- You already pay for X Premium+
+- You want X-specific information
+- You prefer witty responses
+
+**When to Choose Gemini:**
+- You use Google services
+- You want free multimodal AI
+- You need file uploads
+
+---
+
+### Grok vs Perplexity
+
+| Aspect | Grok | Perplexity |
+|--------|------|------------|
+| **Citations** | ❌ No | ✅ Yes (every claim) |
+| **Real-time Info** | ✅ X posts | ✅ Web search |
+| **Research Depth** | 🟡 X-focused | ✅ Comprehensive |
+| **Personality** | 😂 Witty | 😐 Neutral |
+| **Best For** | Social sentiment, fun | Academic research |
+
+**When to Choose Grok:**
+- You want social media sentiment
+- You're researching X discussions
+- You want entertainment
+
+**When to Choose Perplexity:**
+- You need verified sources
+- You're doing academic research
+- You want comprehensive web search
+
+---
+
+## 🎯 Decision Matrix: Which AI to Use?
+
+### For Research:
+1. **Academic:** Perplexity (citations) or Claude (long documents)
+2. **Current Events:** Grok (X posts) or Perplexity (real-time)
+3. **Quick Facts:** Gemini or ChatGPT
+
+### For Coding:
+1. **Complex Projects:** ChatGPT (GPT-4)
+2. **Code Review:** Claude (nuanced analysis)
+3. **Quick Scripts:** Grok or ChatGPT
+
+### For Writing:
+1. **Long-Form:** Claude (best writer)
+2. **Social Media:** Grok (witty, engaging)
+3. **Professional:** ChatGPT (neutral)
+
+### For Fun:
+1. **Entertainment:** Grok (Fun mode)
+2. **Casual Chat:** Gemini (friendly)
+3. **Creative Writing:** Claude or Grok
+
+### For Document Analysis:
+1. **Long Documents:** Claude (200K) or Kimi (200K+)
+2. **PDF Summaries:** Gemini (free uploads)
+3. **Quick Analysis:** ChatGPT (Plus)
+
+---
+
+## 💡 Using Multiple AIs Together
+
+**Pro Strategy:** Combine AI strengths!
+
+**Example Workflow:**
+
+1. **Research Phase:** Use Perplexity for cited research
+2. **Deep Dive:** Use Claude to analyze long documents
+3. **Draft:** Use ChatGPT to write the first draft
+4. **Social Content:** Use Grok to create witty social posts
+5. **Final Polish:** Use Claude for editing
+
+---
+
+## 🎯 Practical Exercise
+
+**Task:** Research a topic using multiple AIs
+
+1. **Grok:** "What's the sentiment on X about [topic]?"
+2. **Perplexity:** "Find research papers about [topic]"
+3. **Claude:** "Analyze this document about [topic]" (upload PDF)
+4. **ChatGPT:** "Write a summary combining these perspectives"
+
+Compare the different strengths!
+
+---
+
+**→ Proceed to Lesson 5: Pro Tips & Troubleshooting**`
+      },
+      {
+        title: 'Pro Tips & Troubleshooting',
+        content: `## ⚡ Pro Tips
+
+### 1. Use Fun Mode Strategically
+
+Fun mode isn't just for laughs — it's great for:
+- Brainstorming (uncensored ideas flow)
+- Breaking writer's block
+- Getting a different perspective
+- Entertainment content
+
+**Example:**
+\`\`\`
+Regular: "How can I improve my productivity?"
+Fun: "Listen, you beautiful disaster of a human. Here's how to 
+actually get stuff done instead of doom-scrolling..."
+\`\`\`
+
+### 2. Leverage Real-Time X Data
+
+Always ask about current events on X:
+
+\`"What are the hot takes on X about [current event]?"\`
+
+You'll get a synthesized view of thousands of perspectives.
+
+### 3. Ask for Multiple Perspectives
+
+\`"Give me 3 different viewpoints on [controversial topic]. Don't take a side, just present them fairly."\`
+
+### 4. Use Grok for Social Listening
+
+\`"What complaints do people have about [product/company] on X? Summarize common issues."\`
+
+### 5. Generate Content Variations
+
+\`"Write 5 versions of a tweet about [topic]. Make them all different in tone."\`
+
+### 6. Ask for Roasts (Carefully)
+
+\`"Roast this idea in Fun mode: [your idea]"\`
+
+Great for identifying weaknesses in your thinking.
+
+### 7. Check Trending Hashtags
+
+\`"What hashtags are trending in [industry] right now? Explain each."\`
+
+---
+
+## 🚨 Troubleshooting Common Issues
+
+### Error 1: "Grok icon not appearing"
+
+**Symptoms:**
+- No Grok icon in X sidebar
+- Can't access Grok at all
+
+**Solutions:**
+\`\`\`
+1. Verify Premium+ subscription:
+   - Go to x.com/settings/premium
+   - Confirm you have Premium+ (not Basic or Premium)
+   
+2. Wait 24-48 hours after subscribing:
+   - Grok access isn't always instant
+   - Try logging out and back in
+   
+3. Clear cache and cookies:
+   - Chrome: Settings → Privacy → Clear data
+   - Select "Cookies and other site data"
+   - Log back in to X
+   
+4. Try incognito/private mode:
+   - Rules out extension conflicts
+   
+5. Check if Grok is available in your region:
+   - Grok is rolling out globally
+   - Some regions may not have access yet
+   
+6. Contact X support:
+   - help.x.com
+   - Select "Premium" → "Grok access"
+\`\`\`
+
+---
+
+### Error 2: "You don't have access to Grok"
+
+**Symptoms:**
+- Click Grok icon → Error message
+- "Subscribe to Premium+" even though you did
+
+**Solutions:**
+\`\`\`
+1. Verify payment went through:
+   - Check email for confirmation
+   - Check credit card statement
+   
+2. Wait for payment processing:
+   - Can take 24 hours in some cases
+   
+3. Ensure you subscribed to Premium+, not Premium:
+   - Premium ($8/mo) does NOT include Grok
+   - Premium+ ($16/mo) DOES include Grok
+   
+4. Check if subscription was cancelled:
+   - x.com/settings/premium
+   
+5. Try grok.x.com directly:
+   - Sometimes works when X sidebar doesn't
+\`\`\`
+
+---
+
+### Error 3: "Grok is experiencing issues"
+
+**Symptoms:**
+- Error message when sending message
+- No response from Grok
+- Loading indefinitely
+
+**Solutions:**
+\`\`\`
+1. Check X status:
+   - Check @XSupport on X
+   - Search "X down" or "Grok down"
+   
+2. Wait 10-15 minutes:
+   - Temporary outages are common
+   
+3. Refresh the page:
+   - F5 or Cmd/Ctrl + R
+   
+4. Try a different browser:
+   - Chrome, Firefox, Safari, Edge
+   
+5. Try the mobile app:
+   - Sometimes works when web doesn't
+   
+6. Start a new conversation:
+   - Old conversations can get "stuck"
+\`\`\`
+
+---
+
+### Error 4: "Response is taking too long"
+
+**Symptoms:**
+- Grok is typing... forever
+- No response after 30+ seconds
+
+**Solutions:**
+\`\`\`
+1. Wait longer (up to 60 seconds):
+   - Complex queries can take time
+   
+2. Simplify your question:
+   - Break into smaller parts
+   
+3. Cancel and retry:
+   - Click the stop button
+   - Resend your message
+   
+4. Check your internet connection:
+   - Slow connection = slow responses
+   
+5. Try a shorter prompt:
+   - Long prompts can cause timeouts
+\`\`\`
+
+---
+
+### Error 5: Grok not accessing X posts
+
+**Symptoms:**
+- Responses don't include X post information
+- Generic responses without real-time data
+
+**Solutions:**
+\`\`\`
+1. Be explicit about wanting X data:
+   ❌ "What's happening with AI?"
+   ✅ "What are people on X saying about AI this week?"
+   
+2. Use "on X" or "according to X posts" in your prompt
+
+3. Ask for specific timeframes:
+   "What was discussed on X about [topic] in the last 24 hours?"
+   
+4. Check if there's a temporary issue with X data access
+\`\`\`
+
+---
+
+### Error 6: Fun mode not working
+
+**Symptoms:**
+- Responses are same in both modes
+- No humor or wit in Fun mode
+
+**Solutions:**
+\`\`\`
+1. Ensure Fun mode toggle is ON:
+   - Look for the toggle at the top of chat
+   - Should be highlighted/blue when active
+   
+2. Refresh the page after switching modes
+
+3. Start a new conversation after switching
+
+4. Be more explicit:
+   "In Fun mode, explain [topic] with your signature wit"
+\`\`\`
+
+---
+
+### Error 7: Image generation not working (Grok 2)
+
+**Symptoms:**
+- "Generate image" prompts don't work
+- No image appears
+
+**Solutions:**
+\`\`\`
+1. Ensure you have Grok 2 access:
+   - Grok 1 doesn't have image generation
+   - Check x.com/i/grok for version info
+   
+2. Use clear prompts:
+   ❌ "Make an image"
+   ✅ "Generate a photorealistic image of a sunset over mountains"
+   
+3. Try different phrasing:
+   - "Create an image of..."
+   - "Generate a picture showing..."
+   
+4. Check content policy:
+   - Some image requests are blocked
+   - Try a different, appropriate prompt
+\`\`\`
+
+---
+
+### Error 8: "Your account has been suspended"
+
+**Symptoms:**
+- Can't access X at all
+- Account suspended message
+
+**Solutions:**
+\`\`\`
+1. Check email for suspension reason:
+   - X sends explanation to your email
+   
+2. Appeal the suspension:
+   - help.x.com
+   - Submit an appeal
+   
+3. Common reasons for suspension:
+   - Violating X rules
+   - Suspicious activity
+   - Impersonation
+   
+4. Wait for appeal response (can take days)
+
+5. You won't be charged for Premium+ while suspended
+   - But you'll lose Grok access
+\`\`\`
+
+---
+
+### Error 9: Grok giving outdated information
+
+**Symptoms:**
+- Responses reference old information
+- Doesn't know about recent events
+
+**Solutions:**
+\`\`\`
+1. Be explicit about timeframe:
+   "As of today, what's the latest on [topic]?"
+   
+2. Ask for X post information:
+   "Check X posts from the last 24 hours about [topic]"
+   
+3. Realize limitations:
+   - Grok's X access isn't perfectly real-time
+   - May have 1-6 hour delay on some topics
+   
+4. Cross-reference with other sources
+\`\`\`
+
+---
+
+### Error 10: Payment issues with Premium+
+
+**Symptoms:**
+- Payment declined
+- Can't complete subscription
+
+**Solutions:**
+\`\`\`
+1. Check card details:
+   - Correct number, expiry, CVV
+   - Billing address matches card
+   
+2. Try a different payment method:
+   - Different credit card
+   - Apple Pay / Google Pay
+   
+3. Check with your bank:
+   - Some banks block recurring subscriptions
+   - Call to authorize the charge
+   
+4. Try the mobile app instead of web:
+   - Sometimes payment works better on app
+   
+5. Contact X support:
+   - help.x.com
+   - Select "Billing" issue
+\`\`\`
+
+---
+
+### Error 11: Grok refusing to answer
+
+**Symptoms:**
+- "I can't help with that" response
+- Refusal despite Grok being "uncensored"
+
+**Solutions:**
+\`\`\`
+1. Grok still has limits:
+   - Illegal activities
+   - Harmful content
+   - Personal information
+   
+2. Rephrase your question:
+   - Be more academic/research-focused
+   
+3. Explain your purpose:
+   "I'm researching [topic] for an academic paper. Can you provide information about...?"
+   
+4. Accept that some topics are off-limits
+   - Grok is less censored, not uncensored
+\`\`\`
+
+---
+
+### Error 12: Mobile app crashes or glitches
+
+**Symptoms:**
+- Grok section crashes
+- Messages don't send
+- App freezes
+
+**Solutions:**
+\`\`\`
+1. Force close and reopen:
+   - iOS: Swipe up from home
+   - Android: Settings → Apps → X → Force stop
+   
+2. Update the X app:
+   - Check App Store / Play Store
+   
+3. Clear app cache:
+   - Android: Settings → Apps → X → Storage → Clear cache
+   - iOS: Uninstall and reinstall
+   
+4. Check device compatibility:
+   - Requires iOS 14+ or Android 8+
+   
+5. Reinstall the X app:
+   - Uninstall → Restart phone → Reinstall
+   
+6. Try web version instead:
+   - x.com in mobile browser
+\`\`\`
+
+---
+
+## 📚 Getting More Help
+
+### Official Resources
+- **X Help Center:** [help.x.com](https://help.x.com)
+- **X Support:** [@XSupport](https://x.com/XSupport) on X
+- **Grok Updates:** [@grok](https://x.com/grok) on X
+
+### Community Resources
+- **X Community:** [x.com/community](https://x.com/community)
+- **Reddit:** r/Twitter, r/grok
+
+### Quick Diagnostics
+\`\`\`
+1. Check subscription status: x.com/settings/premium
+2. Check X status: @XSupport
+3. Try grok.x.com directly
+4. Try different browser or device
+\`\`\`
+
+---
+
+## 🎉 Congratulations!
+
+You've completed the **Using Grok (xAI)** guide!
+
+**What You've Learned:**
+- ✅ Understand Grok's unique features and personality
+- ✅ Set up X Premium+ and access Grok
+- ✅ Use Grok for research, coding, and content creation
+- ✅ Know when to use Grok vs other AIs
+- ✅ Troubleshoot common issues
+
+**Next Steps:**
+- Explore Fun mode for entertainment
+- Use Grok for real-time research
+- Compare with other AI tools
+- Build Grok into your workflow
+
+**Happy Groking!** 🚀😂`
+      }
     ]
   },
   'guide-kimi': {
