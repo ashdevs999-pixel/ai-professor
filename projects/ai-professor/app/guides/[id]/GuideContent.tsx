@@ -1280,13 +1280,513 @@ git merge upstream/main
 
 **Collaboration flow:** Fork → Clone → Edit → Push → Pull Request → Merge
 
+---
+
+## 🚨 Troubleshooting Common Git & GitHub Errors
+
+### Error 1: "git: command not found"
+
+**Full Error:**
+> bash: git: command not found
+> 'git' is not recognized as an internal or external command
+
+**Cause:** Git is not installed or not in your system PATH
+
+**Solution:**
+
+**Windows:**
+\`\`\`bash
+# Download and install from git-scm.com
+# Or use winget:
+winget install Git.Git
+
+# After installation, restart your terminal
+\`\`\`
+
+**macOS:**
+\`\`\`bash
+# Option 1: Xcode Command Line Tools
+xcode-select --install
+
+# Option 2: Homebrew
+brew install git
+\`\`\`
+
+**Linux (Debian/Ubuntu):**
+\`\`\`bash
+sudo apt update
+sudo apt install git
+
+# Verify installation
+git --version
+\`\`\`
+
+**Linux (Fedora/RHEL):**
+\`\`\`bash
+sudo dnf install git
+# or
+sudo yum install git
+\`\`\`
+
+---
+
+### Error 2: "Permission denied (publickey)"
+
+**Full Error:**
+> git@github.com: Permission denied (publickey).
+> fatal: Could not read from remote repository.
+
+**Cause:** SSH key not set up, not added to GitHub, or SSH agent not running
+
+**Solution:**
+\`\`\`bash
+# Step 1: Check if SSH key exists
+ls -la ~/.ssh
+# Look for id_rsa, id_ed25519, etc.
+
+# Step 2: If no key exists, generate one
+ssh-keygen -t ed25519 -C "your.email@example.com"
+# Press Enter for default location
+# Choose a passphrase (or leave empty)
+
+# Step 3: Start SSH agent and add key
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+
+# Step 4: Copy public key to clipboard
+cat ~/.ssh/id_ed25519.pub
+# Copy the output
+
+# Step 5: Add to GitHub
+# Go to github.com → Settings → SSH and GPG keys → New SSH key
+# Paste the public key and save
+
+# Step 6: Test connection
+ssh -T git@github.com
+# Should see: "Hi username! You've successfully authenticated"
+\`\`\`
+
+**Alternative: Use HTTPS instead:**
+\`\`\`bash
+# Change remote URL from SSH to HTTPS
+git remote set-url origin https://github.com/username/repo.git
+
+# Use Personal Access Token (PAT) as password
+# Generate at: github.com → Settings → Developer settings → Personal access tokens
+\`\`\`
+
+---
+
+### Error 3: "fatal: not a git repository"
+
+**Full Error:**
+> fatal: not a git repository (or any of the parent directories): .git
+
+**Cause:** You're not inside a Git repository (no .git folder exists)
+
+**Solution:**
+\`\`\`bash
+# Option 1: Initialize a new repository
+git init
+git add .
+git commit -m "Initial commit"
+
+# Option 2: Clone an existing repository
+git clone https://github.com/username/repo.git
+cd repo
+
+# Option 3: Navigate to correct directory
+cd /path/to/your/repo
+# Check if .git folder exists
+ls -la | grep .git
+\`\`\`
+
+---
+
+### Error 4: "Push rejected" or "Updates were rejected"
+
+**Full Error:**
+> ! [rejected]        main -> main (non-fast-forward)
+> error: failed to push some refs to 'git@github.com:username/repo.git'
+
+**Cause:** Remote has commits you don't have locally (diverged history)
+
+**Solution:**
+\`\`\`bash
+# Option 1: Pull and merge first (safest)
+git pull origin main
+# Resolve any merge conflicts
+git push origin main
+
+# Option 2: Pull with rebase (cleaner history)
+git pull --rebase origin main
+git push origin main
+
+# Option 3: Force push (⚠️ DANGEROUS - only if you're sure)
+git push --force origin main
+# NEVER force push to shared branches!
+\`\`\`
+
+**Prevention:** Always pull before pushing:
+\`\`\`bash
+git pull && git push
+\`\`\`
+
+---
+
+### Error 5: "Merge conflicts" (CONFLICT)
+
+**Full Error:**
+> CONFLICT (content): Merge conflict in filename.js
+> Automatic merge failed; fix conflicts and then commit the result.
+
+**Cause:** Same lines changed in both branches
+
+**Solution:**
+\`\`\`bash
+# Step 1: See which files have conflicts
+git status
+
+# Step 2: Open conflicted files and look for markers:
+# <<<<<<< HEAD
+# your changes
+# =======
+# their changes
+# >>>>>>> branch-name
+
+# Step 3: Manually resolve by choosing what to keep:
+# Delete the markers and keep the correct code
+
+# Step 4: Stage resolved files
+git add filename.js
+
+# Step 5: Complete the merge
+git commit -m "Resolve merge conflicts"
+\`\`\`
+
+**Using VS Code:**
+\`\`\`
+1. Open conflicted file
+2. Click "Accept Current Change" or "Accept Incoming Change"
+3. Or use "Accept Both Changes" to combine
+4. Save file
+5. git add . && git commit
+\`\`\`
+
+**Abort merge and start over:**
+\`\`\`bash
+git merge --abort
+\`\`\`
+
+---
+
+### Error 6: "Authentication failed" or "Invalid credentials"
+
+**Full Error:**
+> remote: Invalid username or password.
+> fatal: Authentication failed for 'https://github.com/...'
+
+**Cause:** Wrong credentials, expired token, or 2FA enabled
+
+**Solution:**
+
+**If using HTTPS:**
+\`\`\`bash
+# GitHub no longer accepts passwords - use Personal Access Token (PAT)
+
+# Step 1: Generate PAT
+# Go to github.com → Settings → Developer settings → Personal access tokens → Tokens (classic)
+# Click "Generate new token"
+# Select scopes: repo (full control)
+# Copy the token (you won't see it again!)
+
+# Step 2: Update credentials
+# macOS: Use osxkeychain
+git config --global credential.helper osxkeychain
+
+# Windows: Use Git Credential Manager
+git config --global credential.helper manager
+
+# Linux: Cache credentials
+git config --global credential.helper cache
+
+# Step 3: Push and enter token as password
+git push
+# Username: your-github-username
+# Password: your-personal-access-token
+\`\`\`
+
+**If using SSH:**
+\`\`\`bash
+# See Error 2 above for SSH setup
+\`\`\`
+
+---
+
+### Error 7: "remote origin already exists"
+
+**Full Error:**
+> remote origin already exists.
+
+**Cause:** You're trying to add a remote named "origin" that already exists
+
+**Solution:**
+\`\`\`bash
+# Option 1: Update existing remote URL
+git remote set-url origin https://github.com/username/new-repo.git
+
+# Option 2: Remove and re-add
+git remote remove origin
+git remote add origin https://github.com/username/new-repo.git
+
+# Option 3: Check existing remotes first
+git remote -v
+# Then decide what to do
+\`\`\`
+
+---
+
+### Error 8: "detected dubious ownership in repository"
+
+**Full Error:**
+> fatal: detected dubious ownership in repository at '/path/to/repo'
+
+**Cause:** Git security feature - repository owned by different user
+
+**Solution:**
+\`\`\`bash
+# Option 1: Add directory to safe list
+git config --global --add safe.directory /path/to/repo
+
+# Option 2: Add all repositories
+git config --global --add safe.directory '*'
+
+# Option 3: Fix ownership (Linux/macOS)
+sudo chown -R $USER:$USER /path/to/repo
+\`\`\`
+
+---
+
+### Error 9: "SSL certificate problem"
+
+**Full Error:**
+> fatal: unable to access 'https://github.com/...': SSL certificate problem: self signed certificate
+
+**Cause:** Corporate proxy, antivirus, or network intercepting SSL
+
+**Solution:**
+\`\`\`bash
+# Option 1: Disable SSL verification (⚠️ temporary only!)
+git config --global http.sslVerify false
+
+# Option 2: Add corporate certificate (safer)
+git config --global http.sslCAInfo /path/to/certificate.crt
+
+# Option 3: Use SSH instead of HTTPS
+git remote set-url origin git@github.com:username/repo.git
+
+# Option 4: Update Git (older versions have SSL issues)
+# Download latest from git-scm.com
+\`\`\`
+
+**Re-enable SSL after fixing:**
+\`\`\`bash
+git config --global http.sslVerify true
+\`\`\`
+
+---
+
+### Error 10: "Connection timed out" or "Could not resolve host"
+
+**Full Error:**
+> fatal: unable to access 'https://github.com/...': Failed to connect to github.com port 443: Connection timed out
+
+**Cause:** Network issues, firewall, or GitHub is down
+
+**Solution:**
+\`\`\`bash
+# Step 1: Check if GitHub is down
+# Visit githubstatus.com
+
+# Step 2: Test basic connectivity
+ping github.com
+
+# Step 3: Check proxy settings
+git config --global --get http.proxy
+
+# Step 4: Configure proxy if needed
+git config --global http.proxy http://proxy.company.com:8080
+git config --global https.proxy https://proxy.company.com:8080
+
+# Step 5: Or unset proxy
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+
+# Step 6: Try alternative DNS
+# On your system, change DNS to 8.8.8.8 or 1.1.1.1
+\`\`\`
+
+---
+
+### Error 11: "LF will be replaced by CRLF"
+
+**Full Error:**
+> warning: LF will be replaced by CRLF in filename.js
+
+**Cause:** Line ending differences between Windows (CRLF) and Unix (LF)
+
+**Solution:**
+\`\`\`bash
+# Option 1: Configure Git to handle line endings
+git config --global core.autocrlf input  # macOS/Linux
+git config --global core.autocrlf true   # Windows
+
+# Option 2: Create .gitattributes file
+echo "* text=auto" > .gitattributes
+git add .gitattributes
+git commit -m "Add gitattributes for line endings"
+
+# Option 3: Normalize all files
+git add --renormalize .
+git status  # See what changed
+git commit -m "Normalize line endings"
+\`\`\`
+
+---
+
+### Error 12: "Your branch is ahead of origin/main by X commits"
+
+**Full Error:**
+> Your branch is ahead of 'origin/main' by 3 commits.
+
+**This is not an error!** It means you have local commits not yet pushed.
+
+**Solution:**
+\`\`\`bash
+# Push your commits
+git push origin main
+
+# If push fails, see Error 4 (Push rejected)
+\`\`\`
+
+---
+
+### Error 13: "detached HEAD state"
+
+**Full Error:**
+> You are in 'detached HEAD' state.
+
+**Cause:** Checked out a specific commit or tag instead of a branch
+
+**Solution:**
+\`\`\`bash
+# Option 1: Create a new branch to save your work
+git checkout -b new-branch-name
+
+# Option 2: Return to main branch
+git checkout main
+
+# Option 3: If you made commits in detached state, save them
+git branch new-branch-name HEAD
+# Then switch to that branch
+git checkout new-branch-name
+\`\`\`
+
+---
+
+### Error 14: "Repository not found"
+
+**Full Error:**
+> remote: Repository not found.
+> fatal: repository 'https://github.com/username/repo.git/' not found
+
+**Cause:** Wrong URL, private repo without access, or repo deleted
+
+**Solution:**
+\`\`\`bash
+# Step 1: Verify repository exists
+# Go to github.com/username/repo in browser
+
+# Step 2: Check remote URL
+git remote -v
+
+# Step 3: Fix URL if wrong
+git remote set-url origin https://github.com/correct-username/correct-repo.git
+
+# Step 4: If private repo, ensure you have access
+# Check with repo owner, or verify SSH key is added
+
+# Step 5: For private repos, authenticate first
+# See Error 2 (SSH) or Error 6 (HTTPS auth)
+\`\`\`
+
+---
+
+### Error 15: ".gitignore not working"
+
+**Symptoms:** Files listed in .gitignore are still being tracked
+
+**Cause:** Files were already tracked before adding to .gitignore
+
+**Solution:**
+\`\`\`bash
+# Step 1: Remove files from Git cache (not local files)
+git rm -r --cached .
+git add .
+git commit -m "Fix gitignore"
+
+# For specific file:
+git rm --cached path/to/file
+
+# Step 2: Verify .gitignore syntax
+cat .gitignore
+# Common patterns:
+# node_modules/
+# .env
+# *.log
+# build/
+# .DS_Store
+\`\`\`
+
+---
+
+## 📚 Getting More Help
+
+### Official Resources
+- **Git Documentation:** [git-scm.com/doc](https://git-scm.com/doc)
+- **GitHub Docs:** [docs.github.com](https://docs.github.com)
+- **GitHub Community:** [github.community](https://github.community)
+- **Pro Git Book:** [git-scm.com/book](https://git-scm.com/book) (free!)
+
+### Quick Diagnostics
+\`\`\`bash
+# Check Git version
+git --version
+
+# Check configuration
+git config --list
+
+# Check remote details
+git remote -v
+
+# Check current status
+git status
+
+# View recent commits
+git log --oneline -10
+
+# Debug connection issues
+ssh -Tv git@github.com
+\`\`\`
+
 ## 🎉 Congratulations!
 
 You now know how to:
 - ✅ Create and clone repositories
 - ✅ Make commits and push changes
 - ✅ Fork repositories
-- ✅ Create and merge pull requests`
+- ✅ Create and merge pull requests
+- ✅ Troubleshoot the most common Git errors!`
       },
     ]
   },
