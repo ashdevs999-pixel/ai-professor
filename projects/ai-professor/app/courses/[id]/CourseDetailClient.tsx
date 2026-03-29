@@ -39,6 +39,8 @@ export default function CourseDetailClient({ courseId, initialCourse }: Props) {
   const [course, setCourse] = useState<Course | null>(initialCourse || null)
   const [lessons, setLessons] = useState<Lesson[]>(initialCourse?.lessons || [])
   const [loading, setLoading] = useState(!initialCourse)
+  const avgRating = 0
+  const ratingCount = 0
 
   useEffect(() => {
     if (!initialCourse) {
