@@ -1,5 +1,12 @@
 {
-  "lastReminderTime": 1743056100,
+  "lastReminderTime": 1743205800,
   "intervalHours": 2,
-  "outstandingItems": []
+  "outstandingItems": [
+    {
+      "id": "secret-rotation",
+      "description": "Rotate exposed credentials (Supabase service role key + OpenAI API key)",
+      "severity": "critical",
+      "addedAt": 1743205800
+    }
+  ]
 }
