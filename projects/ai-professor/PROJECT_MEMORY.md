@@ -285,6 +285,83 @@ If NO → Expand content until YES
 | 2026-03-28 | Hourly news via GitHub Actions | Vercel Hobby plan limitation |
 | 2026-03-29 | Use `write` instead of `edit` | Avoids text matching failures |
 | 2026-03-29 | Spawn agents with notification | Keep Bryan informed |
+| 2026-03-29 | **NO SHORTCUTS** | Leads to more work later |
+| 2026-03-29 | Protect paid content | Revenue leak - must fix |
+| 2026-03-29 | Update memory continuously | Don't forget context |
+
+---
+
+## 🚨 Critical Issues (2026-03-29)
+
+### Issue: Paid Content Not Protected
+**Severity:** 🔴 CRITICAL - Revenue Leak
+**Status:** Fix in progress
+
+**Problem:**
+- Lesson pages accessible without enrollment check
+- Anyone can view paid course content
+- "Enroll Now" button does nothing
+- No Stripe integration
+
+**Impact:**
+- Zero revenue from courses
+- Users have no incentive to pay
+
+**Required Fix:**
+- Add enrollment check to lesson pages
+- Show paywall for non-enrolled users
+- Implement Stripe payments
+- Admin bypass for bryanbleong@gmail.com
+
+### Issue: TypeScript Errors Hiding Bugs
+**Severity:** 🟠 HIGH
+**Status:** Partially fixed (329 → 286)
+
+**Problem:**
+- `ignoreBuildErrors: true` hides type errors
+- Undefined variables crash pages at runtime
+- Examples: `avgRating`, `ratingCount` on course pages
+
+**Pattern:**
+1. TypeScript errors hidden
+2. Code deploys
+3. User hits page → crash
+4. Fix individually
+5. Repeat
+
+**Required Fix:**
+- Fix all 286 remaining TS errors
+- Remove `ignoreBuildErrors: true`
+- Never re-enable it
+
+### Issue: No Admin Dashboard
+**Severity:** 🟡 MEDIUM
+**Status:** Being created
+
+**Problem:**
+- No `/admin` page exists
+- Can't manage users/content visually
+- Only API routes available
+
+---
+
+## ⚠️ Patterns to Avoid
+
+### Pattern: Shortcut → More Work Later
+**Examples:**
+1. Ignored TS errors → Course page crash
+2. Didn't add enrollment check → Revenue leak
+3. Didn't create admin UI → Can't manage site
+
+**Rule:** If there's a problem, FIX IT PERMANENTLY. No workarounds.
+
+### Pattern: Forgetting Context
+**Problem:** Starting each session without knowing what happened before
+
+**Solution:**
+- Update PROJECT_MEMORY.md after every significant discussion
+- Read it at start of every session
+- Prompt Bryan when deviating from documented parameters
 
 ---
 
@@ -295,6 +372,7 @@ If NO → Expand content until YES
 - **Supabase:** https://supabase.com/dashboard
 - **GitHub:** https://github.com/ashdevs999-pixel/ai-professor
 - **OpenAI:** https://platform.openai.com/api-keys
+- **Admin Login:** https://ai-professor-red.vercel.app/auth/signin
 
 ### Environment Variables (Vercel)
 ```
@@ -304,15 +382,16 @@ SUPABASE_SERVICE_ROLE_KEY
 NEXTAUTH_SECRET
 OPENAI_API_KEY
 CRON_SECRET
-TELEGRAM_BOT_TOKEN (pending)
-TELEGRAM_CHAT_ID (pending)
+TELEGRAM_BOT_TOKEN ✅
+TELEGRAM_CHAT_ID ✅
 ```
 
 ### Important Files
-- **Project Memory:** `/home/watson/.openclaw/workspace/projects/ai-professor/PROJECT_MEMORY.md` (this file)
-- **Stability Plan:** `/home/watson/.openclaw/workspace/projects/ai-professor/STABILITY_PLAN.md`
-- **Security Guide:** `/home/watson/.openclaw/workspace/projects/ai-professor/SECURITY_SETUP.md`
-- **Telegram Setup:** `/home/watson/.openclaw/workspace/projects/ai-professor/TELEGRAM_ALERTS.md`
+- **Project Memory:** `PROJECT_MEMORY.md` (this file)
+- **Auth & Security:** `AUTH_SECURITY.md` ⭐
+- **Stability Plan:** `STABILITY_PLAN.md`
+- **Security Guide:** `SECURITY_SETUP.md`
+- **Telegram Setup:** `TELEGRAM_ALERTS.md`
 
 ---
 
@@ -324,6 +403,8 @@ TELEGRAM_CHAT_ID (pending)
 - Communication: Casual, direct
 - Ask before: Code changes, deletions, implementations
 - Notification required: Agent spawning
+- **CRITICAL:** Prompt when deviating from documented parameters
+- **CRITICAL:** No shortcuts - fix problems permanently
 
 ---
 
