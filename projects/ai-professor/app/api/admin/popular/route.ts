@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     const session = await getServerSession(authOptions)
     
     if (!session?.user?.email || !ADMIN_EMAILS.includes(session.user.email)) {
-      return createErrorResponse(new Error('Unauthorized'), 'Forbidden', 403)
+      return createErrorResponse(new Error('Unauthorized'), 'Forbidden')
     }
     
     const courses = await db.analytics.getPopularCourses(10)

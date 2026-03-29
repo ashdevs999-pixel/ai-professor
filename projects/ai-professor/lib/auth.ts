@@ -270,7 +270,8 @@ export class RateLimitError extends Error {
 // Helper to create error response
 export function createErrorResponse(
   error: any,
-  defaultMessage: string = 'An error occurred'
+  defaultMessage: string = 'An error occurred',
+  statusCode?: number
 ): Response {
   console.error('API Error:', error)
 
@@ -307,10 +308,10 @@ export function createErrorResponse(
   return new Response(
     JSON.stringify({
       success: false,
-      error: defaultMessage,
+      error: error.message || defaultMessage,
     }),
     {
-      status: 500,
+      status: statusCode || 500,
       headers: { 'Content-Type': 'application/json' },
     }
   )

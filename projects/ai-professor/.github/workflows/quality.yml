@@ -1,0 +1,66 @@
+name: Quality Gates
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  # Build must pass
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+
+  # TypeScript check (non-blocking - reports errors)
+  typescript:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - name: TypeScript Check
+        run: |
+          echo "📊 TypeScript Error Count:"
+          npx tsc --noEmit 2>&1 | grep -c "error TS" || echo "0 errors"
+          echo ""
+          echo "⚠️ TypeScript errors found. Review and fix incrementally."
+
+  # ESLint (must pass)
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+
+  # Critical: E2E tests (must pass)
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Run E2E Tests
+        run: npx playwright test
+        env:
+          BASE_URL: ${{ secrets.VERCEL_URL || 'https://ai-professor-red.vercel.app' }}

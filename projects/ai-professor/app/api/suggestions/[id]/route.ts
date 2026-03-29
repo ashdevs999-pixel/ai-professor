@@ -32,7 +32,7 @@ export async function POST(
       .single()
     
     if (fetchError || !suggestion) {
-      return createErrorResponse(new Error('Suggestion not found'), 'Not found', 404)
+      return createErrorResponse(new Error('Suggestion not found'), 'Not found')
     }
     
     if (action === 'reject') {
@@ -142,7 +142,7 @@ Return JSON with:
       })
     }
     
-    return createErrorResponse(new Error('Invalid action'), 'Bad request', 400)
+    return createErrorResponse(new Error('Invalid action'), 'Bad request')
   } catch (error: any) {
     console.error('Error processing suggestion:', error)
     return createErrorResponse(error, 'Failed to process suggestion')

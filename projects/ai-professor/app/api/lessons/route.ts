@@ -63,7 +63,7 @@ export async function GET(request: NextRequest) {
     return createSuccessResponse({ lessons })
   } catch (error: any) {
     if (error.message?.includes('not found')) {
-      return createErrorResponse(error, 'Course not found', 404)
+      return createErrorResponse(error, 'Course not found')
     }
     return createErrorResponse(error, 'Failed to fetch lessons')
   }
@@ -131,7 +131,7 @@ export async function POST(request: NextRequest) {
     return createSuccessResponse(lesson, 201)
   } catch (error: any) {
     if (error.message?.includes('not found')) {
-      return createErrorResponse(error, 'Course not found', 404)
+      return createErrorResponse(error, 'Course not found')
     }
     return createErrorResponse(error, 'Failed to create lesson')
   }

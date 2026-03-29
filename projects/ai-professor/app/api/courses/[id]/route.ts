@@ -74,7 +74,7 @@ export async function GET(
     return createSuccessResponse(courseWithStats)
   } catch (error: any) {
     if (error.message?.includes('not found')) {
-      return createErrorResponse(error, 'Course not found', 404)
+      return createErrorResponse(error, 'Course not found')
     }
     return createErrorResponse(error, 'Failed to fetch course')
   }
@@ -129,7 +129,7 @@ export async function PUT(
     return createSuccessResponse(updatedCourse)
   } catch (error: any) {
     if (error.message?.includes('not found')) {
-      return createErrorResponse(error, 'Course not found', 404)
+      return createErrorResponse(error, 'Course not found')
     }
     return createErrorResponse(error, 'Failed to update course')
   }
@@ -170,7 +170,7 @@ export async function DELETE(
     return createSuccessResponse({ message: 'Course deleted successfully' })
   } catch (error: any) {
     if (error.message?.includes('not found')) {
-      return createErrorResponse(error, 'Course not found', 404)
+      return createErrorResponse(error, 'Course not found')
     }
     return createErrorResponse(error, 'Failed to delete course')
   }

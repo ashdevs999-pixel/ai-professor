@@ -87,11 +87,11 @@ export async function POST(request: NextRequest) {
     const { title, description, topic, difficulty, duration_weeks, image_url, is_published } = body
 
     if (!title || typeof title !== 'string') {
-      return createErrorResponse(new Error('Title is required'), 'Validation error', 400)
+      return createErrorResponse(new Error('Title is required'), 'Validation error')
     }
 
     if (!topic || typeof topic !== 'string') {
-      return createErrorResponse(new Error('Topic is required'), 'Validation error', 400)
+      return createErrorResponse(new Error('Topic is required'), 'Validation error')
     }
 
     // Sanitize inputs
@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
     return createSuccessResponse(course, 201)
   } catch (error: any) {
     if (error.message?.includes('already exists')) {
-      return createErrorResponse(error, 'Course already exists', 409)
+      return createErrorResponse(error, 'Course already exists')
     }
     return createErrorResponse(error, 'Failed to create course')
   }

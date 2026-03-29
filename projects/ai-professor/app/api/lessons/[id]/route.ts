@@ -79,7 +79,7 @@ export async function GET(
     return createSuccessResponse(lessonWithProgress)
   } catch (error: any) {
     if (error.message?.includes('not found')) {
-      return createErrorResponse(error, 'Lesson not found', 404)
+      return createErrorResponse(error, 'Lesson not found')
     }
     return createErrorResponse(error, 'Failed to fetch lesson')
   }
@@ -143,7 +143,7 @@ export async function PUT(
     return createSuccessResponse(updatedLesson)
   } catch (error: any) {
     if (error.message?.includes('not found')) {
-      return createErrorResponse(error, 'Lesson not found', 404)
+      return createErrorResponse(error, 'Lesson not found')
     }
     return createErrorResponse(error, 'Failed to update lesson')
   }
@@ -193,7 +193,7 @@ export async function DELETE(
     return createSuccessResponse({ message: 'Lesson deleted successfully' })
   } catch (error: any) {
     if (error.message?.includes('not found')) {
-      return createErrorResponse(error, 'Lesson not found', 404)
+      return createErrorResponse(error, 'Lesson not found')
     }
     return createErrorResponse(error, 'Failed to delete lesson')
   }
