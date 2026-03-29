@@ -65,7 +65,12 @@ export interface LessonResource {
   url: string
   type: 'article' | 'video' | 'book' | 'tool' | 'other'
   description?: string
-}
+  resources?: Json
+    estimated_minutes?: number
+    order_index?: number
+    created_at?: string
+    updated_at?: string
+  }
 
 export interface CourseSyllabus {
   course: Course

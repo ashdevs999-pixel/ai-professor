@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowLeft, Clock, BookOpen, ChevronRight, ChevronLeft, CheckCircle, ExternalLink } from 'lucide-react'
+import { ArrowLeft, Clock, BookOpen, ChevronRight, ChevronLeft, CheckCircle, ExternalLink, Lock, Crown } from 'lucide-react'
 import { Button, Card, Badge } from '@/components/ui'
 import { LessonJsonLd, BreadcrumbJsonLd } from '@/components/seo'
 import ReactMarkdown from 'react-markdown'
@@ -27,9 +27,21 @@ interface Props {
   lesson: Lesson | null
   course: Course | null
   courseId: string
+  isEnrolled: boolean
+  isAdmin: boolean
+  canAccess: boolean
+  userEmail: string | null
 }
 
-export default function LessonClient({ lesson, course, courseId }: Props) {
+export default function LessonClient({ 
+  lesson, 
+  course, 
+  courseId, 
+  isEnrolled, 
+  isAdmin, 
+  canAccess, 
+  userEmail 
+}: Props) {
   if (!lesson) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex items-center justify-center">
@@ -38,6 +50,100 @@ export default function LessonClient({ lesson, course, courseId }: Props) {
           <Link href={`/courses/${courseId}`}>
             <Button>Back to Course</Button>
           </Link>
+        </div>
+      </div>
+    )
+  }
+
+  // Show paywall if user cannot access the lesson
+  if (!canAccess) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+        {/* SEO Structured Data */}
+        <LessonJsonLd
+          name={lesson.title}
+          description={lesson.content?.substring(0, 160) || 'Learn with AI Professor'}
+          courseName={course?.title || 'Course'}
+          courseUrl={`https://pulseaiprofessor.com/courses/${courseId}`}
+          url={`https://pulseaiprofessor.com/courses/${courseId}/lessons/${lesson.id}`}
+          position={1}
+        />
+        
+        {/* Header */}
+        <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-40">
+          <div className="max-w-4xl mx-auto px-4 py-4">
+            <Link
+              href={`/courses/${courseId}`}
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 mb-4"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              Back to {course?.title || 'Course'}
+            </Link>
+          </div>
+        </div>
+
+        {/* Paywall Content */}
+        <div className="max-w-4xl mx-auto px-4 py-12">
+          <Card className="p-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Lock className="w-8 h-8 text-primary-600" />
+              </div>
+              
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                {lesson.title}
+              </h1>
+              
+              <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+                This lesson is part of <strong>{course?.title}</strong>. 
+                Enroll in this course to access all lessons and learning materials.
+              </p>
+              
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 mb-8">
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">What you'll get:</h3>
+                <ul className="text-left space-y-2 text-gray-700 dark:text-gray-300">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Full access to all {course?.lessons?.length || 0} lessons</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Hands-on projects and exercises</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Track your progress</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Lifetime access</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href={`/courses/${courseId}`}>
+                  <Button size="lg">
+                    Enroll in Course
+                  </Button>
+                </Link>
+                <Link href="/courses">
+                  <Button variant="outline" size="lg">
+                    Browse All Courses
+                  </Button>
+                </Link>
+              </div>
+              
+              {!userEmail && (
+                <p className="mt-6 text-sm text-gray-500 dark:text-gray-400">
+                  <Link href="/api/auth/signin" className="text-primary-600 hover:underline">
+                    Sign in
+                  </Link>
+                  {' '}to track your enrollment status
+                </p>
+              )}
+            </div>
+          </Card>
         </div>
       </div>
     )
@@ -72,13 +178,21 @@ export default function LessonClient({ lesson, course, courseId }: Props) {
       {/* Header */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-40">
         <div className="max-w-4xl mx-auto px-4 py-4">
-          <Link
-            href={`/courses/${courseId}`}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 mb-4"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            Back to {course?.title || 'Course'}
-          </Link>
+          <div className="flex items-center justify-between mb-4">
+            <Link
+              href={`/courses/${courseId}`}
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              Back to {course?.title || 'Course'}
+            </Link>
+            {isAdmin && (
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full text-sm font-medium">
+                <Crown className="w-4 h-4" />
+                Admin Access
+              </div>
+            )}
+          </div>
         </div>
       </div>
 

@@ -55,9 +55,11 @@
     ]
   },
   "include": [
+    "app/**/*",
     "lib/**/*",
     "scripts/**/*",
     "types/**/*",
+    "components/**/*",
     ".next/types/**/*.ts"
   ],
   "exclude": [

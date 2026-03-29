@@ -10,7 +10,7 @@
 
 ## Outstanding Items (check these):
 
-- (none currently)
+(none currently - all completed)
 
 ## Reminder Format:
 

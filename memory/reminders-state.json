@@ -1,26 +1,27 @@
 {
-  "lastReminderTime": 1743222900,
+  "lastReminderTime": 1743226200,
   "intervalHours": 2,
-  "outstandingItems": [
+  "outstandingItems": [],
+  "completedItems": [
     {
       "id": "openai-key-rotation",
-      "description": "Rotate OpenAI API key (delete old, create new, update Vercel)",
-      "severity": "critical",
-      "addedAt": 1743207600,
-      "url": "https://platform.openai.com/api-keys"
+      "description": "Rotate OpenAI API key",
+      "completedAt": 1743225000
     },
     {
       "id": "telegram-alerts-setup",
-      "description": "Create bot via @BotFather, get chat ID, add to Vercel",
-      "severity": "medium",
-      "addedAt": 1743207600
+      "description": "Set up Telegram bot for alerts",
+      "completedAt": 1743225300
     },
     {
       "id": "github-secrets",
       "description": "Add CRON_SECRET and SITE_URL to GitHub Actions secrets",
-      "severity": "high",
-      "addedAt": 1743208100,
-      "url": "https://github.com/ashdevs999-pixel/ai-professor/settings/secrets/actions"
+      "completedAt": 1743225800
+    },
+    {
+      "id": "expand-skeletal-guides",
+      "description": "Expand Gemini, Grok, and Kimi guides",
+      "completedAt": 1743226500
     }
   ]
 }
