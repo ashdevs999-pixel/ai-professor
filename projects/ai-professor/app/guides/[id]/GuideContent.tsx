@@ -5522,9 +5522,1171 @@ You've completed the **Using Grok (xAI)** guide!
     description: 'Master Kimi\'s massive context window.',
     topic: 'Emerging AI',
     lessons: [
-      { title: 'What is Kimi?', content: '## Kimi AI\n\n**Kimi** is an AI assistant by Moonshot AI. It\'s famous for:\n- **200K+ token context window** (extremely long!)\n- Ability to read entire books\n- Document analysis powerhouse\n- Free to use\n\n## Why Use Kimi?\n\nWhen you need to analyze:\n- Long documents (100+ pages)\n- Multiple files at once\n- Research papers\n- Legal documents\n- Codebases\n\n## Access\n\n1. Go to **[kimi.moonshot.cn](https://kimi.moonshot.cn)**\n2. Sign up (supports various methods)\n3. Upload documents and start chatting!\n\n**→ Proceed to Lesson 2: Long Context**' },
-      { title: 'Long Context Capabilities', content: '## Why 200K Tokens Matters\n\nOther AIs:\n- ChatGPT: ~4K-128K tokens\n- Claude: ~200K tokens\n- **Kimi: 200K+ tokens**\n\n## What Can You Upload?\n\n- PDF documents (100+ pages)\n- Word documents\n- Text files\n- Multiple files at once\n- Entire code repositories\n\n## Example Use Cases\n\n1. "Summarize this 100-page report"\n2. "Find all mentions of \'revenue\' in these documents"\n3. "Compare these three contracts"\n4. "What are the main themes in this book?"\n\n**→ Proceed to Lesson 3: Document Analysis**' },
-      { title: 'Document Analysis Workflows', content: '## Best Practices\n\n### 1. Upload Multiple Documents\nKimi can analyze several files simultaneously.\n\n### 2. Ask Specific Questions\n❌ "What\'s in this document?"\n✅ "What are the key financial metrics mentioned?"\n\n### 3. Iterate\nFollow up with more questions based on the analysis.\n\n### 4. Export Results\nCopy the analysis to your notes.\n\n## Pro Tips\n\n- Compress PDFs before uploading (faster)\n- Use for literature reviews\n- Great for legal document analysis\n- Perfect for research synthesis\n\n## 🎉 Congratulations!\n\nYou now know how to leverage Kimi\'s long context!' },
+      {
+        title: 'What is Kimi?',
+        content: `## 🎯 What You'll Learn
+
+By the end of this guide, you will:
+
+- ✅ Understand Kimi's unique long-context capabilities
+- ✅ Set up your Kimi account and access the platform
+- ✅ Upload and analyze long documents effectively
+- ✅ Use advanced features for research and analysis
+- ✅ Troubleshoot common issues
+
+**⏱️ Time to complete:** ~30 minutes
+
+---
+
+## What is Kimi?
+
+**Kimi** is an AI assistant created by **Moonshot AI**, a Chinese AI company founded in 2023. It's famous for one thing above all else: **massive context windows**.
+
+While most AI assistants struggle with documents longer than 50 pages, Kimi can handle:
+- **200K tokens** (approximately 150,000 words or 300+ pages)
+- Some versions support up to **2 million tokens**
+- Multiple large documents simultaneously
+
+Think of Kimi as the AI that actually **remembers** your entire book, contract, or research paper.
+
+---
+
+## ✅ Prerequisites Checklist
+
+Before starting, ensure you have:
+
+- [ ] **Web browser** (Chrome, Firefox, Safari, or Edge)
+- [ ] **Internet connection**
+- [ ] **Documents to analyze** (PDFs, Word docs, or text files)
+- [ ] **Optional:** Mobile device for Kimi app
+- [ ] **Optional:** Chinese language knowledge (helpful but not required)
+
+---
+
+## Moonshot AI Background
+
+### Company Overview
+
+- **Founded:** 2023 by Yang Zhilin (ex-Google Brain)
+- **Headquarters:** Beijing, China
+- **Focus:** Long-context language models
+- **Funding:** $1B+ valuation (2024)
+
+### Why Long Context Matters
+
+Most AI assistants have a "memory limit" — they can only consider a certain amount of text at once:
+
+| AI Assistant | Context Window | Approximate Pages |
+|--------------|----------------|-------------------|
+| ChatGPT (Free) | 8K tokens | ~6 pages |
+| ChatGPT (Plus) | 128K tokens | ~100 pages |
+| Claude (Free) | 200K tokens | ~150 pages |
+| Claude (Pro) | 200K tokens | ~150 pages |
+| **Kimi** | **200K-2M tokens** | **~150-1500 pages** |
+
+### What This Means in Practice
+
+**With ChatGPT:** Upload a 50-page report → AI forgets the first half by the time it reads the end
+
+**With Kimi:** Upload a 300-page book → AI remembers everything, can cross-reference chapter 1 and chapter 20
+
+---
+
+## When to Use Kimi
+
+### ✅ Best Use Cases
+
+**1. Long Document Analysis**
+- Research papers (50+ pages)
+- Legal contracts and agreements
+- Financial reports (annual reports, 10-Ks)
+- Technical documentation
+- Academic theses and dissertations
+
+**2. Multi-Document Comparison**
+- Compare multiple contracts side-by-side
+- Synthesize findings from 10+ research papers
+- Cross-reference multiple policy documents
+
+**3. Book Analysis**
+- Summarize entire books
+- Extract key themes and quotes
+- Create chapter-by-chapter breakdowns
+
+**4. Code Repository Analysis**
+- Understand large codebases
+- Find patterns across multiple files
+- Generate documentation
+
+**5. Research Synthesis**
+- Literature reviews
+- Meta-analyses
+- Evidence gathering
+
+### ❌ Not Best For
+
+- Quick fact-checking (use Perplexity)
+- Real-time information (use ChatGPT with browsing)
+- Image analysis (use GPT-4 Vision or Gemini)
+- Coding assistance (use ChatGPT or Claude)
+
+---
+
+## Kimi vs Other Long-Context AIs
+
+### Kimi vs Claude
+
+| Feature | Kimi | Claude |
+|---------|------|--------|
+| **Max Context** | 2M tokens | 200K tokens |
+| **Price** | Free | Free / $20 (Pro) |
+| **Document Uploads** | ✅ Yes | ✅ Yes |
+| **Multiple Files** | ✅ Yes | ✅ Yes |
+| **Writing Quality** | Good | Excellent |
+| **Language** | Chinese/English | English |
+| **Citations** | ❌ No | ✅ Yes (with prompt) |
+
+**When to Choose Kimi:**
+- Ultra-long documents (>200 pages)
+- Free long-context analysis
+- Chinese language documents
+
+**When to Choose Claude:**
+- Best-in-class writing quality
+- Nuanced analysis
+- English documents
+
+---
+
+## Real-World Example
+
+**Scenario:** You have a 150-page legal contract and need to:
+1. Find all termination clauses
+2. Compare liability sections
+3. Extract key dates and deadlines
+4. Identify unusual clauses
+
+**With ChatGPT:** You'd need to break it into 10+ chunks and lose context
+
+**With Kimi:** Upload once, ask all questions, get comprehensive answers with cross-references
+
+---
+
+**→ Proceed to Lesson 2: Access & Setup**`
+      },
+      {
+        title: 'Access & Setup',
+        content: `## 🌐 Accessing Kimi
+
+### Method 1: Web App (Recommended)
+
+**Official URL:** [kimi.moonshot.cn](https://kimi.moonshot.cn)
+
+**Steps:**
+
+1. **Open your web browser** (Chrome, Firefox, Safari, or Edge)
+
+2. **Navigate to kimi.moonshot.cn**
+
+3. **Choose sign-up method:**
+   - **Phone number** (Chinese +86 numbers)
+   - **WeChat** (recommended for Chinese users)
+   - **Email** (international users)
+
+4. **For international users (email signup):**
+   - Click "邮箱登录" (Email login) or look for email icon
+   - Enter your email address
+   - Check your inbox for verification code
+   - Enter the code to verify
+
+5. **Complete profile (optional):**
+   - Add display name
+   - Set preferences
+
+6. **You're in!** Start chatting or uploading documents
+
+**📸 Screenshot Description:**
+The Kimi interface has:
+- A text input box at the bottom
+- A paperclip icon (📎) or "+" for file uploads
+- Chat history in the center
+- Clean, minimalist design
+
+---
+
+### Method 2: Mobile App
+
+**iOS:** Search "Kimi" or "Moonshot AI" in App Store
+**Android:** Search "Kimi" in Google Play or download APK
+
+**Note:** Mobile apps may require Chinese app store account or may not be available in all regions.
+
+---
+
+## 🌍 Interface Language
+
+**Important:** Kimi's interface is primarily in Chinese.
+
+### Key Interface Terms (English Translation)
+
+| Chinese | English |
+|---------|---------|
+| 上传文件 | Upload file |
+| 发送 | Send |
+| 新对话 | New conversation |
+| 历史 | History |
+| 设置 | Settings |
+| 退出 | Sign out |
+
+### Using Kimi in English
+
+Despite the Chinese interface:
+- Kimi **understands and responds in English**
+- You can ask questions in English
+- Upload English documents
+- Get English responses
+
+**Tip:** Use your browser's translate feature if needed (Chrome → Right-click → Translate)
+
+---
+
+## ⏱️ Setup Time Summary
+
+| Step | Time |
+|------|------|
+| Visit website | 1 minute |
+| Create account | 3-5 minutes |
+| Verify email/phone | 2 minutes |
+| First conversation | 2 minutes |
+| Upload first document | 1 minute |
+| **Total** | **~10 minutes** |
+
+---
+
+## 📁 Uploading Documents
+
+### Supported File Types
+
+| Type | Formats | Max Size |
+|------|---------|----------|
+| **PDF** | .pdf | 100 MB |
+| **Word** | .docx, .doc | 50 MB |
+| **Text** | .txt, .md | 10 MB |
+| **Images** | .jpg, .png (OCR) | 20 MB |
+
+### How to Upload
+
+**Step 1:** Click the **paperclip icon (📎)** or **"+" button**
+
+**Step 2:** Select your file(s)
+
+**Step 3:** Wait for upload to complete (progress bar shows)
+
+**Step 4:** File appears in chat with thumbnail
+
+**Step 5:** Start asking questions!
+
+### Uploading Multiple Files
+
+Kimi supports **multiple file uploads** in the same conversation:
+
+1. Upload first file
+2. Click upload again
+3. Select additional file(s)
+4. Kimi will analyze all uploaded files together
+
+**Maximum:** Up to 50 files per conversation (varies by account type)
+
+---
+
+## ✅ Setup Verification
+
+Before moving on, verify:
+
+- [ ] You can access kimi.moonshot.cn
+- [ ] You've created an account
+- [ ] You've sent your first message
+- [ ] You can see the file upload button
+- [ ] Optional: You've uploaded a test document
+
+---
+
+## 💡 Quick First Test
+
+**Try this prompt:**
+\`\`\`
+I'm testing your long-context capabilities. I'll upload a document soon.
+For now, can you confirm: How much text can you handle at once?
+\`\`\`
+
+**Expected Response:** Kimi will confirm its context window (200K+ tokens).
+
+---
+
+**→ Proceed to Lesson 3: Long Document Analysis**`
+      },
+      {
+        title: 'Long Document Analysis',
+        content: `## 📄 Working with Long Documents
+
+Kimi's superpower is handling documents that break other AI assistants. Here's how to use it effectively.
+
+---
+
+## Uploading and Processing Documents
+
+### Step 1: Prepare Your Document
+
+**Best Practices:**
+- ✅ PDF format works best
+- ✅ Ensure text is selectable (not scanned images)
+- ✅ Compress large files if needed
+- ❌ Avoid password-protected PDFs
+- ❌ Avoid heavily formatted documents (tables may not parse correctly)
+
+**For Scanned Documents:**
+Kimi has OCR (Optical Character Recognition) capabilities, but for best results:
+- Use clear, high-resolution scans
+- Ensure text is legible
+- Consider pre-processing with OCR tools
+
+### Step 2: Upload
+
+1. Click **paperclip icon** or **"+" button**
+2. Select your file
+3. Wait for "Upload complete" message
+4. File thumbnail appears in chat
+
+### Step 3: Wait for Processing
+
+For long documents (100+ pages):
+- Kimi needs time to "read" the document
+- Progress indicator shows processing status
+- Usually takes 30-60 seconds for 200-page document
+
+---
+
+## Effective Prompting for Document Analysis
+
+### ❌ Bad Prompt:
+\`"What's in this document?"\`
+
+### ✅ Good Prompts:
+
+**Summarization:**
+\`\`\`
+Summarize this 150-page annual report. Focus on:
+1. Key financial metrics (revenue, profit, growth)
+2. Major business developments
+3. Risk factors mentioned
+4. Future outlook
+
+Format as a structured executive summary.
+\`\`\`
+
+**Information Extraction:**
+\`\`\`
+From this contract, extract:
+1. All parties involved and their roles
+2. Key dates (effective date, termination date, renewal dates)
+3. Payment terms and amounts
+4. Termination conditions
+5. Liability clauses
+
+Format as a table where possible.
+\`\`\`
+
+**Theme Analysis:**
+\`\`\`
+Analyze this book and identify:
+1. The top 5 main themes
+2. Key arguments for each theme
+3. Supporting evidence/examples from the text
+4. Memorable quotes that illustrate each theme
+
+Provide page references where possible.
+\`\`\`
+
+---
+
+## Multi-Document Comparison
+
+One of Kimi's most powerful features is comparing multiple documents.
+
+### Example: Contract Comparison
+
+**Upload:** 3 different versions of a contract (v1, v2, v3)
+
+**Prompt:**
+\`\`\`
+I've uploaded 3 versions of the same contract.
+
+Please create a comparison table showing:
+1. What changed between each version
+2. Which clauses were added, removed, or modified
+3. Any changes to dates, amounts, or parties
+4. Potential implications of each change
+
+Format as:
+| Clause | Version 1 | Version 2 | Version 3 | Impact |
+\`\`\`
+
+### Example: Research Synthesis
+
+**Upload:** 5 academic papers on the same topic
+
+**Prompt:**
+\`\`\`
+I've uploaded 5 research papers about [topic].
+
+Please synthesize:
+1. Common findings across all papers
+2. Conflicting conclusions and why they differ
+3. Methodologies used and their strengths/weaknesses
+4. Gaps in the research that need further study
+5. Most cited papers/references
+
+Create a literature review summary.
+\`\`\`
+
+---
+
+## Citation Extraction
+
+Kimi can extract and organize citations from academic documents.
+
+**Prompt:**
+\`\`\`
+Extract all citations and references from this research paper.
+Format as:
+1. In-text citations (author, year)
+2. Full reference list
+3. Most frequently cited authors
+4. Categorize by topic/theme
+\`\`\`
+
+---
+
+## Real Example: Annual Report Analysis
+
+**Document:** 180-page company annual report (PDF)
+
+**Prompt 1: Executive Summary**
+\`\`\`
+Create a 2-page executive summary of this annual report covering:
+- Financial performance (with specific numbers)
+- Business highlights
+- Strategic initiatives
+- Risks and challenges
+- Management outlook
+\`\`\`
+
+**Prompt 2: Deep Dive**
+\`\`\`
+Find all mentions of "AI" or "artificial intelligence" in this report.
+For each mention:
+1. Quote the relevant paragraph
+2. Explain the context
+3. Note the page number
+\`\`\`
+
+**Prompt 3: Cross-Reference**
+\`\`\`
+The CEO letter mentions "significant investments in technology."
+Find the sections in the financial statements that detail these investments.
+What specific amounts were spent on technology/R&D?
+\`\`\`
+
+---
+
+## 🎯 Practical Exercises
+
+**Exercise 1: Single Document Analysis (10 minutes)**
+1. Upload a long PDF (50+ pages)
+2. Ask for a summary
+3. Ask 3 specific questions about the content
+4. Ask for cross-references between sections
+
+**Exercise 2: Multi-Document Comparison (15 minutes)**
+1. Upload 2-3 related documents
+2. Ask Kimi to compare them
+3. Request a comparison table
+4. Identify key differences
+
+**Exercise 3: Citation Extraction (10 minutes)**
+1. Upload an academic paper
+2. Extract all references
+3. Categorize by topic
+4. Identify the most-cited works
+
+---
+
+**→ Proceed to Lesson 4: Advanced Use Cases**`
+      },
+      {
+        title: 'Advanced Use Cases',
+        content: `## 🚀 Taking Kimi Further
+
+Beyond basic document analysis, Kimi excels at complex, multi-step workflows.
+
+---
+
+## Research Workflows
+
+### Academic Research Pipeline
+
+**Step 1: Literature Collection**
+- Upload 10-20 relevant papers
+- Group by topic or methodology
+
+**Step 2: Initial Synthesis**
+\`\`\`
+I've uploaded [X] papers about [topic].
+
+Please:
+1. Group them by research methodology
+2. Identify the seminal/most-cited papers
+3. Note any conflicting findings
+4. Highlight research gaps
+\`\`\`
+
+**Step 3: Deep Analysis**
+\`\`\`
+Focus on the top 3 most relevant papers.
+
+For each, analyze:
+1. Research question and hypothesis
+2. Methodology and sample size
+3. Key findings and statistical significance
+4. Limitations acknowledged by authors
+5. Recommendations for future research
+\`\`\`
+
+**Step 4: Gap Analysis**
+\`\`\`
+Based on all papers, what research questions remain unanswered?
+What methodologies are underutilized?
+What populations/contexts are understudied?
+\`\`\`
+
+---
+
+## Book Summarization
+
+### Complete Book Analysis
+
+**Upload:** Full book PDF (200-500 pages)
+
+**Prompt 1: Chapter Summaries**
+\`\`\`
+Create a chapter-by-chapter summary of this book.
+For each chapter:
+1. Main argument or narrative arc
+2. Key examples or case studies
+3. Important quotes (with page numbers)
+4. How it connects to the overall thesis
+
+Format as a structured outline.
+\`\`\`
+
+**Prompt 2: Character Analysis (for fiction)**
+\`\`\`
+Analyze all major characters in this novel.
+For each character:
+1. Their arc throughout the story
+2. Key decisions and motivations
+3. Relationships with other characters
+4. Memorable quotes
+5. Symbolic significance
+\`\`\`
+
+**Prompt 3: Theme Extraction**
+\`\`\`
+Identify the top 10 themes in this book.
+For each theme:
+1. Definition and significance
+2. Key scenes/chapters where it appears
+3. Character(s) associated with it
+4. Supporting quotes
+5. How it resolves or develops
+\`\`\`
+
+---
+
+## Legal & Contract Analysis
+
+### Contract Review Workflow
+
+**Upload:** Legal contract (20-100 pages)
+
+**Prompt 1: Executive Overview**
+\`\`\`
+Provide an executive summary of this contract:
+1. Parties involved
+2. Subject matter
+3. Key terms and duration
+4. Financial implications
+5. Major obligations for each party
+\`\`\`
+
+**Prompt 2: Risk Assessment**
+\`\`\`
+Analyze this contract for potential risks:
+1. Unusual or one-sided clauses
+2. Vague language that could be problematic
+3. Termination risks
+4. Liability exposure
+5. Compliance requirements
+
+Rate each risk: Low / Medium / High
+\`\`\`
+
+**Prompt 3: Obligation Extraction**
+\`\`\`
+Extract all obligations, deliverables, and deadlines.
+Format as a table:
+| Party | Obligation | Deadline | Consequence of Breach |
+\`\`\`
+
+**Prompt 4: Clause Comparison**
+\`\`\`
+Compare the liability clause in this contract to standard industry terms.
+What's different? What's missing? What's favorable/unfavorable?
+\`\`\`
+
+---
+
+## Code Repository Analysis
+
+### Understanding Large Codebases
+
+**Upload:** Multiple source code files (up to 50 files)
+
+**Prompt 1: Architecture Overview**
+\`\`\`
+Analyze this codebase and explain:
+1. Overall architecture and design patterns
+2. Main modules/components
+3. Data flow and dependencies
+4. Entry points and key functions
+5. Technologies and frameworks used
+\`\`\`
+
+**Prompt 2: Documentation Generation**
+\`\`\`
+Generate documentation for this codebase:
+1. README.md with setup instructions
+2. API documentation for public functions
+3. Architecture diagram description
+4. Configuration guide
+\`\`\`
+
+**Prompt 3: Code Review**
+\`\`\`
+Review this code for:
+1. Potential bugs or errors
+2. Security vulnerabilities
+3. Performance issues
+4. Code style inconsistencies
+5. Missing error handling
+
+Prioritize by severity.
+\`\`\`
+
+---
+
+## Financial Document Analysis
+
+### Annual Report Deep Dive
+
+**Upload:** Company annual report / 10-K filing
+
+**Prompt 1: Financial Health**
+\`\`\`
+Analyze the financial health of this company:
+1. Revenue trends (3-5 years)
+2. Profit margins and profitability
+3. Debt levels and liquidity
+4. Cash flow analysis
+5. Key financial ratios
+
+Compare to industry benchmarks if mentioned.
+\`\`\`
+
+**Prompt 2: Risk Factors**
+\`\`\`
+Extract and categorize all risk factors mentioned:
+1. Market/competitive risks
+2. Operational risks
+3. Regulatory/legal risks
+4. Financial risks
+5. Technology risks
+
+Rate each by severity based on the discussion.
+\`\`\`
+
+---
+
+## Multi-Language Analysis
+
+Kimi handles both Chinese and English well.
+
+**Chinese Document Analysis:**
+\`\`\`
+这份文件的主要结论是什么？请用英文总结。
+(What are the main conclusions of this document? Please summarize in English.)
+\`\`\`
+
+**Translation + Analysis:**
+\`\`\`
+This document is in Chinese. Please:
+1. Translate key sections to English
+2. Summarize the main points
+3. Highlight culturally-specific references
+\`\`\`
+
+---
+
+## 🎯 Pro Tips
+
+### 1. Chunk Complex Requests
+Instead of one massive prompt, break it into steps:
+\`\`\`
+Step 1: "First, identify all chapters in this book."
+Step 2: "Now summarize chapters 1-5."
+Step 3: "Now summarize chapters 6-10."
+\`\`\`
+
+### 2. Reference Specific Sections
+\`\`\`
+"Based on the 'Financial Statements' section (pages 45-60)..."
+"In Chapter 3, specifically the discussion about..."
+\`\`\`
+
+### 3. Request Structured Output
+\`\`\`
+"Format your response as:
+## Section 1
+- Bullet points
+
+## Section 2
+| Column 1 | Column 2 |
+
+## Section 3
+Numbered list
+\`\`\`
+
+### 4. Ask for Confidence Levels
+\`\`\`
+"If you're uncertain about any extraction, note it as [UNCERTAIN] and explain why."
+\`\`\`
+
+---
+
+**→ Proceed to Lesson 5: Troubleshooting**`
+      },
+      {
+        title: 'Troubleshooting',
+        content: `## 🚨 Common Issues & Solutions
+
+### Error 1: "Upload failed" or File Not Processing
+
+**Symptoms:**
+- Upload bar stuck at 0%
+- "Upload failed" error message
+- File appears but Kimi doesn't respond to questions about it
+
+**Solutions:**
+
+\`\`\`
+1. Check file size:
+   - Max: 100 MB for PDFs
+   - If larger, compress the PDF first
+
+2. Check file format:
+   - Supported: PDF, DOCX, DOC, TXT
+   - Not supported: Encrypted PDFs, some image-only PDFs
+
+3. Check internet connection:
+   - Large files need stable connection
+   - Try smaller file first to test
+
+4. Refresh the page and retry:
+   - Sometimes session expires
+   - Log out and log back in
+
+5. Try a different browser:
+   - Chrome works best
+   - Disable ad blockers temporarily
+
+6. For scanned documents:
+   - Ensure OCR quality is good
+   - Try re-scanning at higher resolution
+\`\`\`
+
+---
+
+### Error 2: "Response stopped" or Incomplete Response
+
+**Symptoms:**
+- Kimi starts responding but cuts off
+- "Continue" doesn't work
+- Response ends mid-sentence
+
+**Solutions:**
+
+\`\`\`
+1. Type "请继续" or "Continue":
+   - Kimi may have hit a length limit
+   - Ask it to continue from where it stopped
+
+2. Request shorter responses:
+   "Instead of a full analysis, give me bullet points."
+
+3. Break down your question:
+   ❌ "Analyze everything in this 500-page book"
+   ✅ "Analyze Chapter 1 of this book"
+
+4. Start a new conversation if stuck:
+   - Long conversations can accumulate context
+   - Fresh start often helps
+\`\`\`
+
+---
+
+### Error 3: Kimi Not Understanding Document
+
+**Symptoms:**
+- Kimi gives generic responses
+- "I don't see that information" when it should be there
+- Responses don't reference the uploaded content
+
+**Solutions:**
+
+\`\`\`
+1. Verify file processed completely:
+   - Look for "Processing complete" message
+   - Large files can take 1-2 minutes
+
+2. Reference the file explicitly:
+   ❌ "What are the main points?"
+   ✅ "In the PDF I uploaded, what are the main points?"
+
+3. Check if document is in supported language:
+   - Chinese and English work best
+   - Other languages may have issues
+
+4. Try simpler prompts first:
+   "Can you see the document I uploaded? What's the title?"
+
+5. Re-upload the document:
+   - Sometimes processing fails silently
+   - Delete and re-upload
+\`\`\`
+
+---
+
+### Error 4: Chinese Interface Confusion
+
+**Symptoms:**
+- Can't find features due to Chinese interface
+- Don't understand error messages
+
+**Solutions:**
+
+\`\`\`
+1. Use browser translation:
+   - Chrome: Right-click → "Translate to English"
+   - This translates the interface
+
+2. Key terms reference:
+   | Chinese | English |
+   |---------|---------|
+   | 上传 | Upload |
+   | 发送 | Send |
+   | 新对话 | New Chat |
+   | 历史记录 | History |
+   | 删除 | Delete |
+   | 下载 | Download |
+
+3. Ask Kimi for help:
+   "How do I upload a file? Please answer in English."
+\`\`\`
+
+---
+
+### Error 5: File Size Limits
+
+**Symptoms:**
+- "File too large" error
+- Upload fails for big documents
+
+**Solutions:**
+
+\`\`\`
+1. Compress PDFs:
+   - Use: ilovepdf.com/compress_pdf
+   - Or: Adobe online compressor
+   - Target: Under 50 MB
+
+2. Split into multiple files:
+   - Upload Part 1, ask questions
+   - Upload Part 2 in same conversation
+   - Kimi remembers context
+
+3. Convert to text:
+   - Copy-paste text directly
+   - Works for any length
+
+4. Remove unnecessary pages:
+   - Delete cover pages, blank pages
+   - Focus on content sections
+\`\`\`
+
+---
+
+### Error 6: Kimi Gives Outdated or Wrong Information
+
+**Symptoms:**
+- Kimi hallucinates facts not in your document
+- References information you didn't provide
+- Makes up page numbers or quotes
+
+**Solutions:**
+
+\`\`\`
+1. Ask for verification:
+   "Please only use information from the uploaded document.
+    If you're unsure, say 'Not found in document'."
+
+2. Request quotes:
+   "Quote the exact text where this information appears."
+
+3. Ask for page references:
+   "What page is this on? Provide the exact page number."
+
+4. Cross-check important facts:
+   - Never trust AI 100% for critical information
+   - Verify in the original document
+
+5. Use more specific prompts:
+   ❌ "Summarize the risks"
+   ✅ "From the 'Risk Factors' section on pages 15-20, summarize the top 5 risks."
+\`\`\`
+
+---
+
+### Error 7: Multiple Files Not Working Together
+
+**Symptoms:**
+- Kimi only analyzes one file
+- "I don't see the other document" error
+
+**Solutions:**
+
+\`\`\`
+1. Upload files in same conversation:
+   - Don't start new chat between uploads
+   - All files must be in same conversation thread
+
+2. Reference files explicitly:
+   "Compare the contract in file1.pdf with file2.pdf"
+
+3. Check file limits:
+   - Max ~50 files per conversation
+   - May vary by account type
+
+4. Number your files:
+   "I've uploaded 3 files. File 1 is the contract.
+    File 2 is the amendment. File 3 is the exhibit.
+    Compare File 1 and File 2."
+\`\`\`
+
+---
+
+### Error 8: Can't Sign Up / Account Issues
+
+**Symptoms:**
+- "Phone number not supported"
+- Verification code not arriving
+- Can't create account
+
+**Solutions:**
+
+\`\`\`
+1. For international users:
+   - Use email signup instead of phone
+   - Look for "邮箱登录" (email login)
+
+2. Verification code issues:
+   - Check spam folder
+   - Wait 5 minutes and request new code
+   - Try different email provider
+
+3. If phone required:
+   - Some regions require Chinese phone (+86)
+   - Use email signup to bypass
+
+4. Account locked:
+   - Contact support via kimi.moonshot.cn
+   - Use feedback form (反馈)
+\`\`\`
+
+---
+
+### Error 9: Slow Responses or Timeouts
+
+**Symptoms:**
+- Kimi takes forever to respond
+- "Request timeout" error
+- Connection lost during response
+
+**Solutions:**
+
+\`\`\`
+1. Check your internet connection:
+   - Stable connection required for long documents
+   - Try different network
+
+2. Reduce document size:
+   - Smaller files = faster processing
+   - Split large documents
+
+3. Simplify your request:
+   - Complex analysis takes longer
+   - Break into smaller questions
+
+4. Avoid peak hours:
+   - Chinese business hours may be busier
+   - Try off-peak times
+
+5. Refresh and retry:
+   - Sometimes server load causes issues
+   - Wait 5 minutes and try again
+\`\`\`
+
+---
+
+### Error 10: Language Issues (Chinese vs English)
+
+**Symptoms:**
+- Kimi responds in Chinese when you want English
+- English prompts get Chinese responses
+- Poor quality translations
+
+**Solutions:**
+
+\`\`\`
+1. Explicitly request English:
+   "Please respond in English."
+   "用英文回答" (Answer in English)
+
+2. Set language preference in prompt:
+   "From now on, respond only in English."
+
+3. For mixed documents:
+   "This document is in Chinese. Please analyze it but respond in English."
+
+4. If Chinese response received:
+   "Please translate your response to English."
+\`\`\`
+
+---
+
+### Error 11: Tables and Formatting Not Preserved
+
+**Symptoms:**
+- Tables appear as messy text
+- Kimi doesn't understand table structure
+- Can't extract data from tables
+
+**Solutions:**
+
+\`\`\`
+1. Describe the format you want:
+   "Extract the data from the table on page 5 and format as:
+    | Column A | Column B | Column C |"
+
+2. Ask for the raw data:
+   "List all the data from the financial table, row by row."
+
+3. For complex tables:
+   - Take a screenshot
+   - Upload as image
+   - Kimi can sometimes read images
+
+4. Alternative: Copy-paste table:
+   - Copy table from PDF
+   - Paste as text in your prompt
+   - Ask Kimi to format it
+\`\`\`
+
+---
+
+### Error 12: Session Expires or Logs Out
+
+**Symptoms:**
+- "Please log in" message
+- Conversation history disappears
+- Uploaded files lost
+
+**Solutions:**
+
+\`\`\`
+1. Save important conversations:
+   - Copy-paste to a document
+   - Don't rely on history
+
+2. Re-upload files:
+   - If logged out, files are lost
+   - Keep originals ready to re-upload
+
+3. Check "Remember me":
+   - Enable during login
+   - Reduces frequency of logouts
+
+4. Use same browser:
+   - Sessions are browser-specific
+   - Don't switch between browsers
+\`\`\`
+
+---
+
+## 📚 Getting More Help
+
+### Official Resources
+- **Website:** [kimi.moonshot.cn](https://kimi.moonshot.cn)
+- **Feedback:** Use the feedback button (反馈) in the interface
+
+### Quick Diagnostics
+\`\`\`
+1. Test with simple question: "Hello, can you respond?"
+2. Upload small test file to verify uploads work
+3. Try different browser
+4. Clear browser cache and cookies
+5. Check if kimi.moonshot.cn is accessible
+\`\`\`
+
+---
+
+## 🎉 Congratulations!
+
+You've completed the **Kimi AI - Long Context Master** guide!
+
+**What You've Learned:**
+- ✅ Understand Kimi's massive 200K-2M token context window
+- ✅ Set up your account and navigate the interface
+- ✅ Upload and analyze long documents effectively
+- ✅ Use advanced workflows for research, legal, and code analysis
+- ✅ Troubleshoot common issues
+
+**Next Steps:**
+- Upload your first long document
+- Try multi-document comparison
+- Build Kimi into your research workflow
+
+**Happy long-context analysis!** 🚀📄`
+      }
     ]
   },
   'guide-perplexity': {
