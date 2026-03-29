@@ -14,15 +14,31 @@ interface NewsItem {
 
 // AI-focused RSS feeds
 const AI_FEEDS = [
+  // Company Blogs
   { name: 'OpenAI Blog', url: 'https://openai.com/blog/rss.xml', category: 'announcements' },
   { name: 'Anthropic News', url: 'https://www.anthropic.com/news/rss', category: 'announcements' },
+  { name: 'Google DeepMind Blog', url: 'https://deepmind.google/discover/blog/', category: 'research' },
+  { name: 'Google AI Blog', url: 'https://blog.google/technology/ai/rss/', category: 'research' },
+  { name: 'Meta AI Blog', url: 'https://ai.meta.com/blog/rss/', category: 'announcements' },
+  { name: 'Microsoft AI Blog', url: 'https://blogs.microsoft.com/ai/feed/', category: 'announcements' },
+  
+  // Tech News AI Sections
   { name: 'TechCrunch AI', url: 'https://techcrunch.com/category/artificial-intelligence/feed/', category: 'news' },
   { name: 'VentureBeat AI', url: 'https://venturebeat.com/category/ai/feed/', category: 'news' },
+  
+  // Research & Academic
+  { name: 'Nature AI', url: 'https://www.nature.com/subjects/machine-learning/artificial-intelligence.rss', category: 'research' },
+  { name: 'MIT Tech Review AI', url: 'https://www.technologyreview.com/topic/artificial-intelligence/feed/', category: 'research' },
+  
+  // Community
   { name: 'Hacker News', url: 'https://hnrss.org/frontpage', category: 'news' },
+  { name: 'r/MachineLearning', url: 'https://www.reddit.com/r/MachineLearning/.rss', category: 'research' },
+  { name: 'AI News', url: 'https://www.artificialintelligence-news.com/feed/', category: 'news' },
 ]
 
 // General tech breaking news RSS feeds
 const BREAKING_TECH_FEEDS = [
+  // Major Tech Publications
   { name: 'TechCrunch', url: 'https://techcrunch.com/feed/', category: 'breaking' },
   { name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml', category: 'breaking' },
   { name: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index', category: 'breaking' },
@@ -30,6 +46,14 @@ const BREAKING_TECH_FEEDS = [
   { name: 'Engadget', url: 'https://www.engadget.com/rss.xml', category: 'breaking' },
   { name: 'MIT Tech Review', url: 'https://www.technologyreview.com/feed/', category: 'breaking' },
   { name: 'Recode', url: 'https://www.vox.com/recode/rss/index.xml', category: 'breaking' },
+  
+  // Business & Financial Tech
+  { name: 'Bloomberg Tech', url: 'https://www.bloomberg.com/technology/feed', category: 'breaking' },
+  { name: 'CNBC Tech', url: 'https://www.cnbc.com/id/19854910/device/rss/rss.html', category: 'breaking' },
+  { name: 'The Information', url: 'https://theinformation.com/feed', category: 'breaking' },
+  
+  // Global Coverage
+  { name: 'BBC Tech', url: 'https://feeds.bbci.co.uk/news/technology/rss.xml', category: 'breaking' },
 ]
 
 /**
