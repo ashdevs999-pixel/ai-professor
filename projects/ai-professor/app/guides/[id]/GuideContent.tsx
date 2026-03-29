@@ -362,7 +362,363 @@ status - Check system status
 - Regenerate if compromised: \`/revoke\` in BotFather
 - Your bot is private — only people with the username can find it
 
-**→ You now have a mobile AI assistant!**`
+**→ You now have a mobile AI assistant!**
+
+---
+
+## 🚨 Troubleshooting Common OpenClaw Issues
+
+### Error 1: "command not found: openclaw"
+
+**Full Error:**
+> bash: openclaw: command not found
+
+**Cause:** OpenClaw is not installed globally or not in your PATH
+
+**Solution:**
+\`\`\`bash
+# Check if installed
+npm list -g openclaw
+
+# If not installed, install it
+npm install -g openclaw
+
+# If installed but not found, add npm global to PATH
+# macOS/Linux (add to ~/.bashrc or ~/.zshrc):
+export PATH="$PATH:$(npm config get prefix)/bin"
+
+# Then reload:
+source ~/.bashrc  # or ~/.zshrc
+
+# Windows: Reopen terminal as administrator and reinstall
+npm install -g openclaw
+\`\`\`
+
+---
+
+### Error 2: "EACCES: permission denied" during installation
+
+**Full Error:**
+> npm ERR! Error: EACCES: permission denied, access '/usr/local/lib/node_modules'
+
+**Cause:** npm doesn't have write permissions to global folder
+
+**Solution (macOS/Linux):**
+\`\`\`bash
+# Option 1: Use sudo (not recommended long-term)
+sudo npm install -g openclaw
+
+# Option 2: Fix npm permissions (recommended)
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+npm install -g openclaw
+\`\`\`
+
+**Solution (Windows):**
+\`\`\`
+1. Run PowerShell as Administrator
+2. npm install -g openclaw
+\`\`\`
+
+---
+
+### Error 3: "Invalid API key" or "Authentication error"
+
+**Full Error:**
+> Error: Invalid API key provided. Check your API key at platform.openai.com
+
+**Cause:** API key is incorrect, expired, or not set
+
+**Solution:**
+\`\`\`bash
+# 1. Check your .env file
+cat .env
+
+# 2. Verify the key format is correct (no extra spaces/quotes)
+# Should be: OPENAI_API_KEY=sk-proj-xxxx...
+# NOT: OPENAI_API_KEY="sk-proj-xxxx..."
+# NOT: OPENAI_API_KEY = sk-proj-xxxx...
+
+# 3. Test key works:
+curl https://api.openai.com/v1/models \
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+# 4. Regenerate key if compromised:
+# Go to platform.openai.com → API Keys → Reveal → Delete → Create new
+\`\`\`
+
+---
+
+### Error 4: "Telegram bot token is invalid"
+
+**Full Error:**
+> Telegram API error: Unauthorized (401)
+
+**Cause:** Bot token is wrong, revoked, or not configured
+
+**Solution:**
+\`\`\`bash
+# 1. Verify token in config
+cat ~/.openclaw/config.json | grep botToken
+
+# 2. Test token manually:
+curl https://api.telegram.org/bot<YOUR_TOKEN>/getMe
+
+# Should return: {"ok":true,"result":{...}}
+
+# 3. If revoked, get new token:
+# Open Telegram → @BotFather → /newbot → Copy new token
+
+# 4. Update config:
+nano ~/.openclaw/config.json
+# Replace botToken value
+
+# 5. Restart OpenClaw:
+openclaw gateway restart
+\`\`\`
+
+---
+
+### Error 5: "Gateway failed to start" or "Port already in use"
+
+**Full Error:**
+> Error: listen EADDRINUSE: address already in use :::3000
+
+**Cause:** Another process is using the port OpenClaw needs
+
+**Solution:**
+\`\`\`bash
+# Find what's using the port (Linux/macOS)
+lsof -i :3000
+# Or
+netstat -tunlp | grep 3000
+
+# Kill the process
+kill -9 <PID>
+
+# Or change OpenClaw port in config:
+nano ~/.openclaw/config.json
+# Add/modify: "gateway": { "port": 3001 }
+
+# Windows:
+netstat -ano | findstr :3000
+taskkill /PID <PID> /F
+\`\`\`
+
+---
+
+### Error 6: "Module not found" or dependencies error
+
+**Full Error:**
+> Error: Cannot find module 'xxx'
+
+**Cause:** Dependencies not installed or corrupted
+
+**Solution:**
+\`\`\`bash
+# 1. Reinstall OpenClaw
+npm uninstall -g openclaw
+npm cache clean --force
+npm install -g openclaw
+
+# 2. If in a workspace directory:
+rm -rf node_modules
+npm install
+
+# 3. Check Node.js version (needs 18+)
+node --version
+# If older, update Node.js from nodejs.org
+\`\`\`
+
+---
+
+### Error 7: "Network error" or "ETIMEDOUT"
+
+**Full Error:**
+> Error: connect ETIMEDOUT 151.101.1.69:443
+
+**Cause:** Network connectivity issue or firewall blocking
+
+**Solution:**
+\`\`\`bash
+# 1. Check internet connection
+ping google.com
+
+# 2. Check if proxy needed
+npm config get proxy
+npm config get https-proxy
+
+# 3. Set proxy if needed
+npm config set proxy http://proxy.company.com:8080
+npm config set https-proxy http://proxy.company.com:8080
+
+# 4. Or bypass SSL (not recommended for production)
+npm config set strict-ssl false
+
+# 5. Try alternate registry
+npm install -g openclaw --registry https://registry.npmmirror.com
+\`\`\`
+
+---
+
+### Error 8: "Rate limit exceeded"
+
+**Full Error:**
+> Error: Rate limit exceeded. Please try again later.
+
+**Cause:** Too many API requests in a short time
+
+**Solution:**
+\`\`\`bash
+# 1. Wait and retry (limits reset every minute/hour)
+
+# 2. Check your usage:
+# OpenAI: platform.openai.com → Usage
+# Anthropic: console.anthropic.com → Usage
+
+# 3. Implement rate limiting in config:
+nano ~/.openclaw/config.json
+# Add: "rateLimit": { "enabled": true, "maxRequests": 50, "windowMs": 60000 }
+
+# 4. Use cheaper/faster model for simple tasks:
+# Change from gpt-4 to gpt-3.5-turbo in requests
+\`\`\`
+
+---
+
+### Error 9: OpenClaw not responding to Telegram messages
+
+**Cause:** Bot not running, wrong permissions, or webhook issue
+
+**Solution:**
+\`\`\`bash
+# 1. Check if gateway is running
+openclaw gateway status
+
+# 2. Start if not running
+openclaw gateway start
+
+# 3. Check logs
+openclaw gateway logs
+
+# 4. Verify bot can receive messages:
+# Open your bot in Telegram → Send /start
+# Check if OpenClaw logs show the message
+
+# 5. Ensure you've started conversation with bot:
+# Send /start to your bot first
+
+# 6. Check bot privacy mode:
+# @BotFather → /setprivacy → DISABLE (to receive all group messages)
+\`\`\`
+
+---
+
+### Error 10: "Config file not found" or "Invalid config"
+
+**Full Error:**
+> Error: Config file not found at ~/.openclaw/config.json
+
+**Cause:** OpenClaw not initialized or config corrupted
+
+**Solution:**
+\`\`\`bash
+# 1. Initialize OpenClaw
+openclaw init
+
+# 2. If config corrupted, reset:
+rm ~/.openclaw/config.json
+openclaw init
+
+# 3. Recreate minimal config:
+mkdir -p ~/.openclaw
+cat > ~/.openclaw/config.json << 'EOF'
+{
+  "model": "gpt-4",
+  "plugins": {
+    "entries": {}
+  }
+}
+EOF
+
+# 4. Add your API key:
+echo "OPENAI_API_KEY=your-key-here" > ~/.openclaw/.env
+\`\`\`
+
+---
+
+### Error 11: "Memory allocation failed" or crashes
+
+**Cause:** System running low on memory
+
+**Solution:**
+\`\`\`bash
+# 1. Check available memory
+free -h  # Linux
+vm_stat  # macOS
+
+# 2. Close unnecessary applications
+
+# 3. Increase Node.js memory limit:
+export NODE_OPTIONS="--max-old-space-size=4096"
+openclaw start
+
+# 4. For permanent fix, add to ~/.bashrc or ~/.zshrc:
+echo 'export NODE_OPTIONS="--max-old-space-size=4096"' >> ~/.bashrc
+\`\`\`
+
+---
+
+### Error 12: Skills not loading or working
+
+**Cause:** Skill not installed, outdated, or incompatible
+
+**Solution:**
+\`\`\`bash
+# 1. List installed skills
+openclaw skill list
+
+# 2. Reinstall the skill
+openclaw skill remove <skill-name>
+openclaw skill add <skill-name>
+
+# 3. Update all skills
+openclaw skill update
+
+# 4. Check skill compatibility with your OpenClaw version
+openclaw --version
+
+# 5. Install from ClawHub:
+openclaw skill install <skill-name> --from clawhub
+\`\`\`
+
+---
+
+## 📚 Getting More Help
+
+### Official Resources
+- **Documentation:** [docs.openclaw.ai](https://docs.openclaw.ai)
+- **GitHub Issues:** [github.com/openclaw/openclaw/issues](https://github.com/openclaw/openclaw/issues)
+- **Discord Community:** [discord.gg/clawd](https://discord.gg/clawd)
+
+### Quick Diagnostics
+\`\`\`bash
+# Run diagnostics
+openclaw doctor
+
+# Check version
+openclaw --version
+
+# View logs
+openclaw logs --tail 100
+
+# Test configuration
+openclaw config validate
+\`\`\`
+
+**→ You're ready to troubleshoot any OpenClaw issue!**`
       },
     ]
   },
@@ -936,12 +1292,1460 @@ You now know how to:
   },
   'guide-vscode': {
     title: 'Setting Up VS Code',
-    description: 'Configure VS Code for productivity.',
+    description: 'The complete beginner\'s guide to installing and mastering Visual Studio Code.',
     topic: 'Development Setup',
     lessons: [
-      { title: 'Installing VS Code', content: '## Download VS Code\n\n1. Go to [code.visualstudio.com](https://code.visualstudio.com)\n2. Download for your operating system\n3. Run the installer\n\n### macOS\nDownload the .dmg file, drag to Applications\n\n### Windows\nDownload the installer, run and follow prompts\n\n### Linux\n```bash\nsudo snap install code --classic\n```\n\n**→ Proceed to Lesson 2: Essential Extensions**' },
-      { title: 'Essential Extensions', content: '## Top 10 VS Code Extensions\n\n### 1. **Prettier** - Code formatter\nAuto-format your code on save\n\n### 2. **ESLint** - JavaScript linter\nCatch errors before running\n\n### 3. **GitLens** - Git supercharged\nSee who changed what, blame info, file history\n\n### 4. **Live Server** - Local dev server\nRight-click HTML → "Open with Live Server"\n\n### 5. **Auto Rename Tag** - HTML helper\nRename opening tag, closing tag updates automatically\n\n### 6. **Path Intellisense** - Autocomplete filenames\nType paths and get suggestions\n\n### 7. **Material Icon Theme** - Better icons\nBeautiful file icons for every file type\n\n### 8. **GitHub Copilot** - AI assistant\nAI-powered code suggestions (requires subscription)\n\n### 9. **Thunder Client** - API testing\nTest APIs without leaving VS Code\n\n### 10. **Error Lens** - Inline errors\nSee error messages directly in your code\n\n**→ Proceed to Lesson 3: Customization**' },
-      { title: 'Customization', content: '## Settings.json\n\nOpen settings: \`Ctrl/Cmd + Shift + P\` → "Open User Settings (JSON)"\n\n### Useful Settings:\n\`\`\`json\n{\n  "editor.fontSize": 14,\n  "editor.tabSize": 2,\n  "editor.wordWrap": "on",\n  "editor.formatOnSave": true,\n  "editor.minimap.enabled": false,\n  "workbench.colorTheme": "One Dark Pro",\n  "files.autoSave": "afterDelay",\n  "files.autoSaveDelay": 1000\n}\n\`\`\`\n\n## Key Shortcuts\n\n| Action | Mac | Windows/Linux |\n|--------|-----|---------------|\n| Command Palette | \`Cmd+Shift+P\` | \`Ctrl+Shift+P\` |\n| Quick Open | \`Cmd+P\` | \`Ctrl+P\` |\n| Terminal | \`Ctrl+\`\` | \`Ctrl+\`\` |\n| Split Editor | \`Cmd+\\\` | \`Ctrl+\\\` |\n| Find | \`Cmd+F\` | \`Ctrl+F\` |\n| Global Search | \`Cmd+Shift+F\` | \`Ctrl+Shift+F\` |\n\n## 🎉 Congratulations!\n\nYou now have a fully configured VS Code setup!' },
+      {
+        title: 'Introduction & Prerequisites',
+        content: `## What is VS Code?
+
+**Visual Studio Code (VS Code)** is a free, open-source code editor created by Microsoft. It's the most popular code editor in the world, used by over 70% of professional developers.
+
+Think of VS Code as your "digital workshop" — it's where you write, edit, and organize your code. It's like Microsoft Word, but for programming.
+
+## 🎯 What You'll Learn
+
+By the end of this guide, you will:
+
+- ✅ Understand what VS Code is and why it's essential
+- ✅ Have VS Code installed and running on your computer
+- ✅ Know which extensions to install (and why)
+- ✅ Create and save your first file
+- ✅ Troubleshoot common problems
+
+**⏱️ Time to complete:** ~20 minutes
+
+---
+
+## 🤔 Why Use VS Code?
+
+### Three Specific Use Cases
+
+**1. Learning to Code**
+If you're just starting out, VS Code is perfect because:
+- It highlights syntax errors (like spell-check for code)
+- It auto-completes as you type
+- It's completely free
+- There are thousands of tutorials for it
+
+**2. Web Development**
+If you're building websites:
+- Live preview of HTML/CSS changes
+- Built-in Git integration
+- Extensions for React, Vue, Angular
+- Integrated terminal for running commands
+
+**3. Professional Development**
+For work projects:
+- Debug code directly in the editor
+- Work on remote files (SSH, containers)
+- Collaborate with Live Share
+- Customize everything to your workflow
+
+### VS Code vs Other Editors
+
+| Feature | VS Code | Sublime Text | Notepad++ | vim |
+|---------|---------|--------------|-----------|-----|
+| **Price** | Free | $99 | Free | Free |
+| **Extensions** | 40,000+ | ~5,000 | ~100 | Many |
+| **Learning Curve** | Easy | Easy | Easy | Hard |
+| **Built-in Terminal** | ✅ Yes | ❌ No | ❌ No | ✅ Yes |
+| **Git Integration** | ✅ Yes | Plugin | ❌ No | Plugin |
+
+**Verdict:** VS Code is the best choice for 95% of developers.
+
+---
+
+## ✅ Prerequisites Checklist
+
+Before installing, make sure your computer meets these requirements:
+
+### Operating System Requirements
+
+| OS | Minimum Version | Recommended |
+|----|-----------------|-------------|
+| **Windows** | Windows 10 | Windows 11 |
+| **macOS** | macOS 10.15 (Catalina) | macOS 14 (Sonoma) |
+| **Linux** | Ubuntu 18.04 / Debian 10 | Latest LTS |
+
+### Hardware Requirements
+
+| Requirement | Minimum | Recommended | Why |
+|-------------|---------|-------------|-----|
+| **RAM** | 4 GB | 8 GB+ | Extensions use memory |
+| **Storage** | 500 MB free | 2 GB+ free | VS Code + extensions |
+| **CPU** | Any modern processor | Multi-core | Large files load faster |
+| **Display** | 1366x768 | 1920x1080+ | More screen = more code |
+
+### Access Requirements
+
+- [ ] **Administrator access** (needed to install software)
+- [ ] **Internet connection** (to download VS Code and extensions)
+- [ ] **A web browser** (to download the installer)
+
+---
+
+## 🔍 How to Check Your Computer
+
+### Windows
+
+1. Press \`Windows Key + R\`
+2. Type \`winver\` and press Enter
+3. A window will show your Windows version
+
+**Check RAM:**
+1. Press \`Ctrl + Shift + Esc\` to open Task Manager
+2. Click "Performance" tab → "Memory"
+3. Look at "Installed RAM"
+
+### macOS
+
+1. Click the **Apple icon ()** in the top-left
+2. Select **"About This Mac"**
+3. You'll see your macOS version and memory
+
+### Linux (Ubuntu)
+
+Open Terminal and run:
+\`\`\`bash
+# Check Ubuntu version
+lsb_release -a
+
+# Check RAM
+free -h
+
+# Check disk space
+df -h /
+\`\`\`
+
+---
+
+## ⚠️ Common Prerequisites Issues
+
+### "I don't have administrator access"
+
+**Solution:**
+- **Work computer:** Contact your IT department and ask for installation privileges
+- **Personal computer:** You should already have admin access
+- **Windows:** Right-click the installer → "Run as administrator"
+
+### "My computer is too old"
+
+VS Code runs on most computers from the last 10 years. If you're unsure:
+- Try installing anyway — it won't harm your computer
+- VS Code will warn you if it can't run
+
+### "I'm on a restricted network (work/school)"
+
+**Solution:**
+- Try the "User Installer" for Windows (doesn't require admin)
+- Ask IT to whitelist \`code.visualstudio.com\`
+- Use the portable version (no installation needed)
+
+---
+
+**→ Ready? Proceed to Lesson 2: Installation**`
+      },
+      {
+        title: 'Installation',
+        content: `## 📥 Download VS Code
+
+### Step 1: Visit the Official Website
+
+1. Open your web browser (Chrome, Firefox, Safari, Edge)
+2. Go to **[code.visualstudio.com](https://code.visualstudio.com)**
+3. The website will automatically detect your operating system
+
+> ⚠️ **IMPORTANT:** Only download from the official website. Fake download sites may contain malware.
+
+---
+
+## 🖥️ Installation by Operating System
+
+### Windows Installation
+
+**Step 1: Download**
+1. Click the blue **"Download for Windows"** button
+2. The file (VSCodeUserSetup-{version}.exe) will download (~90 MB)
+
+**Step 2: Run the Installer**
+1. Find the downloaded file (usually in your **Downloads** folder)
+2. Double-click to run it
+3. If prompted "Do you want to allow this app?", click **Yes**
+
+**Step 3: Setup Wizard**
+1. **License Agreement:** Click "I accept the agreement" → Next
+2. **Install Location:** Keep the default → Next
+3. **Start Menu Folder:** Keep default → Next
+4. **Additional Tasks:** 
+   - ✅ Check **"Add 'Open with Code' action to Windows Explorer file context menu"**
+   - ✅ Check **"Add 'Open with Code' action to Windows Explorer directory context menu"**
+   - ✅ Check **"Register Code as an editor for supported file types"**
+   - ✅ Check **"Add to PATH"** (very important!)
+   - Click **Next**
+
+5. Click **Install**
+6. Wait 1-2 minutes for installation
+7. ✅ Check **"Launch Visual Studio Code"** → Click **Finish**
+
+**Expected Result:** VS Code opens with a "Get Started" page.
+
+---
+
+### macOS Installation
+
+**Step 1: Download**
+1. Click the dropdown arrow next to "Download" 
+2. Select **"macOS"** (Intel chip or Apple Silicon)
+3. A .zip file will download (~150 MB)
+
+> 💡 **How to check your chip:** Apple menu → "About This Mac" → Look for "Chip: Apple M1/M2/M3" (Apple Silicon) or "Processor: Intel" (Intel)
+
+**Step 2: Extract and Install**
+1. Open your **Downloads** folder
+2. Double-click the downloaded .zip file (it will extract automatically)
+3. Drag the **"Visual Studio Code.app"** to your **Applications** folder
+
+**Step 3: First Launch**
+1. Open **Applications** folder
+2. Double-click **Visual Studio Code**
+3. If you see **"VS Code is an app downloaded from the internet"**:
+   - Click **Open**
+4. If macOS still blocks it:
+   - Go to **System Settings → Privacy & Security**
+   - Click **"Open Anyway"** next to the security warning
+
+**Step 4: Add to Dock (Recommended)**
+1. Right-click the VS Code icon in the Dock
+2. Select **Options → Keep in Dock**
+
+**Expected Result:** VS Code opens with a welcome screen.
+
+---
+
+### Linux Installation
+
+#### Option A: Using Snap (Easiest - Ubuntu, Debian, etc.)
+
+\`\`\`bash
+sudo snap install code --classic
+\`\`\`
+
+Enter your password when prompted. Done!
+
+#### Option B: Using apt (Debian/Ubuntu)
+
+\`\`\`bash
+# Install dependencies
+sudo apt update
+sudo apt install software-properties-common apt-transport-https wget
+
+# Import Microsoft GPG key
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+
+# Add VS Code repository
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+
+# Install VS Code
+sudo apt update
+sudo apt install code
+\`\`\`
+
+#### Option C: Direct Download (.deb or .rpm)
+
+1. Go to [code.visualstudio.com/download](https://code.visualstudio.com/download)
+2. Click **.deb** (Debian/Ubuntu) or **.rpm** (Fedora/openSUSE)
+3. Open the downloaded file with Software Center
+4. Click **Install**
+
+**Expected Result:** Type \`code\` in terminal and VS Code launches.
+
+---
+
+## ✅ How to Verify Installation Worked
+
+### Windows
+1. Press \`Windows Key\`
+2. Type \`Visual Studio Code\`
+3. Press Enter
+4. ✅ VS Code should open
+
+### macOS
+1. Press \`Cmd + Space\` to open Spotlight
+2. Type \`Visual Studio Code\`
+3. Press Enter
+4. ✅ VS Code should open
+
+### Linux
+\`\`\`bash
+code --version
+\`\`\`
+You should see something like: \`1.85.0\`
+
+---
+
+## 🚨 Common Installation Errors & Fixes
+
+### Error 1: "Installation failed" (Windows)
+
+**Symptoms:**
+- Installer closes unexpectedly
+- "Installation failed" message
+- Progress bar stops midway
+
+**Solutions:**
+
+1. **Run as Administrator:**
+   - Right-click the installer
+   - Select **"Run as administrator"**
+   - Try again
+
+2. **Disable Antivirus Temporarily:**
+   - Some antivirus blocks installers
+   - Temporarily disable, install, re-enable
+
+3. **Use the User Installer:**
+   - Download "User Installer" instead of "System Installer"
+   - Doesn't require admin rights
+   - Download from: [code.visualstudio.com/download](https://code.visualstudio.com/download)
+
+4. **Clean Previous Installation:**
+   \`\`\`
+   1. Uninstall VS Code (Settings → Apps → VS Code → Uninstall)
+   2. Delete folder: C:\\Users\\[YourName]\\.vscode
+   3. Delete folder: %APPDATA%\\Code
+   4. Reinstall
+   \`\`\`
+
+---
+
+### Error 2: "Permission denied" (macOS/Linux)
+
+**Symptoms:**
+- "Permission denied" when running installer
+- "You don't have permission to open this application"
+
+**Solutions (macOS):**
+
+1. **Allow in Security Settings:**
+   \`\`\`
+   1. System Settings → Privacy & Security
+   2. Scroll down to security message
+   3. Click "Open Anyway"
+   \`\`\`
+
+2. **Fix Permissions via Terminal:**
+   \`\`\`bash
+   sudo chmod +x /Applications/Visual\\ Studio\\ Code.app/Contents/MacOS/Electron
+   \`\`\`
+
+**Solutions (Linux):**
+\`\`\`bash
+# Fix permissions
+sudo chown -R $USER:$USER /home/$USER/.vscode
+
+# Or use sudo for snap install
+sudo snap install code --classic
+\`\`\`
+
+---
+
+### Error 3: "VS Code is already running" (All OS)
+
+**Symptoms:**
+- "Another instance is already running"
+- Installer won't proceed
+
+**Solutions:**
+
+**Windows:**
+\`\`\`
+1. Press Ctrl + Shift + Esc (Task Manager)
+2. Find "Visual Studio Code"
+3. Right-click → End Task
+4. Try installing again
+\`\`\`
+
+**macOS:**
+\`\`\`
+1. Cmd + Space → "Activity Monitor"
+2. Search "Code"
+3. Select → click X → Force Quit
+5. Try installing again
+\`\`\`
+
+**Linux:**
+\`\`\`bash
+# Kill VS Code process
+killall code
+# Or find and kill:
+ps aux | grep code
+kill [PID]
+\`\`\`
+
+---
+
+### Error 4: "Download failed" or "Network error"
+
+**Symptoms:**
+- Download doesn't start
+- "Network error" message
+- Very slow download
+
+**Solutions:**
+
+1. **Try a Different Browser:**
+   - Chrome, Firefox, Edge — try another
+
+2. **Check Your Connection:**
+   - Ensure you're online
+   - Try another network (mobile hotspot)
+
+3. **Use a Download Manager:**
+   - Tools like Free Download Manager can resume interrupted downloads
+
+4. **Corporate/University Network:**
+   - IT may be blocking downloads
+   - Contact IT or use personal network
+
+---
+
+### Error 5: "The application is damaged" (macOS)
+
+**Symptoms:**
+- "The application 'Visual Studio Code' is damaged and can't be opened"
+- App appears with a prohibitory sign
+
+**Solution:**
+
+1. **Remove Quarantine Attribute:**
+   \`\`\`bash
+   xattr -cr /Applications/Visual\\ Studio\\ Code.app
+   \`\`\`
+
+2. **Re-download and Reinstall:**
+   \`\`\`
+   1. Delete the damaged app
+   2. Empty Trash
+   3. Download fresh copy
+   4. Install again
+   \`\`\`
+
+---
+
+### Error 6: "code command not found" (Linux/macOS)
+
+**Symptoms:**
+- Typing \`code\` in terminal shows "command not found"
+- Can't launch VS Code from command line
+
+**Solution (macOS):**
+
+1. Open VS Code manually
+2. Press \`Cmd + Shift + P\`
+3. Type: \`shell command\`
+4. Click **"Shell Command: Install 'code' command in PATH"**
+5. Restart terminal
+
+**Solution (Linux):**
+
+\`\`\`bash
+# For snap installation
+sudo ln -s /snap/bin/code /usr/local/bin/code
+
+# For .deb installation
+sudo ln -s /usr/share/code/bin/code /usr/local/bin/code
+\`\`\`
+
+---
+
+## 📋 Quick Reference: Installation Commands
+
+| OS | Command/Method |
+|----|---------------|
+| **Windows** | Download .exe installer, run as admin |
+| **macOS** | Download .zip, extract, drag to Applications |
+| **Ubuntu/Debian** | \`sudo snap install code --classic\` |
+| **Fedora** | \`sudo dnf install code\` |
+| **Arch Linux** | \`yay -S visual-studio-code-bin\` |
+
+---
+
+**✅ Installation Complete! Proceed to Lesson 3: Essential Setup**`
+      },
+      {
+        title: 'Essential Setup',
+        content: `## 🚀 First Launch Walkthrough
+
+When you open VS Code for the first time, you'll see the **Get Started** page. Let's walk through what to do.
+
+### What You'll See
+
+1. **Welcome Tab** — Overview of VS Code features
+2. **Side Bar** (left) — File explorer, search, Git, extensions
+3. **Editor Area** (center) — Where you write code
+4. **Terminal** (bottom) — Command-line interface (toggle with \`Ctrl/Cmd + \`\`)
+5. **Status Bar** (very bottom) — File info, Git branch, errors
+
+### First Things to Do
+
+1. **Sign in (Optional):**
+   - Click the person icon in the top-right
+   - Sign in with GitHub or Microsoft account
+   - This syncs your settings across devices
+
+2. **Choose a Theme:**
+   - Press \`Ctrl/Cmd + K\`, then \`Ctrl/Cmd + T\` (yes, press K first, then T)
+   - Or: File → Preferences → Color Theme
+   - Popular choices: **Dark+** (default), **One Dark Pro**, **Dracula**
+
+3. **Set Your Font:**
+   - File → Preferences → Settings
+   - Search "font family"
+   - Recommended: \`'Fira Code', 'Cascadia Code', Consolas, monospace\`
+   - Also enable "Font Ligatures" for fancy character combinations
+
+---
+
+## 🧩 Must-Have Extensions
+
+Extensions are what make VS Code powerful. Here are the **7 essential extensions** every beginner should install:
+
+### How to Install Extensions
+
+1. Click the **Extensions icon** in the left sidebar (looks like squares)
+2. Or press \`Ctrl/Cmd + Shift + X\`
+3. Search for the extension name
+4. Click **Install**
+
+---
+
+### 1. 🎨 Prettier — Code Formatter
+
+**What it does:** Automatically formats your code to look clean and consistent
+
+**Why you need it:**
+- No more manual indentation
+- Consistent code style across projects
+- One keystroke to beautify entire files
+
+**Install:** Search "Prettier - Code formatter" (author: Prettier)
+
+**Setup after installing:**
+\`\`\`
+1. File → Preferences → Settings
+2. Search "format on save"
+3. Check "Editor: Format On Save"
+\`\`\`
+
+**Test it:** Write messy code, save the file → It auto-formats!
+
+---
+
+### 2. 🔍 ESLint — JavaScript Linter
+
+**What it does:** Finds and fixes problems in your JavaScript/TypeScript code
+
+**Why you need it:**
+- Catches errors before you run the code
+- Shows warnings for bad practices
+- Auto-fixes many issues
+
+**Install:** Search "ESLint" (author: Microsoft)
+
+**Note:** Requires Node.js. If you don't have it:
+- Download from [nodejs.org](https://nodejs.org)
+- Install the LTS version
+
+---
+
+### 3. 📊 GitLens — Git Supercharged
+
+**What it does:** Shows who changed each line of code and when
+
+**Why you need it:**
+- See git blame annotations (who wrote this?)
+- Compare changes visually
+- Navigate git history easily
+
+**Install:** Search "GitLens" (author: GitKraken)
+
+---
+
+### 4. 🌐 Live Server — Local Development Server
+
+**What it does:** Opens a local server that auto-refreshes when you save
+
+**Why you need it:**
+- See HTML/CSS changes instantly
+- No more manually refreshing browser
+- Great for learning web development
+
+**Install:** Search "Live Server" (author: Ritwick Dey)
+
+**How to use:**
+\`\`\`
+1. Create an HTML file
+2. Right-click in the editor
+3. Select "Open with Live Server"
+4. Browser opens with your page
+5. Make changes → Save → Browser auto-refreshes!
+\`\`\`
+
+---
+
+### 5. 🏷️ Auto Rename Tag
+
+**What it does:** When you rename an HTML opening tag, it auto-renames the closing tag
+
+**Why you need it:**
+- Save time editing HTML/XML
+- Prevent mismatched tags
+- Essential for web developers
+
+**Install:** Search "Auto Rename Tag" (author: Jun Han)
+
+---
+
+### 6. 📁 Material Icon Theme
+
+**What it does:** Adds beautiful, colorful icons to your file explorer
+
+**Why you need it:**
+- Instantly identify file types
+- Makes file navigation easier
+- Just looks nicer!
+
+**Install:** Search "Material Icon Theme" (author: Philipp Kief)
+
+---
+
+### 7. 💡 Error Lens
+
+**What it does:** Shows error messages directly in your code (no need to hover)
+
+**Why you need it:**
+- See errors at a glance
+- Faster debugging
+- Great for beginners
+
+**Install:** Search "Error Lens" (author: Alexander)
+
+---
+
+## ⚙️ Settings Optimization
+
+Let's optimize VS Code for a better experience.
+
+### How to Open Settings
+
+- **Windows/Linux:** \`Ctrl + ,\`
+- **macOS:** \`Cmd + ,\`
+- Or: File → Preferences → Settings
+
+### Recommended Settings
+
+Click the **"Open Settings (JSON)"** icon in the top-right of Settings, then add these:
+
+\`\`\`json
+{
+  // Editor Settings
+  "editor.fontSize": 14,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.lineNumbers": "on",
+  "editor.renderWhitespace": "selection",
+  
+  // Auto-save
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  
+  // Theme
+  "workbench.colorTheme": "One Dark Pro",
+  "workbench.iconTheme": "material-icon-theme",
+  
+  // Terminal
+  "terminal.integrated.fontSize": 13,
+  
+  // Performance
+  "extensions.autoUpdate": true,
+  "telemetry.telemetryLevel": "off"
+}
+\`\`\`
+
+### What Each Setting Does
+
+| Setting | What It Does | Why Change It |
+|---------|-------------|---------------|
+| \`fontSize: 14\` | Makes text readable | Default 12 is too small |
+| \`tabSize: 2\` | Spaces per tab | Industry standard |
+| \`wordWrap: "on"\` | Wraps long lines | No horizontal scrolling |
+| \`formatOnSave: true\` | Auto-formats on save | Always clean code |
+| \`minimap.enabled: false\` | Hides code mini-map | More screen space |
+| \`autoSave: "afterDelay"\` | Auto-saves after 1 second | Never lose work |
+
+---
+
+## 🎨 Theme and Font Setup
+
+### Installing Custom Themes
+
+**Popular Themes:**
+1. **One Dark Pro** — Classic Atom-style dark theme
+2. **Dracula Official** — Popular purple dark theme
+3. **GitHub Theme** — Light and dark GitHub-style
+4. **Nord** — Arctic, bluish dark theme
+5. **Tokyo Night** — Clean dark theme with good contrast
+
+**How to Install:**
+1. Extensions → Search theme name
+2. Install
+3. File → Preferences → Color Theme
+4. Select your new theme
+
+### Better Fonts for Coding
+
+**Recommended Fonts:**
+1. **Fira Code** — Free, with programming ligatures
+2. **Cascadia Code** — Microsoft's font for terminals
+3. **JetBrains Mono** — Optimized for code readability
+
+**How to Install Fonts:**
+1. Download from the font's website
+2. Install on your OS:
+   - **Windows:** Right-click .ttf → Install
+   - **macOS:** Double-click .ttf → Install Font
+   - **Linux:** Copy to \`~/.local/share/fonts\`
+3. Restart VS Code
+4. Settings → "Font Family" → Add font name
+
+**Enable Ligatures (fancy symbols):**
+\`\`\`json
+"editor.fontLigatures": true
+\`\`\`
+
+---
+
+## ⚠️ Common Setup Mistakes
+
+### Mistake 1: Installing Too Many Extensions
+
+**Problem:** VS Code becomes slow and cluttered
+
+**Solution:**
+- Start with the 7 essential extensions above
+- Only add more as you actually need them
+- Regularly review and remove unused extensions
+
+### Mistake 2: Not Syncing Settings
+
+**Problem:** Lose all your settings when you switch computers
+
+**Solution:**
+- Sign in with GitHub/Microsoft account
+- Enable Settings Sync: \`Ctrl/Cmd + Shift + P\` → "Settings Sync: Turn On"
+- Your settings, extensions, and keybindings sync automatically
+
+### Mistake 3: Ignoring the Terminal
+
+**Problem:** Missing out on VS Code's integrated terminal
+
+**Solution:**
+- Press \`Ctrl/Cmd + \`\` to open terminal
+- Run commands without leaving VS Code
+- Much faster than switching windows
+
+### Mistake 4: Using Default Light Theme on Dark Mode
+
+**Problem:** Bright theme hurts your eyes at night
+
+**Solution:**
+- Install a dark theme (One Dark Pro, Dracula)
+- VS Code doesn't auto-switch with OS — set it manually
+
+### Mistake 5: Not Configuring Auto-Save
+
+**Problem:** Losing work when VS Code crashes
+
+**Solution:**
+- Enable \`files.autoSave: "afterDelay"\`
+- Or \`"onWindowChange"\` to save when switching windows
+- Or \`"onFocusChange"\` to save when switching files
+
+---
+
+## 🎯 Setup Checklist
+
+Before moving on, verify:
+
+- [ ] VS Code installed and opens correctly
+- [ ] At least 5 extensions installed
+- [ ] Theme changed from default
+- [ ] Auto-save enabled
+- [ ] Format on save enabled
+- [ ] Integrated terminal working (\`Ctrl/Cmd + \`\`)
+- [ ] Settings Sync enabled (optional)
+
+---
+
+**→ Proceed to Lesson 4: Your First Project**`
+      },
+      {
+        title: 'Your First Project',
+        content: `## 📝 Creating Your First HTML File
+
+Now let's create an actual project! We'll make a simple webpage from scratch.
+
+### Step 1: Create a Project Folder
+
+First, we need a place to store our files.
+
+**Windows:**
+\`\`\`
+1. Open File Explorer
+2. Navigate to Documents
+3. Right-click → New → Folder
+4. Name it "my-first-website"
+\`\`\`
+
+**macOS:**
+\`\`\`
+1. Open Finder
+2. Go to Documents
+3. Right-click → New Folder
+4. Name it "my-first-website"
+\`\`\`
+
+**Linux:**
+\`\`\`bash
+mkdir ~/Documents/my-first-website
+\`\`\`
+
+### Step 2: Open the Folder in VS Code
+
+**Method 1: From VS Code**
+\`\`\`
+1. Open VS Code
+2. File → Open Folder
+3. Navigate to "my-first-website"
+4. Click "Select Folder"
+\`\`\`
+
+**Method 2: Right-Click (Windows)**
+\`\`\`
+1. Navigate to the folder in File Explorer
+2. Right-click the folder
+3. Select "Open with Code"
+\`\`\`
+
+**Method 3: Terminal**
+\`\`\`bash
+cd ~/Documents/my-first-website
+code .
+\`\`\`
+
+**What You'll See:**
+- Empty file explorer on the left
+- Welcome tab in the center
+- Your folder name in the title bar
+
+### Step 3: Create Your First HTML File
+
+1. **Create New File:**
+   - Click the **"New File"** icon (page with +) in the file explorer
+   - Or: File → New File (\`Ctrl/Cmd + N\`)
+   - Or: Right-click empty space → New File
+
+2. **Name the File:**
+   - Type: \`index.html\`
+   - Press Enter
+
+3. **VS Code Recognizes HTML:**
+   - Look at the bottom-right corner
+   - You should see "HTML" (VS Code detected the file type)
+   - The syntax highlighter is now active
+
+### Step 4: Write the HTML
+
+**Type this exactly** (or copy-paste):
+
+\`\`\`html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Website</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+    <p>This is my first webpage created with VS Code.</p>
+    <p>I'm learning to code!</p>
+</body>
+</html>
+\`\`\`
+
+### Step 5: Use Emmet Shortcuts (Pro Tip!)
+
+**Instead of typing all that HTML manually:**
+
+1. Delete everything in the file
+2. Type just: \`!\` (an exclamation mark)
+3. Press **Tab** or **Enter**
+
+VS Code automatically generates the entire HTML structure! This is called **Emmet**.
+
+Then add your content between \`<body>\` and \`</body>\`:
+\`\`\`html
+<h1>Hello, World!</h1>
+<p>This is my first webpage.</p>
+\`\`\`
+
+### Step 6: Save the File
+
+- Press \`Ctrl/Cmd + S\`
+- Or: File → Save
+- Or: File → Save All (\`Ctrl/Cmd + K S\`)
+
+**Expected Result:**
+- File name in tab is no longer italic (italic = unsaved)
+- If you enabled auto-save, this happens automatically
+
+### Step 7: Preview in Browser
+
+**Method 1: Using Live Server (Recommended)**
+\`\`\`
+1. Right-click anywhere in the HTML file
+2. Select "Open with Live Server"
+3. Your browser opens automatically
+4. The page shows: "Hello, World!"
+\`\`\`
+
+**Method 2: Manual Open**
+\`\`\`
+1. Press Ctrl/Cmd + S to save
+2. Go to your folder in File Explorer/Finder
+3. Double-click index.html
+4. It opens in your default browser
+\`\`\`
+
+### What You Should See
+
+Your browser should show:
+- **Large text:** "Hello, World!"
+- **Normal text:** "This is my first webpage created with VS Code."
+- **Normal text:** "I'm learning to code!"
+
+---
+
+## 🎨 Adding CSS Styling
+
+Let's make it look better!
+
+### Step 1: Create a CSS File
+
+1. Click **New File** icon
+2. Name it: \`styles.css\`
+3. Add this code:
+
+\`\`\`css
+body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    color: #333;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+
+p {
+    color: #666;
+    line-height: 1.6;
+}
+\`\`\`
+
+### Step 2: Link CSS to HTML
+
+Go back to \`index.html\` and add this line inside \`<head>\`:
+
+\`\`\`html
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Website</title>
+    <link rel="stylesheet" href="styles.css">  <!-- Add this line -->
+</head>
+\`\`\`
+
+### Step 3: Save and Preview
+
+1. Save both files (\`Ctrl/Cmd + S\`)
+2. If using Live Server, browser auto-refreshes
+3. If not, refresh the browser manually
+
+**Expected Result:**
+- Gray background
+- Styled heading with border
+- Better-looking paragraph text
+
+---
+
+## 💪 Exercise: Add More Content
+
+**Your challenge:** Add the following to your webpage:
+
+1. **Add an image:**
+\`\`\`html
+<img src="https://picsum.photos/400/200" alt="Random image">
+\`\`\`
+
+2. **Add a link:**
+\`\`\`html
+<a href="https://code.visualstudio.com">Visit VS Code Website</a>
+\`\`\`
+
+3. **Add a list:**
+\`\`\`html
+<ul>
+    <li>First item</li>
+    <li>Second item</li>
+    <li>Third item</li>
+</ul>
+\`\`\`
+
+4. **Style the link:**
+Add to \`styles.css\`:
+\`\`\`css
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+\`\`\`
+
+---
+
+## 🎯 What You've Accomplished
+
+By completing this lesson, you have:
+
+- ✅ Created a project folder
+- ✅ Opened a folder in VS Code
+- ✅ Created HTML and CSS files
+- ✅ Used Emmet shortcuts
+- ✅ Linked CSS to HTML
+- ✅ Previewed your work in a browser
+- ✅ Made changes and seen them live
+
+---
+
+## 📁 Your Project Structure
+
+Your folder should now look like this:
+
+\`\`\`
+my-first-website/
+├── index.html
+└── styles.css
+\`\`\`
+
+This is the foundation of every website!
+
+---
+
+**→ Proceed to Lesson 5: Pro Tips & Troubleshooting**`
+      },
+      {
+        title: 'Pro Tips & Troubleshooting',
+        content: `## ⌨️ Keyboard Shortcuts Cheat Sheet
+
+Master these shortcuts to become a VS Code power user!
+
+### Most Essential (Memorize These!)
+
+| Action | Windows/Linux | macOS | What It Does |
+|--------|--------------|-------|--------------|
+| **Command Palette** | \`Ctrl + Shift + P\` | \`Cmd + Shift + P\` | Access every VS Code command |
+| **Quick Open File** | \`Ctrl + P\` | \`Cmd + P\` | Open any file by name |
+| **Toggle Terminal** | \`Ctrl + \`\` | \`Ctrl + \`\` | Show/hide terminal |
+| **Save File** | \`Ctrl + S\` | \`Cmd + S\` | Save current file |
+| **Save All** | \`Ctrl + K S\` | \`Cmd + K S\` | Save all open files |
+| **Undo** | \`Ctrl + Z\` | \`Cmd + Z\` | Undo last action |
+| **Redo** | \`Ctrl + Y\` | \`Cmd + Shift + Z\` | Redo last undone action |
+| **Find** | \`Ctrl + F\` | \`Cmd + F\` | Find in current file |
+| **Global Search** | \`Ctrl + Shift + F\` | \`Cmd + Shift + F\` | Search entire project |
+
+### Editing Shortcuts
+
+| Action | Windows/Linux | macOS |
+|--------|--------------|-------|
+| Cut line | \`Ctrl + X\` | \`Cmd + X\` |
+| Copy line | \`Ctrl + C\` | \`Cmd + C\` |
+| Move line up | \`Alt + ↑\` | \`Opt + ↑\` |
+| Move line down | \`Alt + ↓\` | \`Opt + ↓\` |
+| Duplicate line | \`Shift + Alt + ↓\` | \`Opt + Shift + ↓\` |
+| Delete line | \`Ctrl + Shift + K\` | \`Cmd + Shift + K\` |
+| Comment line | \`Ctrl + /\` | \`Cmd + /\` |
+| Select all | \`Ctrl + A\` | \`Cmd + A\` |
+| Select word | \`Ctrl + D\` | \`Cmd + D\` |
+
+### Navigation Shortcuts
+
+| Action | Windows/Linux | macOS |
+|--------|--------------|-------|
+| Go to line | \`Ctrl + G\` | \`Ctrl + G\` |
+| Go to definition | \`F12\` | \`F12\` |
+| Go back | \`Alt + ←\` | \`Ctrl + -\` |
+| Go forward | \`Alt + →\` | \`Ctrl + Shift + -\` |
+| Next editor | \`Ctrl + Tab\` | \`Ctrl + Tab\` |
+| Close editor | \`Ctrl + W\` | \`Cmd + W\` |
+| Split editor | \`Ctrl + \\\` | \`Cmd + \\\` |
+
+### Multi-Cursor Editing
+
+| Action | Windows/Linux | macOS |
+|--------|--------------|-------|
+| Add cursor above | \`Ctrl + Alt + ↑\` | \`Cmd + Opt + ↑\` |
+| Add cursor below | \`Ctrl + Alt + ↓\` | \`Cmd + Opt + ↓\` |
+| Select all occurrences | \`Ctrl + Shift + L\` | \`Cmd + Shift + L\` |
+| Add next occurrence | \`Ctrl + D\` | \`Cmd + D\` |
+
+---
+
+## ⚡ Performance Tips
+
+### 1. Disable Unnecessary Extensions
+
+**Problem:** Too many extensions slow down VS Code
+
+**Solution:**
+\`\`\`
+1. Press Ctrl/Cmd + Shift + X
+2. Click "Installed" filter
+3. Review each extension
+4. Disable or uninstall unused ones
+\`\`\`
+
+### 2. Exclude Large Folders from Search
+
+**Problem:** Search takes forever because it scans \`node_modules\`
+
+**Solution:** Add to settings.json:
+\`\`\`json
+"search.exclude": {
+  "**/node_modules": true,
+  "**/bower_components": true,
+  "**/*.code-search": true,
+  "**/dist": true,
+  "**/build": true
+}
+\`\`\`
+
+### 3. Limit Files Shown in Explorer
+
+**Problem:** File explorer is slow with thousands of files
+
+**Solution:**
+\`\`\`json
+"files.exclude": {
+  "**/.git": true,
+  "**/.svn": true,
+  "**/.hg": true,
+  "**/CVS": true,
+  "**/.DS_Store": true,
+  "**/node_modules": true
+}
+\`\`\`
+
+### 4. Increase Max Memory (Large Projects)
+
+**Problem:** VS Code runs out of memory
+
+**Solution:**
+1. Press \`Ctrl/Cmd + Shift + P\`
+2. Type: \`Preferences: Configure Runtime Arguments\`
+3. Add:
+\`\`\`json
+{
+  "memory.max": 8192
+}
+\`\`\`
+
+### 5. Disable GPU Acceleration (If Glitchy)
+
+**Problem:** VS Code has graphical glitches
+
+**Solution:**
+\`\`\`json
+"window.titleBarStyle": "custom",
+"window.nativeTabs": false,
+"window.nativeFullScreen": false
+\`\`\`
+
+Or launch with: \`code --disable-gpu\`
+
+---
+
+## 🚨 Common Errors & Exact Solutions
+
+### Error 1: "The terminal process failed to launch"
+
+**Full Error:**
+> The terminal process failed to launch: Path to shell executable "cmd.exe" does not exist.
+
+**Cause:** Terminal settings are corrupted or incorrect
+
+**Solution:**
+\`\`\`
+1. Press Ctrl/Cmd + Shift + P
+2. Type: "Terminal: Select Default Profile"
+3. Choose your shell:
+   - Windows: Command Prompt or PowerShell
+   - macOS: bash or zsh
+   - Linux: bash
+\`\`\`
+
+---
+
+### Error 2: "Extension 'XXX' is not compatible with this version of VS Code"
+
+**Cause:** Extension requires a newer VS Code version
+
+**Solution:**
+\`\`\`
+1. Check your VS Code version: Help → About
+2. Update VS Code: 
+   - Windows/Linux: Help → Check for Updates
+   - macOS: Code → Check for Updates
+3. Restart VS Code
+4. Try installing the extension again
+\`\`\`
+
+---
+
+### Error 3: "Unable to write into user settings"
+
+**Full Error:**
+> Unable to write into user settings because the file denies write permissions.
+
+**Cause:** Settings file is read-only or owned by another user
+
+**Solution (Windows):**
+\`\`\`
+1. Navigate to: %APPDATA%\\Code\\User
+2. Right-click settings.json → Properties
+3. Uncheck "Read-only"
+4. Click OK
+\`\`\`
+
+**Solution (macOS/Linux):**
+\`\`\`bash
+# Fix permissions
+chmod 644 ~/.config/Code/User/settings.json
+# Or take ownership
+sudo chown $USER ~/.config/Code/User/settings.json
+\`\`\`
+
+---
+
+### Error 4: "Git not found. Install it or configure it using the 'git.path' setting"
+
+**Cause:** Git is not installed or not in PATH
+
+**Solution:**
+
+**Step 1: Install Git**
+- **Windows:** Download from [git-scm.com](https://git-scm.com)
+- **macOS:** \`brew install git\` or Xcode Command Line Tools
+- **Linux:** \`sudo apt install git\` (Ubuntu/Debian)
+
+**Step 2: Configure Git Path (if still not found)**
+\`\`\`json
+// In settings.json
+"git.path": "/usr/bin/git"  // macOS/Linux
+"git.path": "C:\\\\Program Files\\\\Git\\\\bin\\\\git.exe"  // Windows
+\`\`\`
+
+---
+
+### Error 5: "SFTP: Cannot connect to remote host"
+
+**Cause:** SSH connection issues with remote server
+
+**Solution:**
+\`\`\`
+1. Test SSH manually in terminal:
+   ssh user@hostname
+
+2. If that works, check VS Code settings:
+   - Ensure Remote-SSH extension is installed
+   - Check ~/.ssh/config for correct host config
+
+3. If SSH doesn't work:
+   - Check your internet connection
+   - Verify host address and credentials
+   - Check firewall settings
+\`\`\`
+
+---
+
+### Error 6: "Cannot edit in read-only editor"
+
+**Cause:** File is from a compiled extension, or opened from a protected location
+
+**Solution:**
+\`\`\`
+1. Check if file is in node_modules or similar generated folder
+2. If editing a library file, edit your local version instead
+3. Check file permissions:
+   - Right-click file → Properties (Windows)
+   - Right-click file → Get Info (macOS)
+\`\`\`
+
+---
+
+### Error 7: "Python extension loading..."
+
+**Cause:** Python extension is slow to load or stuck
+
+**Solution:**
+\`\`\`
+1. Press Ctrl/Cmd + Shift + P
+2. Type: "Developer: Reload Window"
+3. If still stuck:
+   - Uninstall Python extension
+   - Restart VS Code
+   - Reinstall Python extension
+4. Ensure Python is installed and in PATH
+\`\`\`
+
+---
+
+### Error 8: "ENOENT: no such file or directory, open '...'"
+
+**Cause:** File or folder was deleted or moved externally
+
+**Solution:**
+\`\`\`
+1. Check if file exists in file explorer
+2. If deleted, restore from:
+   - Git: Right-click → "Open Changes" to see deleted content
+   - Recycle bin/Trash
+3. Close and reopen the folder in VS Code
+\`\`\`
+
+---
+
+### Error 9: "Code helper wants to use your confidential information"
+
+**macOS only**
+
+**Cause:** VS Code trying to access keychain for Git credentials
+
+**Solution:**
+\`\`\`
+1. Click "Always Allow" when prompted
+2. Or disable Git credential helper:
+   "git.enableSmartCommit": false
+3. Or use SSH keys instead of HTTPS for Git
+\`\`\`
+
+---
+
+### Error 10: "Out of memory" or VS Code freezes
+
+**Cause:** Too many files, extensions, or memory-intensive operations
+
+**Solution:**
+\`\`\`
+1. Close unnecessary tabs and windows
+2. Press Ctrl/Cmd + Shift + P → "Developer: Reload Window"
+3. If frozen, force quit and restart:
+   - Windows: Task Manager → End Task
+   - macOS: Cmd + Opt + Esc → Force Quit
+   - Linux: killall code
+
+4. Prevent future issues:
+   - Limit files.watch exclusions
+   - Disable heavy extensions
+   - Increase max memory setting
+\`\`\`
+
+---
+
+## 📚 Where to Get Help
+
+### Official Resources
+
+1. **VS Code Documentation**
+   - [code.visualstudio.com/docs](https://code.visualstudio.com/docs)
+   - Official guides for everything
+
+2. **VS Code Tips & Tricks**
+   - [code.visualstudio.com/docs/getstarted/tips-and-tricks](https://code.visualstudio.com/docs/getstarted/tips-and-tricks)
+   - Built-in tips feature
+
+3. **Keyboard Shortcuts Reference**
+   - \`Ctrl/Cmd + K\` then \`Ctrl/Cmd + R\`
+   - Or: Help → Keyboard Shortcut Reference
+
+### Community Help
+
+1. **Stack Overflow**
+   - Tag: \`[visual-studio-code]\`
+   - [stackoverflow.com/questions/tagged/visual-studio-code](https://stackoverflow.com/questions/tagged/visual-studio-code)
+
+2. **VS Code GitHub Issues**
+   - [github.com/microsoft/vscode/issues](https://github.com/microsoft/vscode/issues)
+   - Search for your error before creating new issue
+
+3. **Reddit**
+   - [r/vscode](https://reddit.com/r/vscode)
+   - Community Q&A
+
+4. **Discord**
+   - VS Code Community Discord
+   - Real-time help from other users
+
+### Quick Help in VS Code
+
+1. **Command Palette:** \`Ctrl/Cmd + Shift + P\` → Type what you need
+2. **Help Menu:** Help → Documentation, Intro Videos, Tips
+3. **Output Panel:** View → Output (see extension logs)
+4. **Problems Panel:** View → Problems (see errors/warnings)
+
+---
+
+## 🎉 Congratulations!
+
+You've completed the **Setting Up VS Code** guide!
+
+**What You've Learned:**
+- ✅ What VS Code is and why it's essential
+- ✅ How to install VS Code on any operating system
+- ✅ Essential extensions every developer needs
+- ✅ How to create and save your first project
+- ✅ Keyboard shortcuts to boost productivity
+- ✅ How to troubleshoot common errors
+
+**Next Steps:**
+- Practice using VS Code daily
+- Explore more extensions as you need them
+- Try the other guides: Cursor, Windsurf, GitHub
+- Build your next project!
+
+**Happy Coding!** 🚀`
+      },
     ]
   },
   'guide-website': {
@@ -1088,6 +2892,404 @@ You now know how to use Claude AND deploy it to Telegram!` },
       { title: 'Installation & Setup', content: '## Install Cursor\n\n1. Download from cursor.sh\n2. Run the installer\n3. Open Cursor\n\n## Import VS Code Settings\n\nCursor can import:\n- Extensions\n- Keybindings\n- Settings\n\nJust click "Import" when prompted.\n\n## Sign In\n\nSign in to unlock:\n- AI features\n- Cloud sync\n- Team features\n\n**→ Proceed to Lesson 3: AI Chat & Autocomplete**' },
       { title: 'AI Chat & Autocomplete', content: '## AI Chat\n\nPress \`Cmd/Ctrl + L\` to open AI chat.\n\n### Ask anything:\n- "Explain this function"\n- "Find bugs in this code"\n- "Write tests for this"\n- "How do I use this library?"\n\n## Tab Autocomplete\n\nStart typing, and Cursor suggests:\n- Code completions\n- Function implementations\n- Variable names\n- Entire blocks of code\n\nPress \`Tab\` to accept.\n\n## Codebase Awareness\n\nCursor knows your entire project:\n- \`@Codebase\` - Search your code\n- \`@Files\` - Reference specific files\n- \`@Docs\` - Reference documentation\n\n**→ Proceed to Lesson 4: Pro Tips**' },
       { title: 'Pro Tips & Workflows', content: '## Power User Tips\n\n### 1. Cmd+K for Inline Edit\nSelect code → \`Cmd+K\` → Describe change\n\n### 2. @Codebase for Context\n"Using @Codebase, explain how authentication works"\n\n### 3. Generate Tests\nRight-click function → "Generate Tests"\n\n### 4. Fix Errors\nHover over error → "Fix with AI"\n\n## Best Practices\n\n- Review AI suggestions before accepting\n- Use AI for first drafts, then refine\n- Learn from AI explanations\n- Keep code readable for AI context\n\n## 🎉 Congratulations!\n\nYou now know how to use Cursor AI!' },
+      { 
+        title: 'Troubleshooting & Common Issues', 
+        content: `## 🚨 Common Cursor Errors & Solutions
+
+### Error 1: "Cursor won't start" or "Application is damaged" (macOS)
+
+**Full Error:**
+> "Cursor" is damaged and can't be opened. You should move it to the Trash.
+
+**Cause:** macOS Gatekeeper blocking unsigned or quarantined app
+
+**Solution:**
+\`\`\`bash
+# Option 1: Remove quarantine attribute
+xattr -cr /Applications/Cursor.app
+
+# Option 2: Allow in System Settings
+# System Settings → Privacy & Security → Scroll down → Click "Open Anyway"
+
+# Option 3: Re-download from official site
+# Go to cursor.sh → Download fresh copy
+\`\`\`
+
+---
+
+### Error 2: "AI features not working" or "No completions"
+
+**Symptoms:**
+- No AI suggestions appear
+- Chat shows "Connection error"
+- Tab autocomplete doesn't work
+
+**Cause:** Not signed in, API limit reached, or network issue
+
+**Solution:**
+\`\`\`
+1. Check if signed in:
+   - Click profile icon in top-right
+   - Sign in with GitHub/Google
+
+2. Check API status:
+   - cursor.sh/status
+   - Check if there's an outage
+
+3. Check your plan:
+   - Free tier has monthly limits
+   - Upgrade at cursor.sh/pricing
+
+4. Network check:
+   - Try a different network
+   - Disable VPN temporarily
+   - Check firewall settings
+
+5. Restart Cursor:
+   - Cmd/Ctrl + Q to fully quit
+   - Reopen Cursor
+\`\`\`
+
+---
+
+### Error 3: "Indexing stuck" or "Codebase not indexed"
+
+**Full Error:**
+> Codebase indexing in progress... (stuck for hours)
+
+**Cause:** Large codebase, insufficient memory, or corrupted index
+
+**Solution:**
+\`\`\`
+1. Check indexing status:
+   - Click Cursor icon in status bar
+   - View "Indexing Status"
+
+2. Force reindex:
+   - Cmd/Ctrl + Shift + P
+   - "Cursor: Reindex Codebase"
+
+3. Exclude large folders:
+   - Settings → "Cursor: Indexing Exclude"
+   - Add: node_modules, dist, build, .git
+
+4. Increase memory:
+   - Close other applications
+   - Restart Cursor
+
+5. Reset index (last resort):
+   # macOS/Linux
+   rm -rf ~/.cursor/index
+   # Windows
+   rmdir /s %USERPROFILE%\\.cursor\\index
+   # Then reopen Cursor
+\`\`\`
+
+---
+
+### Error 4: "Cmd+K not working" or keyboard shortcuts broken
+
+**Cause:** Shortcut conflict with other apps or corrupted keybindings
+
+**Solution:**
+\`\`\`
+1. Check keyboard shortcuts:
+   - Cmd/Ctrl + K Cmd/Ctrl + S (opens keybindings)
+   - Search for "cursor" commands
+   - Verify shortcuts are assigned
+
+2. Reset to defaults:
+   - Cmd/Ctrl + K Cmd/Ctrl + S
+   - Click "..." menu → "Reset Keybindings"
+
+3. Check for conflicts:
+   - Look for "!" warning icons
+   - Click the shortcut to see conflicts
+   - Remove conflicting bindings
+
+4. Check system shortcuts:
+   - macOS: System Settings → Keyboard → Shortcuts
+   - Windows: Settings → Ease of Access → Keyboard
+   - Disable any conflicting system shortcuts
+\`\`\`
+
+---
+
+### Error 5: "Sign in failed" or "Authentication error"
+
+**Full Error:**
+> Authentication failed. Please try again.
+
+**Cause:** Session expired, network issue, or OAuth problem
+
+**Solution:**
+\`\`\`
+1. Sign out and sign back in:
+   - Click profile icon → Sign Out
+   - Sign in again
+
+2. Clear auth cache:
+   # macOS/Linux
+   rm -rf ~/.cursor/auth*
+   # Windows
+   del %USERPROFILE%\\.cursor\\auth*
+   # Then reopen Cursor and sign in
+
+3. Try different sign-in method:
+   - If GitHub fails, try Google
+   - Or use email magic link
+
+4. Check browser settings:
+   - Allow popups from cursor.sh
+   - Clear browser cookies for cursor.sh
+\`\`\`
+
+---
+
+### Error 6: "Cursor is slow" or high CPU usage
+
+**Cause:** Large files, too many extensions, or indexing overhead
+
+**Solution:**
+\`\`\`
+1. Check what's using resources:
+   - Cmd/Ctrl + Shift + P
+   - "Developer: Open Process Explorer"
+   - Identify high CPU processes
+
+2. Disable heavy extensions:
+   - Cmd/Ctrl + Shift + X
+   - Review and disable unnecessary extensions
+   - Particularly: heavy linters, formatters
+
+3. Exclude large folders:
+   \`\`\`json
+   // settings.json
+   "files.exclude": {
+     "**/node_modules": true,
+     "**/.git": true,
+     "**/dist": true,
+     "**/build": true
+   }
+   \`\`\`
+
+4. Reduce indexing scope:
+   \`\`\`json
+   "cursor.indexing.maxFileSize": 1000000,
+   "cursor.indexing.exclude": ["**/node_modules/**", "**/dist/**"]
+   \`\`\`
+
+5. Increase memory limit:
+   \`\`\`bash
+   # macOS/Linux
+   export CURSOR_MAX_MEMORY=4096
+   # Windows (PowerShell)
+   $env:CURSOR_MAX_MEMORY=4096
+   \`\`\`
+
+---
+
+### Error 7: "Chat not responding" or endless loading
+
+**Cause:** API timeout, large context, or server issue
+
+**Solution:**
+\`\`\`
+1. Cancel and retry:
+   - Click "Stop" button
+   - Resend your message
+
+2. Reduce context size:
+   - Don't include entire large files
+   - Use @Codebase more selectively
+   - Close unrelated tabs
+
+3. Clear chat history:
+   - Click "Clear" in chat panel
+   - Start fresh conversation
+
+4. Check server status:
+   - cursor.sh/status
+   - Wait if there's an outage
+
+5. Restart Cursor completely
+\`\`\`
+
+---
+
+### Error 8: "Cannot import VS Code settings"
+
+**Full Error:**
+> Failed to import VS Code settings
+
+**Cause:** VS Code settings corrupted or incompatible
+
+**Solution:**
+\`\`\`
+1. Import manually:
+   - Open VS Code
+   - Cmd/Ctrl + Shift + P → "Export Settings"
+   - In Cursor: Cmd/Ctrl + Shift + P → "Import Settings"
+
+2. Copy keybindings:
+   # VS Code location:
+   - macOS: ~/Library/Application Support/Code/User/keybindings.json
+   - Windows: %APPDATA%\\Code\\User\\keybindings.json
+   - Linux: ~/.config/Code/User/keybindings.json
+
+   # Copy to Cursor location:
+   - macOS: ~/Library/Application Support/Cursor/User/keybindings.json
+   - Windows: %APPDATA%\\Cursor\\User\\keybindings.json
+   - Linux: ~/.config/Cursor/User/keybindings.json
+
+3. Reinstall extensions individually:
+   - Not all VS Code extensions work in Cursor
+   - Install them fresh from Cursor's extension marketplace
+\`\`\`
+
+---
+
+### Error 9: "Context limit exceeded" or "Too many tokens"
+
+**Full Error:**
+> The context exceeds the maximum number of tokens.
+
+**Cause:** Too much code/ @files included in chat context
+
+**Solution:**
+\`\`\`
+1. Be more selective with context:
+   - Instead of @entire-repo, use @specific-file
+   - Don't include multiple large files
+
+2. Use @Codebase smart search:
+   - "Using @Codebase, find authentication logic"
+   - Cursor will search, not load everything
+
+3. Clear chat history:
+   - Start new chat for different topics
+   - Old context accumulates
+
+4. Break up requests:
+   - Ask about one thing at a time
+   - Don't request entire rewrites
+\`\`\`
+
+---
+
+### Error 10: "File watcher error" or "ENOSPC"
+
+**Full Error:**
+> ENOSPC: System limit for number of file watchers reached
+
+**Cause:** Too many files being watched (Linux only)
+
+**Solution:**
+\`\`\`bash
+# Check current limit
+cat /proc/sys/fs/inotify/max_user_watches
+
+# Increase limit temporarily
+echo 524288 | sudo tee /proc/sys/fs/inotify/max_user_watches
+
+# Make permanent
+echo "fs.inotify.max_user_watches=524288" | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+
+# Or exclude node_modules from watching
+# In Cursor settings.json:
+"files.watcherExclude": {
+  "**/node_modules/**": true,
+  "**/.git/**": true
+}
+\`\`\`
+
+---
+
+### Error 11: "Extension not compatible" or "Extension host crashed"
+
+**Cause:** Extension incompatible with Cursor's version of VS Code
+
+**Solution:**
+\`\`\`
+1. Check extension compatibility:
+   - Not all VS Code extensions work in Cursor
+   - Check extension page for "Cursor compatible"
+
+2. Report incompatible extensions:
+   - github.com/getcursor/cursor/issues
+   - Developers often fix quickly
+
+3. Find alternatives:
+   - Search for similar extensions
+   - Use Cursor's built-in features instead
+
+4. Disable problematic extension:
+   - Cmd/Ctrl + Shift + X
+   - Find extension → Click Disable
+   - Restart Cursor
+\`\`\`
+
+---
+
+### Error 12: "Cannot connect to remote" (SSH/Dev Container)
+
+**Cause:** Remote extension not installed or SSH config issue
+
+**Solution:**
+\`\`\`
+1. Install Remote SSH extension:
+   - Extensions → Search "Remote - SSH"
+   - Install Microsoft's official extension
+
+2. Verify SSH works in terminal:
+   ssh user@hostname
+
+3. Check SSH config:
+   cat ~/.ssh/config
+   # Should have:
+   Host my-server
+     HostName hostname.com
+     User myuser
+     IdentityFile ~/.ssh/id_rsa
+
+4. Remote connection steps:
+   - Cmd/Ctrl + Shift + P
+   - "Remote-SSH: Connect to Host"
+   - Select your configured host
+\`\`\`
+
+---
+
+## 📚 Getting More Help
+
+### Official Resources
+- **Documentation:** [cursor.sh/docs](https://cursor.sh/docs)
+- **Discord Community:** [discord.gg/cursor](https://discord.gg/cursor)
+- **GitHub Issues:** [github.com/getcursor/cursor/issues](https://github.com/getcursor/cursor/issues)
+- **Status Page:** [cursor.sh/status](https://cursor.sh/status)
+
+### Quick Diagnostics
+\`\`\`
+1. Check version: Cmd/Ctrl + Shift + P → "About Cursor"
+2. View logs: Cmd/Ctrl + Shift + P → "Developer: Open Logs Folder"
+3. Toggle developer tools: Cmd/Ctrl + Shift + I
+4. Reset settings: Cmd/Ctrl + Shift + P → "Reset Settings"
+\`\`\`
+
+## 🎉 Congratulations!
+
+You can now troubleshoot any Cursor issue!
+
+**What You've Learned:**
+- ✅ Fix startup and authentication errors
+- ✅ Resolve AI feature issues
+- ✅ Optimize Cursor performance
+- ✅ Handle context and indexing problems
+- ✅ Know where to get help
+
+**Happy coding with Cursor!** 🚀`
+      },
     ]
   },
   'guide-botfather': {
@@ -4347,6 +6549,436 @@ You're ready to use Windsurf like a pro!
 - Download Windsurf
 - Try Cascade on your project
 - Customize for your workflow` },
+      { 
+        title: 'Troubleshooting & Common Issues', 
+        content: `## 🚨 Common Windsurf Errors & Solutions
+
+### Error 1: "Windsurf won't open" or "Application is damaged" (macOS)
+
+**Full Error:**
+> "Windsurf" is damaged and can't be opened. You should move it to the Trash.
+
+**Cause:** macOS Gatekeeper blocking the application
+
+**Solution:**
+\`\`\`bash
+# Option 1: Remove quarantine attribute
+xattr -cr /Applications/Windsurf.app
+
+# Option 2: Allow in System Settings
+# System Settings → Privacy & Security → Scroll down → Click "Open Anyway"
+
+# Option 3: Re-download from official site
+# Go to codeium.com/windsurf → Download fresh copy
+\`\`\`
+
+---
+
+### Error 2: "Cascade not responding" or "AI features unavailable"
+
+**Symptoms:**
+- Cascade chat doesn't respond
+- No code suggestions appear
+- "Connection error" in chat
+
+**Cause:** Not signed in, API limit reached, network issue, or server outage
+
+**Solution:**
+\`\`\`
+1. Check if signed in:
+   - Click profile icon in top-right
+   - Sign in with GitHub/Google/Email
+
+2. Check your plan limits:
+   - Free tier has usage limits
+   - Check at codeium.com/pricing
+
+3. Verify network:
+   - Try different network
+   - Disable VPN temporarily
+   - Check firewall settings
+
+4. Check server status:
+   - codeium.com/status
+   - Check for outages
+
+5. Restart Windsurf:
+   - Fully quit (Cmd/Ctrl + Q)
+   - Reopen
+\`\`\`
+
+---
+
+### Error 3: "Indexing failed" or "Codebase not understanding context"
+
+**Full Error:**
+> Cascade doesn't seem to understand my project
+
+**Cause:** Codebase not properly indexed, or too large
+
+**Solution:**
+\`\`\`
+1. Check indexing status:
+   - Click Windsurf icon in status bar
+   - View "Indexing Status"
+
+2. Force reindex:
+   - Cmd/Ctrl + Shift + P
+   - "Windsurf: Reindex Codebase"
+
+3. Exclude large folders:
+   # Settings.json
+   "windsurf.indexing.exclude": [
+     "**/node_modules/**",
+     "**/dist/**",
+     "**/build/**",
+     "**/.git/**"
+   ]
+
+4. Add Cascade instructions:
+   # Create .cascade/instructions.md
+   # Describe your project architecture
+   # This helps Cascade understand context
+
+5. Limit index size:
+   "windsurf.indexing.maxFileSize": 1000000
+\`\`\`
+
+---
+
+### Error 4: "Supercomplete not working" or no suggestions
+
+**Cause:** Feature disabled, context issue, or performance mode
+
+**Solution:**
+\`\`\`
+1. Check if Supercomplete is enabled:
+   - Settings → "Windsurf: Supercomplete"
+   - Ensure it's ON
+
+2. Trigger manually:
+   - Start typing and wait 500ms
+   - Or press specific trigger key
+
+3. Check file type:
+   - Some file types may not support Supercomplete
+   - Try in a .js/.ts/.py file
+
+4. Restart Windsurf:
+   - Cmd/Ctrl + Q to fully quit
+   - Reopen
+\`\`\`
+
+---
+
+### Error 5: "Sign in failed" or "Authentication error"
+
+**Full Error:**
+> Authentication failed. Please try again.
+
+**Cause:** Session expired, OAuth issue, or account problem
+
+**Solution:**
+\`\`\`
+1. Sign out completely:
+   - Click profile → Sign Out
+   - Close Windsurf
+   - Reopen and sign in
+
+2. Clear auth cache:
+   # macOS/Linux
+   rm -rf ~/.windsurf/auth*
+   # Windows
+   del %USERPROFILE%\\.windsurf\\auth*
+
+3. Try different method:
+   - If GitHub fails, try Google
+   - Or use email directly
+
+4. Check account:
+   - Verify account exists at codeium.com
+   - Check if subscription is active
+\`\`\`
+
+---
+
+### Error 6: "Windsurf is slow" or high CPU/memory usage
+
+**Cause:** Large project, too many extensions, or excessive indexing
+
+**Solution:**
+\`\`\`
+1. Check resource usage:
+   - Cmd/Ctrl + Shift + P
+   - "Developer: Open Process Explorer"
+
+2. Exclude heavy folders:
+   \`\`\`json
+   "files.exclude": {
+     "**/node_modules": true,
+     "**/.git": true,
+     "**/dist": true,
+     "**/build": true
+   },
+   "search.exclude": {
+     "**/node_modules": true,
+     "**/dist": true
+   }
+   \`\`\`
+
+3. Disable unnecessary extensions:
+   - Cmd/Ctrl + Shift + X
+   - Remove extensions you don't need
+
+4. Reduce Cascade context:
+   - Close unnecessary tabs
+   - Clear Cascade chat history
+
+5. Restart Windsurf
+\`\`\`
+
+---
+
+### Error 7: "Cascade chat stuck" or infinite loading
+
+**Cause:** Large context, API timeout, or network issue
+
+**Solution:**
+\`\`\`
+1. Cancel current request:
+   - Click "Stop" button in chat
+   - Wait a moment, try again
+
+2. Reduce context:
+   - Don't @include massive files
+   - Be more specific in requests
+   - Clear chat history
+
+3. Check network:
+   - Verify internet connection
+   - Try different network
+
+4. Restart chat:
+   - Click "New Chat" or clear current
+   - Start fresh conversation
+\`\`\`
+
+---
+
+### Error 8: "Cannot import VS Code settings"
+
+**Cause:** Incompatible settings or corrupted export
+
+**Solution:**
+\`\`\`
+1. Manual import:
+   - In VS Code: Cmd/Ctrl + Shift + P → "Export Settings"
+   - In Windsurf: Cmd/Ctrl + Shift + P → "Import Settings"
+
+2. Copy settings manually:
+   # VS Code settings location:
+   - macOS: ~/Library/Application Support/Code/User/settings.json
+   - Windows: %APPDATA%\\Code\\User\\settings.json
+   - Linux: ~/.config/Code/User/settings.json
+
+   # Copy to Windsurf location:
+   - macOS: ~/Library/Application Support/Windsurf/User/settings.json
+   - Windows: %APPDATA%\\Windsurf\\User\\settings.json
+   - Linux: ~/.config/Windsurf/User/settings.json
+
+3. Reinstall extensions:
+   - Not all VS Code extensions are compatible
+   - Install fresh from Windsurf marketplace
+\`\`\`
+
+---
+
+### Error 9: "Keyboard shortcuts not working"
+
+**Cause:** Shortcut conflicts or corrupted keybindings
+
+**Solution:**
+\`\`\`
+1. Check keybindings:
+   - Cmd/Ctrl + K Cmd/Ctrl + S
+   - Search for "cascade" or "windsurf"
+   - Verify shortcuts are assigned
+
+2. Reset to defaults:
+   - Cmd/Ctrl + K Cmd/Ctrl + S
+   - Click "..." → "Reset Keybindings"
+
+3. Check for conflicts:
+   - Look for warning (!) icons
+   - Resolve conflicts manually
+\`\`\`
+
+---
+
+### Error 10: "Extension host crashed" or "Extension not compatible"
+
+**Cause:** Extension incompatible with Windsurf's VS Code version
+
+**Solution:**
+\`\`\`
+1. Identify problematic extension:
+   - View → Output → Select "Extension Host"
+   - Look for error messages
+
+2. Disable suspect extension:
+   - Cmd/Ctrl + Shift + X
+   - Find extension → Disable
+
+3. Check compatibility:
+   - Not all VS Code extensions work
+   - Look for Windsurf-compatible alternatives
+
+4. Report issues:
+   - github.com/CodeiumAI/windsurf/issues
+\`\`\`
+
+---
+
+### Error 11: "Cascade produces incorrect code" or hallucinations
+
+**Cause:** AI limitation, unclear instructions, or missing context
+
+**Solution:**
+\`\`\`
+1. Be more specific:
+   ❌ "Add a button"
+   ✅ "Add a primary button using Tailwind's bg-blue-500 class,
+       with onClick handler that calls handleSubmit"
+
+2. Provide context:
+   - Use @file references for relevant files
+   - Include .cascade/instructions.md with project conventions
+   - Show example code you want Cascade to follow
+
+3. Break down complex tasks:
+   - Instead of "Build entire feature"
+   - Ask "First, create the component structure"
+
+4. Always review generated code:
+   - Don't blindly accept suggestions
+   - Test the output
+   - Ask Cascade to explain if unsure
+\`\`\`
+
+---
+
+### Error 12: "File watcher limit reached" (Linux)
+
+**Full Error:**
+> ENOSPC: System limit for number of file watchers reached
+
+**Cause:** Too many files being watched
+
+**Solution:**
+\`\`\`bash
+# Check current limit
+cat /proc/sys/fs/inotify/max_user_watches
+
+# Increase limit
+echo 524288 | sudo tee /proc/sys/fs/inotify/max_user_watches
+
+# Make permanent
+echo "fs.inotify.max_user_watches=524288" | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+
+# Or exclude folders from watching:
+# In settings.json:
+"files.watcherExclude": {
+  "**/node_modules/**": true,
+  "**/.git/**": true
+}
+\`\`\`
+
+---
+
+### Error 13: "Context window too large" or "Token limit exceeded"
+
+**Cause:** Too much context for the AI model
+
+**Solution:**
+\`\`\`
+1. Be selective with context:
+   - Don't @include entire large files
+   - Reference specific functions/sections
+
+2. Use Cascade's smart context:
+   - Let Cascade search for relevant code
+   - Don't manually add everything
+
+3. Clear old context:
+   - Start new chat for new topics
+   - Old conversations accumulate context
+
+4. Split large requests:
+   - Ask for one component at a time
+   - Build iteratively
+\`\`\`
+
+---
+
+### Error 14: "Cascade instructions not being followed"
+
+**Cause:** Instructions file in wrong location or format
+
+**Solution:**
+\`\`\`
+1. Verify file location:
+   project/.cascade/instructions.md  ← Correct location
+
+2. Check file format:
+   # Project Instructions
+   
+   ## Tech Stack
+   - React 18
+   - TypeScript
+   
+   ## Conventions
+   - Functional components only
+
+3. Ensure Cascade sees it:
+   - Restart Windsurf after creating
+   - Check indexing status
+
+4. Be explicit in chat:
+   - "Following the project instructions in .cascade/instructions.md..."
+\`\`\`
+
+---
+
+## 📚 Getting More Help
+
+### Official Resources
+- **Documentation:** [codeium.com/windsurf/docs](https://codeium.com/windsurf/docs)
+- **Discord:** [discord.gg/codeium](https://discord.gg/codeium)
+- **GitHub Issues:** [github.com/CodeiumAI/windsurf/issues](https://github.com/CodeiumAI/windsurf/issues)
+- **Status:** [codeium.com/status](https://codeium.com/status)
+
+### Quick Diagnostics
+\`\`\`
+1. Check version: Cmd/Ctrl + Shift + P → "About Windsurf"
+2. View logs: Cmd/Ctrl + Shift + P → "Developer: Open Logs Folder"
+3. Developer tools: Cmd/Ctrl + Shift + I
+4. Reset settings: Cmd/Ctrl + Shift + P → "Reset Settings"
+\`\`\`
+
+## 🎉 Congratulations!
+
+You can now troubleshoot any Windsurf issue!
+
+**What You've Learned:**
+- ✅ Fix startup and sign-in errors
+- ✅ Resolve Cascade and indexing issues
+- ✅ Optimize performance
+- ✅ Handle context and memory problems
+- ✅ Know where to get help
+
+**Happy coding with Windsurf!** 🚀`
+      },
     ]
   },
   'guide-vibe-coding': {
