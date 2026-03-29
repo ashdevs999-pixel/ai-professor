@@ -1,0 +1,45 @@
+name: Scrape News Hourly
+
+on:
+  schedule:
+    # Every hour at minute 0 (UTC)
+    - cron: '0 * * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  scrape-news:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Call scrape-news endpoint
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" -X GET \
+            "${{ secrets.SITE_URL }}/api/cron/scrape-news" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json")
+          
+          if [ "$response" -eq 200 ]; then
+            echo "✅ News scrape successful"
+          else
+            echo "❌ News scrape failed with status: $response"
+            exit 1
+          fi
+
+  scrape-tools:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Call scrape-tools endpoint (daily at 9 AM UTC = 5 PM SGT)
+        if: github.event.schedule == '0 9 * * *'
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" -X GET \
+            "${{ secrets.SITE_URL }}/api/cron/scrape-tools" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json")
+          
+          if [ "$response" -eq 200 ]; then
+            echo "✅ Tools scrape successful"
+          else
+            echo "❌ Tools scrape failed with status: $response"
+            exit 1
+          fi
