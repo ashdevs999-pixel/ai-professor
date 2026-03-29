@@ -1,6 +1,3 @@
--- PART 5: Row Level Security (RLS)
--- Run this in Supabase SQL Editor to verify RLS status
-
 -- Check RLS status on all tables
 SELECT 
   schemaname,
@@ -32,7 +29,7 @@ SELECT
     ELSE '✅ Has policies'
   END as status
 FROM pg_tables t
-LEFT JOIN pg_policies p ON p.tablename = t.tablename AND p.schemaname = 'public'
+LEFT JOIN pg_policies p ON p.schemaname = t.schemaname AND p.tablename = t.tablename
 WHERE t.schemaname = 'public'
 GROUP BY t.tablename, p.policyname
 ORDER BY t.tablename;
