@@ -68,6 +68,34 @@ test.describe('Critical Path Tests', () => {
     await expect(page.locator('h1')).toContainText('Courses');
   });
 
+  test('Course detail page loads without error', async ({ page }) => {
+    // Test first course
+    await page.goto(`${BASE_URL}/courses/245cbd99-b45d-448e-8b12-3ab3b865a3da`);
+    
+    // Should NOT show error page
+    await expect(page.locator('text=Application error')).not.toBeVisible();
+    await expect(page.locator('text=Course Not Found')).not.toBeVisible();
+    
+    // Should show course content
+    await expect(page.locator('text=Machine Learning')).toBeVisible();
+  });
+
+  test('All course pages load', async ({ page }) => {
+    const courses = [
+      { id: '245cbd99-b45d-448e-8b12-3ab3b865a3da', name: 'Machine Learning' },
+      { id: '6f466bf7-5e89-4f5e-b14c-cefaa9bf3800', name: 'Deep Learning' },
+      { id: 'a3224274-bfb4-4b61-81ab-fe35e203269b', name: 'NLP' },
+      { id: '1cff768a-d1d1-4c33-9d99-be1b621e96fa', name: 'AI Engineer' },
+      { id: '37993b02-0364-43c4-938b-e41250a0e8ce', name: 'Vibe Coding' },
+    ];
+
+    for (const course of courses) {
+      await page.goto(`${BASE_URL}/courses/${course.id}`);
+      await expect(page.locator('text=Application error')).not.toBeVisible();
+      await expect(page.locator('text=Course Not Found')).not.toBeVisible();
+    }
+  });
+
   test('News page loads', async ({ page }) => {
     await page.goto(`${BASE_URL}/news`);
     await expect(page.locator('h1, h2').first()).toBeVisible();
