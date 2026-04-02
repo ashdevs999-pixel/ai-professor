@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, User, LogOut } from 'lucide-react';
+import { Menu, X, Sun, Moon, User, LogOut, Download } from 'lucide-react';
 import { Button } from '@/components/ui';
 import { useTheme } from '@/hooks';
 import { useAuthStore } from '@/stores/auth-store';
@@ -22,6 +22,30 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, toggleTheme, mounted } = useTheme();
   const { isAuthenticated, user, logout } = useAuthStore();
+
+  const [canInstall, setCanInstall] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+
+  React.useEffect(() => {
+    // Check if already installed (running as PWA)
+    if (window.matchMedia('(display-mode: standalone)').matches) return;
+
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setCanInstall(true);
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  const handleInstall = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    setDeferredPrompt(null);
+    setCanInstall(false);
+  };
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md">
@@ -61,6 +85,18 @@ export function Header() {
 
           {/* Right Section */}
           <div className="flex items-center gap-4">
+            {/* PWA Install */}
+            {canInstall && (
+              <button
+                onClick={handleInstall}
+                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                aria-label="Install app"
+                title="Install App"
+              >
+                <Download className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+              </button>
+            )}
+
             {/* Theme Toggle */}
             {mounted && (
               <button
