@@ -29,12 +29,7 @@ export default function LearningPathsPage() {
   }
 
   const getPathImage = (slug: string) => {
-    const images: Record<string, string> = {
-      'ai-fundamentals': 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&h=400&fit=crop',
-      'ai-engineer': 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop',
-      'ai-researcher': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop',
-    }
-    return images[slug] || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop'
+    return `/images/programs/${slug}.svg`
   }
 
   if (isLoading) {

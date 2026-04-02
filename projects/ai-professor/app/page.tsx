@@ -26,7 +26,7 @@ export default function HomePage() {
   const [stats, setStats] = useState<Stats>({
     articles: 100,  // Fallback values
     guides: 24,
-    courses: 5,
+    courses: 28,
   })
 
   useEffect(() => {
@@ -109,9 +109,9 @@ export default function HomePage() {
             {/* Quick Stats */}
             <div className="grid grid-cols-4 gap-4 max-w-2xl mx-auto">
               {[
-                { value: `${stats.articles}+`, label: 'Articles' },
-                { value: `${stats.guides}`, label: 'Quick Guides' },
-                { value: `${stats.courses}`, label: 'Full Courses' },
+                { value: '7', label: 'Programs' },
+                { value: `${stats.courses}`, label: 'Courses' },
+                { value: '226+', label: 'Lessons' },
                 { value: '24/7', label: 'Updates' },
               ].map((stat, i) => (
                 <motion.div
@@ -147,7 +147,7 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
             {[
               {
                 icon: Newspaper,
@@ -175,10 +175,18 @@ export default function HomePage() {
               },
               {
                 icon: GraduationCap,
-                title: 'Full Courses',
-                description: '8-12 week comprehensive programs. Master AI with hands-on projects.',
-                link: '/courses',
+                title: 'Learning Programs',
+                description: '7 structured programs from cybersecurity to AI strategy. Master a domain end-to-end.',
+                link: '/paths',
                 color: 'from-blue-500 to-indigo-500',
+                cta: 'Browse Programs'
+              },
+              {
+                icon: BookOpen,
+                title: 'Full Courses',
+                description: '28 individual courses across all levels. Pick what you need, learn at your pace.',
+                link: '/courses',
+                color: 'from-teal-500 to-cyan-500',
                 cta: 'Browse Courses'
               },
             ].map((item, i) => (

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#b71c1c"/><stop offset="100%" style="stop-color:#e53935"/></linearGradient></defs>
+  <rect width="800" height="400" fill="url(#g)"/>
+  <text x="400" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="72" font-weight="bold" fill="white" opacity="0.15">🚀</text>
+  <text x="400" y="240" text-anchor="middle" font-family="system-ui,sans-serif" font-size="32" font-weight="bold" fill="white">Leading Through Change</text>
+  <text x="400" y="280" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" fill="white" opacity="0.7">LTC</text>
+</svg>
