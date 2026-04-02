@@ -1,12 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
-import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import { Twitter, Linkedin, Mail } from 'lucide-react';
 
 const footerLinks = {
   product: [
     { href: '/news', label: 'Pulse News' },
-    { href: '/courses', label: 'AI Professor' },
     { href: '/programs', label: 'Programs' },
+    { href: '/courses', label: 'Courses' },
     { href: '/pricing', label: 'Pricing' },
   ],
   company: [
@@ -22,7 +22,6 @@ const footerLinks = {
 
 const socialLinks = [
   { href: 'https://twitter.com/pulseaiprof', icon: Twitter, label: 'Twitter' },
-  { href: 'https://github.com/bryanbenjaminleong', icon: Github, label: 'GitHub' },
   { href: 'https://linkedin.com/company/pulse-ai-professor', icon: Linkedin, label: 'LinkedIn' },
   { href: 'mailto:support@pulseaiprofessor.com', icon: Mail, label: 'Email' },
 ];
