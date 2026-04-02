@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { db } from '@/lib/supabase'
+import { db, getSupabaseAdmin } from '@/lib/supabase'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://pulseaiprofessor.com'
@@ -49,6 +49,40 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
   ]
+
+  // Programs page
+  const programsPage: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/programs`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/paths/compare`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+  ]
+
+  // Dynamic learning paths
+  let pathPages: MetadataRoute.Sitemap = []
+  try {
+    const supabaseAdmin = getSupabaseAdmin()
+    const { data: paths } = await supabaseAdmin
+      .from('learning_paths')
+      .select('slug, updated_at')
+      .eq('is_published', true)
+    pathPages = (paths || []).map((p: any) => ({
+      url: `${baseUrl}/paths/${p.slug}`,
+      lastModified: new Date(p.updated_at || new Date()),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    }))
+  } catch (error) {
+    console.error('Failed to fetch paths for sitemap:', error)
+  }
 
   // Dynamic courses
   let coursePages: MetadataRoute.Sitemap = []
@@ -101,5 +135,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('Failed to fetch news for sitemap:', error)
   }
 
-  return [...staticPages, ...coursePages, ...guidePages, ...newsPages]
+  return [...staticPages, ...programsPage, ...pathPages, ...coursePages, ...guidePages, ...newsPages]
 }

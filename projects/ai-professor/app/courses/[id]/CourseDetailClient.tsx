@@ -103,7 +103,7 @@ export default function CourseDetailClient({ courseId }: { courseId: string }) {
                   Included free with program purchase
                 </p>
               </div>
-              <Button size="lg">Enroll Now</Button>
+              <Button size="lg">Join Waitlist</Button>
             </div>
           </Card>
 
