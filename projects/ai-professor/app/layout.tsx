@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://pulseaiprofessor.com',
+    url: 'https://ai-professor-app.vercel.app',
     siteName: 'Pulse + AI Professor',
     title: 'Pulse + AI Professor | Stay Current. Get Smarter.',
     description:

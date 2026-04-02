@@ -1,17 +1,16 @@
-import React from 'react';
-import Link from 'next/link';
+import React from 'react'
+import Link from 'next/link'
 import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
 
 const footerLinks = {
   product: [
     { href: '/news', label: 'Pulse News' },
     { href: '/courses', label: 'AI Professor' },
+    { href: '/programs', label: 'Programs' },
     { href: '/pricing', label: 'Pricing' },
-    { href: '/dashboard', label: 'Dashboard' },
   ],
   company: [
     { href: '/about', label: 'About' },
-    { href: '/careers', label: 'Careers' },
     { href: '/contact', label: 'Contact' },
   ],
   legal: [
@@ -22,10 +21,10 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { href: 'https://twitter.com', icon: Twitter, label: 'Twitter' },
-  { href: 'https://github.com', icon: Github, label: 'GitHub' },
-  { href: 'https://linkedin.com', icon: Linkedin, label: 'LinkedIn' },
-  { href: 'mailto:hello@pulseaiprofessor.com', icon: Mail, label: 'Email' },
+  { href: 'https://twitter.com/pulseaiprof', icon: Twitter, label: 'Twitter' },
+  { href: 'https://github.com/bryanbenjaminleong', icon: Github, label: 'GitHub' },
+  { href: 'https://linkedin.com/company/pulse-ai-professor', icon: Linkedin, label: 'LinkedIn' },
+  { href: 'mailto:support@pulseaiprofessor.com', icon: Mail, label: 'Email' },
 ];
 
 export function Footer() {
