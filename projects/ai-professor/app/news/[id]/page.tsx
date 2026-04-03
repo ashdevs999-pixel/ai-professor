@@ -88,7 +88,7 @@ export default function NewsArticlePage() {
       })
     : 'Recent';
 
-  const shareUrl = `https://pulseaiprofessor.com/news/${article.id}`;
+  const shareUrl = `https://cxoacademy.co/news/${article.id}`;
   const shareTitle = article.title;
 
   return (
@@ -97,7 +97,7 @@ export default function NewsArticlePage() {
       <NewsArticleJsonLd
         headline={article.title}
         description={article.summary || article.title}
-        url={`https://pulseaiprofessor.com/news/${article.id}`}
+        url={`https://cxoacademy.co/news/${article.id}`}
         datePublished={article.published_at || article.created_at || new Date().toISOString()}
         dateModified={article.created_at}
         category={categoryLabels[article.category]}
@@ -105,9 +105,9 @@ export default function NewsArticlePage() {
       />
       <BreadcrumbJsonLd
         items={[
-          { name: 'Home', url: 'https://pulseaiprofessor.com' },
-          { name: 'AI News', url: 'https://pulseaiprofessor.com/news' },
-          { name: article.title, url: `https://pulseaiprofessor.com/news/${article.id}` },
+          { name: 'Home', url: 'https://cxoacademy.co' },
+          { name: 'AI News', url: 'https://cxoacademy.co/news' },
+          { name: article.title, url: `https://cxoacademy.co/news/${article.id}` },
         ]}
       />
       

@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 import { Mail, MessageSquare, Clock } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Contact - AI Professor',
-  description: 'Get in touch with the AI Professor team.',
+  title: 'Contact - CXO Academy',
+  description: 'Get in touch with the CXO Academy team.',
 }
 
 export default function ContactPage() {
@@ -20,8 +20,8 @@ export default function ContactPage() {
             <Mail className="w-8 h-8 text-primary-600 dark:text-primary-400 mb-4" />
             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Email Us</h3>
             <p className="text-gray-600 dark:text-gray-300 mb-4">For general inquiries, partnerships, or support</p>
-            <a href="mailto:support@pulseaiprofessor.com" className="text-primary-600 dark:text-primary-400 font-medium hover:underline">
-              support@pulseaiprofessor.com
+            <a href="mailto:support@cxoacademy.co" className="text-primary-600 dark:text-primary-400 font-medium hover:underline">
+              support@cxoacademy.co
             </a>
           </div>
 

@@ -50,7 +50,7 @@ async function runScraping() {
 }
 
 async function main() {
-  console.log('📰 Pulse News Cron Job')
+  console.log('📰 CXO News Cron Job')
   console.log(`Interval: Every ${SCRAPE_INTERVAL_HOURS} hours\n`)
 
   // Run immediately on startup

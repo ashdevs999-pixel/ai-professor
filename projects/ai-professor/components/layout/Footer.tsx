@@ -4,7 +4,7 @@ import { Twitter, Linkedin, Mail } from 'lucide-react';
 
 const footerLinks = {
   product: [
-    { href: '/news', label: 'Pulse News' },
+    { href: '/news', label: 'CXO News' },
     { href: '/programs', label: 'Programs' },
     { href: '/courses', label: 'Courses' },
     { href: '/pricing', label: 'Pricing' },
@@ -21,9 +21,9 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { href: 'https://twitter.com/pulseaiprof', icon: Twitter, label: 'Twitter' },
-  { href: 'https://linkedin.com/company/pulse-ai-professor', icon: Linkedin, label: 'LinkedIn' },
-  { href: 'mailto:support@pulseaiprofessor.com', icon: Mail, label: 'Email' },
+  { href: 'https://twitter.com/cxoacademy', icon: Twitter, label: 'Twitter' },
+  { href: 'https://linkedin.com/company/cxo-academy', icon: Linkedin, label: 'LinkedIn' },
+  { href: 'mailto:support@cxoacademy.co', icon: Mail, label: 'Email' },
 ];
 
 export function Footer() {
@@ -35,14 +35,11 @@ export function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">P</span>
+                <span className="text-white font-bold text-lg">C</span>
               </div>
-              <div className="flex items-baseline gap-1">
+              <div className="flex items-baseline gap-0">
                 <span className="font-bold text-xl text-gray-900 dark:text-white">
-                  Pulse
-                </span>
-                <span className="text-sm text-gray-500 dark:text-gray-400">
-                  + AI Professor
+                  CXO Academy
                 </span>
               </div>
             </Link>
@@ -118,7 +115,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
           <p className="text-center text-gray-500 dark:text-gray-400 text-sm">
-            © {new Date().getFullYear()} Pulse + AI Professor. All rights reserved.
+            © {new Date().getFullYear()} CXO Academy. All rights reserved.
           </p>
         </div>
       </div>

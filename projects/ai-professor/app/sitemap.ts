@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { db, getSupabaseAdmin } from '@/lib/supabase'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://pulseaiprofessor.com'
+  const baseUrl = 'https://cxoacademy.co'
   
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [

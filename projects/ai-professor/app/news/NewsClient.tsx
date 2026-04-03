@@ -18,7 +18,7 @@ export default function NewsClient() {
             className="text-center"
           >
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-              Pulse News
+              CXO News
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
               The pulse of AI innovation. Your one-stop destination for the latest AI developments,

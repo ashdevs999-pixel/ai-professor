@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import CourseDetailClient from './CourseDetailClient'
 
 export const metadata: Metadata = {
-  title: 'Course - AI Professor',
+  title: 'Course - CXO Academy',
   description: 'Learn AI with expert-led courses',
 }
 

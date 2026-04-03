@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy - AI Professor',
-  description: 'Learn about how AI Professor uses cookies and similar technologies.',
+  title: 'Cookie Policy - CXO Academy',
+  description: 'Learn about how CXO Academy uses cookies and similar technologies.',
 }
 
 export default function CookiesPage() {
@@ -62,7 +62,7 @@ export default function CookiesPage() {
           <p>We may update this Cookie Policy from time to time. Changes will be posted on this page with an updated revision date.</p>
 
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">Contact</h2>
-          <p>Questions about our use of cookies? Contact us at <a href="mailto:support@pulseaiprofessor.com" className="text-primary-600 dark:text-primary-400 underline">support@pulseaiprofessor.com</a>.</p>
+          <p>Questions about our use of cookies? Contact us at <a href="mailto:support@cxoacademy.co" className="text-primary-600 dark:text-primary-400 underline">support@cxoacademy.co</a>.</p>
         </div>
       </div>
     </div>

@@ -16,8 +16,8 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui'
 
 export const metadata: Metadata = {
-  title: 'Admin Dashboard - AI Professor',
-  description: 'Admin dashboard for AI Professor',
+  title: 'Admin Dashboard - CXO Academy',
+  description: 'Admin dashboard for CXO Academy',
 }
 
 // Admin emails that bypass all checks

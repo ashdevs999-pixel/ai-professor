@@ -11,9 +11,9 @@ interface OrganizationJsonLdProps {
 }
 
 export function OrganizationJsonLd({
-  name = 'Pulse + AI Professor',
-  url = 'https://pulseaiprofessor.com',
-  logo = 'https://pulseaiprofessor.com/icons/icon.svg',
+  name = 'CXO Academy',
+  url = 'https://cxoacademy.co',
+  logo = 'https://cxoacademy.co/icons/icon.svg',
   description = 'Real-time AI news aggregation meets AI-powered learning. Stay current with the latest AI developments and get smarter with expert-led courses.',
   sameAs = [
     'https://twitter.com/pulseaiprof',
@@ -45,8 +45,8 @@ interface WebSiteJsonLdProps {
 }
 
 export function WebSiteJsonLd({
-  name = 'Pulse + AI Professor',
-  url = 'https://pulseaiprofessor.com',
+  name = 'CXO Academy',
+  url = 'https://cxoacademy.co',
   description = 'Real-time AI news aggregation meets AI-powered learning.',
 }: WebSiteJsonLdProps) {
   const schema = {

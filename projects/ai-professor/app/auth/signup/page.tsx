@@ -52,7 +52,7 @@ export default function SignupPage() {
           {/* Header */}
           <div className="text-center mb-8">
             <Link href="/" className="text-2xl font-bold text-primary-600">
-              AI Professor
+              CXO Academy
             </Link>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white mt-4">
               Create Account

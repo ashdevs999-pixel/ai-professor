@@ -62,10 +62,10 @@ export default function LessonClient({
         {/* SEO Structured Data */}
         <LessonJsonLd
           name={lesson.title}
-          description={lesson.content?.substring(0, 160) || 'Learn with AI Professor'}
+          description={lesson.content?.substring(0, 160) || 'Learn with CXO Academy'}
           courseName={course?.title || 'Course'}
-          courseUrl={`https://pulseaiprofessor.com/courses/${courseId}`}
-          url={`https://pulseaiprofessor.com/courses/${courseId}/lessons/${lesson.id}`}
+          courseUrl={`https://cxoacademy.co/courses/${courseId}`}
+          url={`https://cxoacademy.co/courses/${courseId}/lessons/${lesson.id}`}
           position={1}
         />
         
@@ -160,18 +160,18 @@ export default function LessonClient({
       {/* SEO Structured Data */}
       <LessonJsonLd
         name={lesson.title}
-        description={lesson.content?.substring(0, 160) || 'Learn with AI Professor'}
+        description={lesson.content?.substring(0, 160) || 'Learn with CXO Academy'}
         courseName={course?.title || 'Course'}
-        courseUrl={`https://pulseaiprofessor.com/courses/${courseId}`}
-        url={`https://pulseaiprofessor.com/courses/${courseId}/lessons/${lesson.id}`}
+        courseUrl={`https://cxoacademy.co/courses/${courseId}`}
+        url={`https://cxoacademy.co/courses/${courseId}/lessons/${lesson.id}`}
         position={currentIndex + 1}
       />
       <BreadcrumbJsonLd
         items={[
-          { name: 'Home', url: 'https://pulseaiprofessor.com' },
-          { name: 'Courses', url: 'https://pulseaiprofessor.com/courses' },
-          { name: course?.title || 'Course', url: `https://pulseaiprofessor.com/courses/${courseId}` },
-          { name: lesson.title, url: `https://pulseaiprofessor.com/courses/${courseId}/lessons/${lesson.id}` },
+          { name: 'Home', url: 'https://cxoacademy.co' },
+          { name: 'Courses', url: 'https://cxoacademy.co/courses' },
+          { name: course?.title || 'Course', url: `https://cxoacademy.co/courses/${courseId}` },
+          { name: lesson.title, url: `https://cxoacademy.co/courses/${courseId}/lessons/${lesson.id}` },
         ]}
       />
       

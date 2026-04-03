@@ -58,10 +58,7 @@ export function Header() {
             </div>
             <div className="flex items-baseline gap-1">
               <span className="font-bold text-xl text-gray-900 dark:text-white">
-                Pulse
-              </span>
-              <span className="text-sm text-gray-500 dark:text-gray-400">
-                + AI Professor
+                CXO Academy
               </span>
             </div>
           </Link>

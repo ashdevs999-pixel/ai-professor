@@ -1,7 +1,7 @@
 {
   "name": "pulse-ai-professor",
   "version": "1.0.0",
-  "description": "Pulse + AI Professor - Real-time AI news aggregation meets AI-powered learning",
+  "description": "CXO Academy - Premium AI and tech leadership education for executives and professionals",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -35,7 +35,7 @@
     "gpt-4",
     "e-learning"
   ],
-  "author": "AI Professor",
+  "author": "CXO Academy",
   "license": "MIT",
   "dependencies": {
     "@auth/core": "^0.34.3",

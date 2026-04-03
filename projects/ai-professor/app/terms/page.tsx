@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service - AI Professor',
-  description: 'Terms and conditions for using the AI Professor platform.',
+  title: 'Terms of Service - CXO Academy',
+  description: 'Terms and conditions for using the CXO Academy platform.',
 }
 
 export default function TermsPage() {
@@ -13,13 +13,13 @@ export default function TermsPage() {
         <p className="text-gray-500 dark:text-gray-400 mb-8">Last updated: April 2, 2026</p>
         
         <div className="prose prose-lg dark:prose-invert max-w-none space-y-6 text-gray-600 dark:text-gray-300">
-          <p><strong>IMPORTANT:</strong> By using AI Professor, you agree to these terms. Please read them carefully.</p>
+          <p><strong>IMPORTANT:</strong> By using CXO Academy, you agree to these terms. Please read them carefully.</p>
 
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">1. Acceptance of Terms</h2>
-          <p>By accessing or using the AI Professor platform (&quot;Service&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree to these Terms, you may not use the Service.</p>
+          <p>By accessing or using the CXO Academy platform (&quot;Service&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree to these Terms, you may not use the Service.</p>
 
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">2. Description of Service</h2>
-          <p>AI Professor provides online educational content including courses, learning programs, quick guides, and AI news. Content is delivered through our web platform and may include text-based lessons, exercises, and supplementary materials.</p>
+          <p>CXO Academy provides online educational content including courses, learning programs, quick guides, and AI news. Content is delivered through our web platform and may include text-based lessons, exercises, and supplementary materials.</p>
 
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">3. User Accounts</h2>
           <ul className="list-disc pl-6 space-y-1">
@@ -40,7 +40,7 @@ export default function TermsPage() {
           </ul>
 
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">5. Intellectual Property</h2>
-          <p>All content on AI Professor — including but not limited to text, graphics, logos, course materials, and software — is owned by or licensed to us and is protected by copyright and intellectual property laws.</p>
+          <p>All content on CXO Academy — including but not limited to text, graphics, logos, course materials, and software — is owned by or licensed to us and is protected by copyright and intellectual property laws.</p>
           <ul className="list-disc pl-6 space-y-1">
             <li>You may access and use purchased content for your personal, non-commercial education</li>
             <li>You may not reproduce, distribute, modify, or create derivative works from our content</li>
@@ -65,7 +65,7 @@ export default function TermsPage() {
           <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, AI PROFESSOR SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATING TO YOUR USE OF THE SERVICE. Our total liability shall not exceed the amount you paid us in the 12 months preceding the claim.</p>
 
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">9. Indemnification</h2>
-          <p>You agree to indemnify and hold harmless AI Professor from any claims, damages, or expenses arising from your use of the Service or violation of these Terms.</p>
+          <p>You agree to indemnify and hold harmless CXO Academy from any claims, damages, or expenses arising from your use of the Service or violation of these Terms.</p>
 
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">10. Modifications</h2>
           <p>We may modify these Terms at any time. Continued use of the Service after changes constitutes acceptance of the new Terms. Material changes will be communicated via email or platform notification.</p>
@@ -74,7 +74,7 @@ export default function TermsPage() {
           <p>These Terms are governed by the laws of Singapore, Any disputes shall be resolved in the courts of Singapore.</p>
 
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">12. Contact</h2>
-          <p>For questions about these Terms, contact us at <a href="mailto:support@pulseaiprofessor.com" className="text-primary-600 dark:text-primary-400 underline">support@pulseaiprofessor.com</a>.</p>
+          <p>For questions about these Terms, contact us at <a href="mailto:support@cxoacademy.co" className="text-primary-600 dark:text-primary-400 underline">support@cxoacademy.co</a>.</p>
         </div>
       </div>
     </div>

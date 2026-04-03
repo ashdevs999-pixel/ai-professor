@@ -17,8 +17,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'Pulse + AI Professor | Stay Current. Get Smarter.',
-    template: '%s | Pulse + AI Professor',
+    default: 'CXO Academy | Stay Current. Get Smarter.',
+    template: '%s | CXO Academy',
   },
   description:
     'Real-time AI news aggregation meets AI-powered learning. Stay current with the latest AI developments and get smarter with expert-led courses.',
@@ -32,16 +32,16 @@ export const metadata: Metadata = {
     'artificial intelligence',
     'ML courses',
     'AI education',
-    'Pulse News',
-    'AI Professor',
+    'CXO News',
+    'CXO Academy',
   ],
-  authors: [{ name: 'Pulse + AI Professor' }],
-  creator: 'Pulse + AI Professor',
+  authors: [{ name: 'CXO Academy' }],
+  creator: 'CXO Academy',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'AI Professor',
+    title: 'CXO Academy',
   },
   formatDetection: {
     telephone: false,
@@ -50,8 +50,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://ai-professor-app.vercel.app',
-    siteName: 'Pulse + AI Professor',
-    title: 'Pulse + AI Professor | Stay Current. Get Smarter.',
+    siteName: 'CXO Academy',
+    title: 'CXO Academy | Stay Current. Get Smarter.',
     description:
       'Real-time AI news aggregation meets AI-powered learning. Stay current with the latest AI developments and get smarter with expert-led courses.',
     images: [
@@ -59,17 +59,17 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Pulse + AI Professor',
+        alt: 'CXO Academy',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pulse + AI Professor | Stay Current. Get Smarter.',
+    title: 'CXO Academy | Stay Current. Get Smarter.',
     description:
       'Real-time AI news aggregation meets AI-powered learning. Stay current with the latest AI developments and get smarter with expert-led courses.',
     images: ['/og-image.png'],
-    creator: '@pulseaiprof',
+    creator: '@cxoacademy',
   },
   robots: {
     index: true,
@@ -100,8 +100,8 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="AI Professor" />
-        <meta name="application-name" content="AI Professor" />
+        <meta name="apple-mobile-web-app-title" content="CXO Academy" />
+        <meta name="application-name" content="CXO Academy" />
         <meta name="msapplication-TileColor" content="#0d9488" />
         <meta name="msapplication-tap-highlight" content="no" />
       </head>

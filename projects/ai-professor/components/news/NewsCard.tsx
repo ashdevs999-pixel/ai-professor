@@ -40,7 +40,7 @@ export function NewsCard({
       })
     : 'Recent';
 
-  const shareUrl = `https://pulseaiprofessor.com/news/${item.id}`;
+  const shareUrl = `https://cxoacademy.co/news/${item.id}`;
   const shareTitle = item.title;
 
   // Load voice preference

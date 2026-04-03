@@ -80,8 +80,8 @@ export function AudioPlayer({
     if ('mediaSession' in navigator && isPlaying) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title,
-        artist: `Pulse News (${voiceType === 'male' ? 'Male' : 'Female'} Voice)`,
-        album: 'Pulse + AI Professor',
+        artist: `CXO News (${voiceType === 'male' ? 'Male' : 'Female'} Voice)`,
+        album: 'CXO Academy',
       })
 
       navigator.mediaSession.setActionHandler('play', togglePlayPause)

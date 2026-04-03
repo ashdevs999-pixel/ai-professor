@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'Program Not Found' }
   }
 
-  const title = `${path.title} - AI Professor`
+  const title = `${path.title} - CXO Academy`
   const description = path.description || `Learn ${path.title} with structured, expert-led modules.`
 
   return {
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       type: 'website',
-      url: `https://pulseaiprofessor.com/paths/${slug}`,
+      url: `https://cxoacademy.co/paths/${slug}`,
     },
   }
 }

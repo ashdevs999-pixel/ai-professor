@@ -27,7 +27,7 @@ export interface EmailOptions {
 }
 
 // Default from address
-const DEFAULT_FROM = process.env.EMAIL_FROM || 'Pulse + AI Professor <noreply@pulseaiprofessor.com>'
+const DEFAULT_FROM = process.env.EMAIL_FROM || 'CXO Academy <noreply@cxoacademy.co>'
 
 // Send email
 export async function sendEmail(options: EmailOptions): Promise<{ id: string }> {
@@ -63,7 +63,7 @@ export async function sendEmail(options: EmailOptions): Promise<{ id: string }> 
 export const emailTemplates = {
   // Welcome email for new users
   welcome: (name: string, email: string) => ({
-    subject: 'Welcome to Pulse + AI Professor! 🎓',
+    subject: 'Welcome to CXO Academy! 🎓',
     html: `
 <!DOCTYPE html>
 <html>
@@ -80,11 +80,11 @@ export const emailTemplates = {
 <body>
   <div class="container">
     <div class="header">
-      <h1>Welcome to Pulse + AI Professor!</h1>
+      <h1>Welcome to CXO Academy!</h1>
     </div>
     <div class="content">
       <h2>Hi ${name},</h2>
-      <p>Welcome to Pulse + AI Professor! We're excited to have you on board.</p>
+      <p>Welcome to CXO Academy! We're excited to have you on board.</p>
       <p>Stay current with AI news. Get smarter with AI courses. One platform.</p>
       <p>You now have access to:</p>
       <ul>
@@ -98,10 +98,10 @@ export const emailTemplates = {
         <a href="${process.env.NEXT_PUBLIC_APP_URL}/courses" class="button">Browse Courses</a>
       </p>
       <p>Happy learning!</p>
-      <p>The Pulse + AI Professor Team</p>
+      <p>The CXO Academy Team</p>
     </div>
     <div class="footer">
-      <p>Pulse + AI Professor - Stay current. Get smarter. One platform.</p>
+      <p>CXO Academy - Where leaders learn to lead in the age of AI.</p>
       <p>${process.env.NEXT_PUBLIC_APP_URL}</p>
     </div>
   </div>
@@ -109,11 +109,11 @@ export const emailTemplates = {
 </html>
     `,
     text: `
-Welcome to Pulse + AI Professor!
+Welcome to CXO Academy!
 
 Hi ${name},
 
-Welcome to Pulse + AI Professor! We're excited to have you on board.
+Welcome to CXO Academy! We're excited to have you on board.
 
 You now have access to:
 - Expert-designed courses
@@ -124,7 +124,7 @@ You now have access to:
 Get started by exploring our course catalog: ${process.env.NEXT_PUBLIC_APP_URL}/courses
 
 Happy learning!
-The Pulse + AI Professor Team
+The CXO Academy Team
     `,
   }),
 
@@ -167,10 +167,10 @@ The Pulse + AI Professor Team
         <a href="${process.env.NEXT_PUBLIC_APP_URL}/courses/${courseId}" class="button">Start Learning</a>
       </p>
       <p>Happy learning!</p>
-      <p>The Pulse + AI Professor Team</p>
+      <p>The CXO Academy Team</p>
     </div>
     <div class="footer">
-      <p>Pulse + AI Professor - Stay current. Get smarter. One platform.</p>
+      <p>CXO Academy - Where leaders learn to lead in the age of AI.</p>
       <p>${process.env.NEXT_PUBLIC_APP_URL}</p>
     </div>
   </div>
@@ -187,7 +187,7 @@ You've successfully enrolled in ${courseTitle}!
 Your learning journey begins now. Start with the first lesson: ${process.env.NEXT_PUBLIC_APP_URL}/courses/${courseId}
 
 Happy learning!
-The Pulse + AI Professor Team
+The CXO Academy Team
     `,
   }),
 
@@ -238,10 +238,10 @@ The Pulse + AI Professor Team
         <a href="${process.env.NEXT_PUBLIC_APP_URL}/courses/${courseId}/certificate" class="button">View Certificate</a>
       </p>
       <p>Keep up the great work!</p>
-      <p>The Pulse + AI Professor Team</p>
+      <p>The CXO Academy Team</p>
     </div>
     <div class="footer">
-      <p>Pulse + AI Professor - Stay current. Get smarter. One platform.</p>
+      <p>CXO Academy - Where leaders learn to lead in the age of AI.</p>
       <p>${process.env.NEXT_PUBLIC_APP_URL}</p>
     </div>
   </div>
@@ -258,7 +258,7 @@ You've successfully completed ${courseTitle}!
 You can view and download your certificate here: ${process.env.NEXT_PUBLIC_APP_URL}/courses/${courseId}/certificate
 
 Keep up the great work!
-The Pulse + AI Professor Team
+The CXO Academy Team
     `,
   }),
 
@@ -301,11 +301,11 @@ The Pulse + AI Professor Team
       <p style="text-align: center; margin: 30px 0;">
         <a href="${process.env.NEXT_PUBLIC_APP_URL}/account/billing" class="button">Manage Subscription</a>
       </p>
-      <p>Thank you for choosing AI Professor!</p>
-      <p>The Pulse + AI Professor Team</p>
+      <p>Thank you for choosing CXO Academy!</p>
+      <p>The CXO Academy Team</p>
     </div>
     <div class="footer">
-      <p>Pulse + AI Professor - Stay current. Get smarter. One platform.</p>
+      <p>CXO Academy - Where leaders learn to lead in the age of AI.</p>
       <p>${process.env.NEXT_PUBLIC_APP_URL}</p>
     </div>
   </div>
@@ -325,8 +325,8 @@ Next billing date: ${nextBillingDate}
 
 Manage your subscription: ${process.env.NEXT_PUBLIC_APP_URL}/account/billing
 
-Thank you for choosing AI Professor!
-The Pulse + AI Professor Team
+Thank you for choosing CXO Academy!
+The CXO Academy Team
     `,
   }),
 
@@ -362,10 +362,10 @@ The Pulse + AI Professor Team
         <p><strong>Security notice:</strong> This link will expire in 24 hours. If you didn't request a password reset, please ignore this email.</p>
       </div>
       <p>Stay secure!</p>
-      <p>The Pulse + AI Professor Team</p>
+      <p>The CXO Academy Team</p>
     </div>
     <div class="footer">
-      <p>Pulse + AI Professor - Stay current. Get smarter. One platform.</p>
+      <p>CXO Academy - Where leaders learn to lead in the age of AI.</p>
       <p>${process.env.NEXT_PUBLIC_APP_URL}</p>
     </div>
   </div>
@@ -384,7 +384,7 @@ Reset your password here: ${resetLink}
 This link will expire in 24 hours. If you didn't request a password reset, please ignore this email.
 
 Stay secure!
-The Pulse + AI Professor Team
+The CXO Academy Team
     `,
   }),
 
@@ -425,10 +425,10 @@ The Pulse + AI Professor Team
       <p style="text-align: center; margin: 30px 0;">
         <a href="${process.env.NEXT_PUBLIC_APP_URL}/courses" class="button">Continue Learning</a>
       </p>
-      <p>The Pulse + AI Professor Team</p>
+      <p>The CXO Academy Team</p>
     </div>
     <div class="footer">
-      <p>Pulse + AI Professor - Stay current. Get smarter. One platform.</p>
+      <p>CXO Academy - Where leaders learn to lead in the age of AI.</p>
       <p>${process.env.NEXT_PUBLIC_APP_URL}</p>
     </div>
   </div>
@@ -447,7 +447,7 @@ ${summary}
 Continue learning: ${process.env.NEXT_PUBLIC_APP_URL}/courses
 
 Stay curious!
-The Pulse + AI Professor Team
+The CXO Academy Team
     `,
   }),
 }

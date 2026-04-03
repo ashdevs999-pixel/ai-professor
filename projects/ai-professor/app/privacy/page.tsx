@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - AI Professor',
-  description: 'Learn how AI Professor collects, uses, and protects your personal information.',
+  title: 'Privacy Policy - CXO Academy',
+  description: 'Learn how CXO Academy collects, uses, and protects your personal information.',
 }
 
 export default function PrivacyPage() {
@@ -64,7 +64,7 @@ export default function PrivacyPage() {
             <li>Data portability (receive your data in a structured format)</li>
             <li>Withdraw consent at any time where processing is based on consent</li>
           </ul>
-          <p>To exercise these rights, please contact us at <a href="mailto:support@pulseaiprofessor.com" className="text-primary-600 dark:text-primary-400 underline">support@pulseaiprofessor.com</a>.</p>
+          <p>To exercise these rights, please contact us at <a href="mailto:support@cxoacademy.co" className="text-primary-600 dark:text-primary-400 underline">support@cxoacademy.co</a>.</p>
 
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">7. Data Retention</h2>
           <p>We retain your personal data for as long as your account is active or as needed to provide services. If you delete your account, we will delete your personal data within 30 days, except where we are legally required to retain it longer (e.g., financial records).</p>
@@ -81,7 +81,7 @@ export default function PrivacyPage() {
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">11. Contact Us</h2>
           <p>If you have questions about this Privacy Policy, please contact us at:</p>
           <ul className="list-none space-y-1">
-            <li>Email: <a href="mailto:support@pulseaiprofessor.com" className="text-primary-600 dark:text-primary-400 underline">support@pulseaiprofessor.com</a></li>
+            <li>Email: <a href="mailto:support@cxoacademy.co" className="text-primary-600 dark:text-primary-400 underline">support@cxoacademy.co</a></li>
           </ul>
         </div>
       </div>

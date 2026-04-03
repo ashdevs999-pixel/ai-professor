@@ -3,19 +3,19 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 
 export const metadata: Metadata = {
-  title: 'About - AI Professor',
-  description: 'Learn about AI Professor, our mission, and the team behind the platform.',
+  title: 'About - CXO Academy',
+  description: 'Learn about CXO Academy, our mission, and the team behind the platform.',
 }
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">About AI Professor</h1>
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">About CXO Academy</h1>
         
         <div className="prose prose-lg dark:prose-invert max-w-none space-y-6">
           <p className="text-lg text-gray-600 dark:text-gray-300">
-            <strong>AI Professor</strong> is an educational platform built for professionals who want to master AI, cybersecurity, data strategy, and digital leadership — without the fluff.
+            <strong>CXO Academy</strong> is an educational platform built for professionals who want to master AI, cybersecurity, data strategy, and digital leadership — without the fluff.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-10">Our Mission</h2>
@@ -23,7 +23,7 @@ export default function AboutPage() {
             We believe the gap between AI hype and real-world competence is massive. Most professionals don&apos;t need another buzzword blog — they need structured, actionable learning that they can apply on Monday morning.
           </p>
           <p className="text-gray-600 dark:text-gray-300">
-            AI Professor delivers expert-designed programs that combine academic rigor with practical application. Every lesson is built around real frameworks, real tools, and real decisions.
+            CXO Academy delivers expert-designed programs that combine academic rigor with practical application. Every lesson is built around real frameworks, real tools, and real decisions.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-10">What Makes Us Different</h2>
@@ -51,7 +51,7 @@ export default function AboutPage() {
 
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-10">Built by Professionals, for Professionals</h2>
           <p className="text-gray-600 dark:text-gray-300">
-            AI Professor is developed by a team with deep experience in AI engineering, cybersecurity consulting, and executive education. We understand what leaders need because we&apos;ve been in those roles ourselves.
+            CXO Academy is developed by a team with deep experience in AI engineering, cybersecurity consulting, and executive education. We understand what leaders need because we&apos;ve been in those roles ourselves.
           </p>
           
           <div className="mt-12 p-6 bg-primary-50 dark:bg-primary-900/20 rounded-xl">

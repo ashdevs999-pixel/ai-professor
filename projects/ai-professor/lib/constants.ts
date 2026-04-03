@@ -145,7 +145,7 @@ export const AI_CONFIG = {
 
 // Email constants
 export const EMAIL_CONFIG = {
-  FROM: process.env.EMAIL_FROM || 'Pulse + AI Professor <noreply@pulseaiprofessor.com>',
+  FROM: process.env.EMAIL_FROM || 'CXO Academy <noreply@cxoacademy.co>',
   TEMPLATES: {
     WELCOME: 'welcome',
     ENROLLMENT_CONFIRMATION: 'enrollment_confirmation',

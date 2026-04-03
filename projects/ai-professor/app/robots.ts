@@ -44,6 +44,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/admin/', '/auth/', '/dashboard/'],
       },
     ],
-    sitemap: 'https://pulseaiprofessor.com/sitemap.xml',
+    sitemap: 'https://cxoacademy.co/sitemap.xml',
   }
 }

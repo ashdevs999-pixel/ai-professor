@@ -320,7 +320,7 @@ export function createEmptyCourse(metadata: Partial<CourseMetadata>): Course {
       prerequisites: metadata.prerequisites || [],
       learningObjectives: metadata.learningObjectives || [],
       estimatedHours: metadata.estimatedHours || 20,
-      author: metadata.author || 'AI Professor',
+      author: metadata.author || 'CXO Academy',
       createdAt: new Date(),
       updatedAt: new Date(),
       status: 'draft',

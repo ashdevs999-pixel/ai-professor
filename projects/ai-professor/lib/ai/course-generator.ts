@@ -220,7 +220,7 @@ export class CourseGenerator {
       estimatedHours: metadata.estimatedHours || 10,
       category,
       skillLevel,
-      author: 'AI Professor',
+      author: 'CXO Academy',
       createdAt: metadata.createdAt || new Date(),
       updatedAt: metadata.updatedAt || new Date(),
       status: metadata.status || 'draft',

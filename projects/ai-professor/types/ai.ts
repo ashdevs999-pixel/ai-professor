@@ -1,5 +1,5 @@
 /**
- * AI Types - AI-related type definitions for Pulse + AI Professor Platform
+ * AI Types - AI-related type definitions for CXO Academy Platform
  * 
  * These types define interfaces for AI model interactions,
  * prompt engineering, and token management.

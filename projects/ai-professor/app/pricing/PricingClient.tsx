@@ -16,7 +16,7 @@ const pricingTiers = [
     description: 'Get started with quick guides and sample content',
     features: [
       '11 Quick Guides (detailed tutorials)',
-      'Pulse News access',
+      'CXO News access',
       '1 sample course lesson',
       'Community access',
     ],

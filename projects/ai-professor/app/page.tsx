@@ -67,9 +67,7 @@ export default function HomePage() {
             
             {/* Main Headline - Bolder */}
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight">
-              <span className="text-white">Pulse</span>
-              <span className="text-white/40"> + </span>
-              <span className="text-white">AI Professor</span>
+              <span className="text-white">CXO Academy</span>
             </h1>
             
             {/* Subheadline */}
@@ -343,7 +341,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-2xl font-bold mb-4 md:mb-0">
-              Pulse + AI Professor
+              CXO Academy
             </div>
             <div className="flex gap-6 text-gray-400">
               <Link href="/breaking" className="hover:text-white transition-colors">Breaking</Link>
@@ -353,7 +351,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500">
-            <p>© 2026 Pulse + AI Professor. Stay current. Get smarter.</p>
+            <p>© 2026 CXO Academy. Stay current. Get smarter.</p>
           </div>
         </div>
       </footer>

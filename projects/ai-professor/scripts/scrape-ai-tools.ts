@@ -2,7 +2,7 @@
  * AI Tools Auto-Scraper
  * 
  * Scans Product Hunt AI, TechCrunch AI, and Hacker News for new AI tools
- * and generates quick guide templates for AI Professor.
+ * and generates quick guide templates for CXO Academy.
  * 
  * Run: npx ts-node scripts/scrape-ai-tools.ts
  * Cron: 0 9 * * * (daily at 9 AM)

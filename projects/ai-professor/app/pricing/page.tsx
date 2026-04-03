@@ -2,13 +2,13 @@ import { Metadata } from 'next'
 import PricingClient from './PricingClient'
 
 export const metadata: Metadata = {
-  title: 'Pricing - AI Professor',
+  title: 'Pricing - CXO Academy',
   description: 'Simple, transparent pricing. Start free with quick guides, or unlock full courses and programs.',
   openGraph: {
-    title: 'Pricing - AI Professor',
+    title: 'Pricing - CXO Academy',
     description: 'Simple, transparent pricing. Start free with quick guides, or unlock full courses and programs.',
     type: 'website',
-    url: 'https://pulseaiprofessor.com/pricing',
+    url: 'https://cxoacademy.co/pricing',
   },
 }
 

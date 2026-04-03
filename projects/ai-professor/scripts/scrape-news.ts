@@ -18,7 +18,7 @@ async function main() {
   const processSummaries = !args.includes('--no-summaries')
   const statsOnly = args.includes('--stats')
 
-  console.log('📰 Pulse News Scraper\n')
+  console.log('📰 CXO News Scraper\n')
 
   try {
     // Show stats only

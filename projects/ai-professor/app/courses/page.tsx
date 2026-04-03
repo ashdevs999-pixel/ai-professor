@@ -3,7 +3,7 @@ import CoursesClient from './CoursesClient'
 import { db } from '@/lib/supabase'
 
 export const metadata: Metadata = {
-  title: 'Courses - AI Professor',
+  title: 'Courses - CXO Academy',
   description: 'Master AI with expert-led courses. From fundamentals to advanced topics.',
 }
 

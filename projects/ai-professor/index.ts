@@ -1,5 +1,5 @@
 /**
- * AI Professor - Intelligent Content Generation System
+ * CXO Academy - Intelligent Content Generation System
  * 
  * Main entry point for the AI content generation library.
  */

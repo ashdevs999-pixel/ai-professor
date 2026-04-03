@@ -4,8 +4,8 @@ import { db } from '@/lib/supabase'
 import { getCurrentSession } from '@/lib/auth'
 
 export const metadata: Metadata = {
-  title: 'Lesson - AI Professor',
-  description: 'Learn with AI Professor',
+  title: 'Lesson - CXO Academy',
+  description: 'Learn with CXO Academy',
 }
 
 // Admin emails that bypass all checks

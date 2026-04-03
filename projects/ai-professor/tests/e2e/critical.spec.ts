@@ -6,8 +6,8 @@ test.describe('Critical Path Tests', () => {
   
   test('Homepage loads', async ({ page }) => {
     await page.goto(BASE_URL);
-    await expect(page).toHaveTitle(/Pulse.*AI Professor/);
-    await expect(page.locator('h1')).toContainText('Pulse');
+    await expect(page).toHaveTitle(/CXO Academy/);
+    await expect(page.locator('h1')).toContainText('CXO');
   });
 
   test('Guides page loads', async ({ page }) => {

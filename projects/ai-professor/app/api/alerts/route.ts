@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     }[body.type] || '📢'
 
     const alertMessage = `
-${severityEmoji} *AI Professor Alert*
+${severityEmoji} *CXO Academy Alert*
 
 ${typeEmoji} *${body.type.toUpperCase().replace(/_/g, ' ')}*
 ${body.message}

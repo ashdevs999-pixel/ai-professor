@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server'
 const ALLOWED_ORIGINS = [
   'https://ai-professor-app.vercel.app',
   'https://ai-professor-red.vercel.app',
-  'https://pulseaiprofessor.com',
+  'https://cxoacademy.co',
   'http://localhost:3000',
   process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : '',
 ].filter(Boolean) as string[]

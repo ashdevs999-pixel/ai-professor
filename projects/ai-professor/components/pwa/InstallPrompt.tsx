@@ -93,7 +93,7 @@ export function InstallPrompt() {
               
               <div className="flex-1">
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
-                  Install AI Professor
+                  Install CXO Academy
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
                   Tap <span className="inline-block">⎙</span> Share, then "Add to Home Screen"
@@ -127,7 +127,7 @@ export function InstallPrompt() {
             
             <div className="flex-1">
               <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
-                Install AI Professor
+                Install CXO Academy
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
                 Install this app for a better experience and offline access.

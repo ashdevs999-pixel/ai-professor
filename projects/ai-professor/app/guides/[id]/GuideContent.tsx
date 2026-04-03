@@ -11374,15 +11374,15 @@ export default function GuideContent({ guideId }: { guideId: string }) {
       <ArticleJsonLd
         headline={`${guide.title} - Lesson ${currentLesson + 1}: ${lesson.title}`}
         description={guide.description}
-        url={`https://pulseaiprofessor.com/guides/${guideId}`}
+        url={`https://cxoacademy.co/guides/${guideId}`}
         datePublished={new Date().toISOString()}
         articleBody={lesson.content}
       />
       <BreadcrumbJsonLd
         items={[
-          { name: 'Home', url: 'https://pulseaiprofessor.com' },
-          { name: 'Quick Guides', url: 'https://pulseaiprofessor.com/guides' },
-          { name: guide.title, url: `https://pulseaiprofessor.com/guides/${guideId}` },
+          { name: 'Home', url: 'https://cxoacademy.co' },
+          { name: 'Quick Guides', url: 'https://cxoacademy.co/guides' },
+          { name: guide.title, url: `https://cxoacademy.co/guides/${guideId}` },
         ]}
       />
       

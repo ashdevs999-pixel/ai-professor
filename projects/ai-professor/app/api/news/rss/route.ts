@@ -53,7 +53,7 @@ function generateRSS(items: any[]): string {
       <link>${escapeXML(item.source_url)}</link>
       <description><![CDATA[${escapeXML(item.summary || item.content || '')}]]></description>
       <pubDate>${item.published_at ? new Date(item.published_at).toUTCString() : now}</pubDate>
-      <author>${escapeXML(item.author || 'Pulse News')}</author>
+      <author>${escapeXML(item.author || 'CXO News')}</author>
       <category>${escapeXML(item.category)}</category>
       <guid isPermaLink="true">${escapeXML(item.source_url)}</guid>
       ${item.image_url ? `<enclosure url="${escapeXML(item.image_url)}" type="image/jpeg" />` : ''}
@@ -64,12 +64,12 @@ function generateRSS(items: any[]): string {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Pulse News - Latest AI News</title>
-    <link>https://pulseaiprofessor.com/news</link>
-    <description>Stay updated with the latest AI developments, research, and tools curated by Pulse News</description>
+    <title>CXO News - Latest AI News</title>
+    <link>https://cxoacademy.co/news</link>
+    <description>Stay updated with the latest AI developments, research, and tools curated by CXO News</description>
     <language>en-us</language>
     <lastBuildDate>${now}</lastBuildDate>
-    <atom:link href="https://pulseaiprofessor.com/api/news/rss" rel="self" type="application/rss+xml" />
+    <atom:link href="https://cxoacademy.co/api/news/rss" rel="self" type="application/rss+xml" />
     ${itemsXML}
   </channel>
 </rss>`
